@@ -20,6 +20,7 @@ bar p {
 header  {
     overflow: hidden;
     height: 50vh;
+    background-color: #EEEEEE;
 }
 
 header img  {
@@ -31,19 +32,18 @@ header :not(img)  {
     position:absolute;
     left: 50%;
     transform: translateX(-50%);
-    width: 400px;
     font-family: 'Work Sans', sans-serif;
     text-align: center;
 }
 
 header h1 {
     top: 17%;
-    font-size: 80px;
-    font-weight: 800;
+    font-size: 150px;
+    font-weight: 200;
 }
 
 header p {
-    top: 32%;
+    top: 37%;
     font-size: 23px;
     
     font-weight: 100;
