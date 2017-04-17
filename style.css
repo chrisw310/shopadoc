@@ -1,69 +1,60 @@
-.wrapper {
-    margin-left: 20%;
-    margin-right: 20%;
-}
-
 bar {
     background-color: #333333;
     color: white;
-    height: 30px;
+    height: 40px;
     display: block;
     margin: none;
 }
 
 bar p {
     vertical-align: middle;
-    line-height: 30px;  
+    line-height: 40px;  
     margin-left: 10px;
+    font-size: 20px;
 }
 
 header  {
     overflow: hidden;
-    height: 50vh;
-    background-color: #EEEEEE;
+    height: 500px;
 }
 
 header img  {
-    height: 50vh;
+    height: 500px;
     width: 100vw;
+    
 }
 
 header :not(img)  {
     position:absolute;
     left: 50%;
     transform: translateX(-50%);
-    font-family: 'Work Sans', sans-serif;
-    text-align: center;
+    color: white;
+    border: black;
+    
+    
 }
 
 header h1 {
     top: 17%;
     font-size: 150px;
-    font-weight: 200;
+      
 }
 
 header p {
     top: 37%;
-    font-size: 23px;
-    
-    font-weight: 100;
-}
-
-footer {
-    height: 100px;
-}
-
-#category {
-
+    font-size: 33px;
+    font-weight: 800;
 }
 
 #category div {
     height: 50px;
 }
 
-#filter div {
-    height: 40px;
+#dropdowns div {
+    height: 70px;
 }
+
+
 
 #category div p{
     text-align: center;
@@ -71,9 +62,106 @@ footer {
     line-height: 50px;    
 }
 
-#filter div button {
-    text-align: center;
-    vertical-align: middle;
-    line-height: 20px; 
+.col-sm-4 {
+    background-color: #DDDDDD;
+    font-size: 24px;
 }
 
+.col-sm-4:nth-child(2) {
+    background-color: #BBBBBB;
+    font-weight: 800;
+}
+
+#dropdowns {
+    background-color:#EEEEEE;
+    
+}
+
+.dropdown button {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width: 300px;
+    font-size: 20px
+    
+}
+
+.dropdown .dropdown-menu {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+}
+
+
+.listing {
+    float: left;
+    width: 74%;
+    height: 300px;
+    padding-left: 20px;
+}
+
+.listing * {
+    position: absolute;
+    width: auto;
+}
+
+.name {
+    padding-top: 20px;
+    font-size: 50px;
+}
+
+.type {
+    padding-top: 90px;
+    font-size: 30px;
+}
+
+.location {
+    padding-top: 140px;
+    font-size: 20px;
+}
+
+.price {
+    padding-top: 180px;
+    font-size: 15px;
+}
+
+.listing img {
+    float: right;
+    position: relative;
+    width: 250px;
+    height: 250px;
+    margin: 20px;
+    background-image: url(images/me.jpg)
+}
+
+.listing:last-child {
+    margin-bottom: 100px;
+}
+
+footer {
+    height: 200px;
+}
+
+#content > div {
+    margin-top: 30px;
+    margin-left: 2%;
+    
+    border: 1px solid #DDDDDD;
+    box-shadow: 2px 5px 10px rgba(0,0,0,0.13), 1px 3px 3px rgba(0,0,0,0.13);
+}
+
+/* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 1000px;
+        width: 20%;
+        float: left;
+      }
+
+.parallax-window {
+    height: 500px;
+    width: 100vw;
+    min-height: 500px;
+    background: transparent;
+}

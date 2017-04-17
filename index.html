@@ -1,45 +1,132 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- Bootstrap viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <!-- jQuery -->
-    <script src="http://code.jquery.com/jquery.js"></script>
+    <title>ShopADoc</title>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <!-- jQuery -->
+    <script   src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/parallax.js-1.4.2/parallax.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="style.css">
     <!-- JavaScript -->
     <script src="script.js"></script>
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADWEyT0t77SmQhezZxrTmJadAXuHnREMU&callback=initMap"
+    async defer></script>
   </head>
   <body>
       <bar>
           <p>Login/Sign Up</p>
       </bar>
-   <header>
-       
-    <h1>ShopADoc</h1>
-    <p>For All of Your Doctorey Needs</p>
+    <header>
+       <div class="parallax-window" data-parallax="scroll" data-image-src="/images/background.jpg"></div>
+        <h1>ShopADoc</h1>
+        <p>For All of Your Doctorey Needs</p>
     </header>
-    <div class="container-fluid">
+    <div id="panels" class="container-fluid">
         <div class="row" id="category">
-            <div class="col-sm-4" style="background-color:white;">
+            <div class="col-sm-4">
               <p>Saved</p>
             </div>
-        <div class="col-sm-4" style="background-color:lightgrey;">
+        <div class="col-sm-4">
           <p>Popular</p>
         </div>
-        <div class="col-sm-4" style="background-color:white;">
+        <div class="col-sm-4">
           <p>Local</p>
         </div>
         </div>
     </div>
-    <footer>
-    </footer>
+    <div class="container-fluid" style="">
+       <div class="row" id="dropdowns">
+            <div class="col-sm-3">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Field
+                    <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">General Practitioner</a></li>
+                    <li><a href="#">Dermatologist</a></li>
+                    <li><a href="#">Psychiatrist</a></li>
+                  </ul>
+                </div> 
+            </div>
+           <div class="col-sm-3">
+                <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Distance
+                  <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">0-9km</a></li>
+                    <li><a href="#">10-49km</a></li>
+                    <li><a href="#">50-100km</a></li>
+                    <li><a href="#">100km+</a></li>
+                  </ul>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Rating
+                    <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">&#9733;</a></li>
+                        <li><a href="#">&#9733;&#9733;</a></li>
+                        <li><a href="#">&#9733;&#9733;&#9733;</a></li>
+                        <li><a href="#">&#9733;&#9733;&#9733;&#9733;</a></li>
+                        <li><a href="#">&#9733;&#9733;&#9733;&#9733;&#9733;</a></li>
+                    </ul>
+                </div>
+        
+        
+            </div>
+            <div class="col-sm-3">
+                <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Price
+                <span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">$</a></li>
+                    <li><a href="#">$$</a></li>
+                    <li><a href="#">$$$</a></li>
+                    <li><a href="#">$$$$</a></li>
+                    <li><a href="#">$$$$$</a></li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="content">
+    <div id="map"></div>
+    <div class="listing">
+        <p class="name">Cameron Weber</p>
+        <p class="type">General Practitioner</p>
+        <p class="location">St Lucia, QLD</p>
+        <p class="price">$199-299</p>
+        <img />
+    </div>
+    <div class="listing">
+        <p class="name">Harry Hoyland</p>
+        <p class="type">Brexit Enthusiast</p>
+        <p class="location">Caboolture, QLD</p>
+        <p class="price">$99-129</p>
+        <img />
+    </div>
+    <div class="listing">
+        <p class="name">Chris Wilkinson</p>
+        <p class="type">Cognitive Psychologist</p>
+        <p class="location">Toowoomba, QLD</p>
+        <p class="price">$49-99</p>
+        <img />
+    </div>
+    </div>
+<footer>
+
+</footer>
     
   </body>
 </html>
