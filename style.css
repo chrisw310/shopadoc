@@ -1,3 +1,8 @@
+h1, h2 {
+    font-family: 'Roboto';
+    font-weight: 500;
+}
+
 bar {
     background-color: #333333;
     color: white;
@@ -7,10 +12,43 @@ bar {
 }
 
 bar p {
+    position: absolute;
     vertical-align: middle;
     line-height: 40px;  
-    margin-left: 10px;
+    margin-left: 40px;
     font-size: 20px;
+}
+
+#logo {
+    position: absolute;
+    text-align: center;
+    vertical-align: middle;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    background-color: red;
+    font-size: 30px;
+    font-weight: 900;
+    border: 1px solid grey;
+    border-radius: 4px;
+}
+
+#plus {
+    position: absolute;
+    top: -10px;
+    left: 5px;
+}
+
+#searchlogo {
+    width:40px;
+    height:40px;
+    padding:6px;
+    margin-top:-2px;
+}
+
+#content {
+    height: 1200px;
+    background-color:#EFEFEF
 }
 
 header  {
@@ -21,29 +59,35 @@ header  {
 header img  {
     height: 500px;
     width: 100vw;
-    
 }
 
-header :not(img)  {
+header :not(img):not(.input-group *)   {
     position:absolute;
     left: 50%;
     transform: translateX(-50%);
     color: white;
     border: black;
-    
-    
 }
 
 header h1 {
-    top: 17%;
+    top: 9%;
     font-size: 150px;
-      
 }
 
 header p {
-    top: 37%;
+    top: 28%;
     font-size: 33px;
     font-weight: 800;
+}
+
+.input-group {
+    top: 40%;
+    width: 40%;
+}
+
+.input-group * {
+    height: 50px;
+    font-size: 20px;
 }
 
 #category div {
@@ -54,8 +98,6 @@ header p {
     height: 70px;
 }
 
-
-
 #category div p{
     text-align: center;
     vertical-align: middle;
@@ -63,17 +105,17 @@ header p {
 }
 
 .col-sm-4 {
-    background-color: #DDDDDD;
+    background-color: #FFFFFF;
     font-size: 24px;
-}
-
-.col-sm-4:nth-child(2) {
-    background-color: #BBBBBB;
     font-weight: 800;
 }
 
+.col-sm-4:nth-child(2) {
+    background-color: #EFEFEF;
+}
+
 #dropdowns {
-    background-color:#EEEEEE;
+    background-color:#EFEFEF;
     
 }
 
@@ -99,31 +141,44 @@ header p {
     width: 74%;
     height: 300px;
     padding-left: 20px;
+    background-color: white;
 }
 
 .listing * {
     position: absolute;
     width: auto;
+
 }
 
-.name {
-    padding-top: 20px;
+.listing p:nth-child(1) {
+    padding-top: 10px;
     font-size: 50px;
 }
 
-.type {
-    padding-top: 90px;
+.listing p:nth-child(2) {
+    padding-top: 80px;
     font-size: 30px;
 }
 
-.location {
-    padding-top: 140px;
+.listing p:nth-child(3) {
+    padding-top: 130px;
     font-size: 20px;
 }
 
-.price {
-    padding-top: 180px;
+.listing p:nth-child(4) {
+    padding-top: 170px;
     font-size: 15px;
+}
+
+.listing p:nth-child(5) {
+    padding-top: 200px;
+    font-size: 35px;
+}
+
+.listing p:nth-child(6) {
+    padding-top: 250px;
+    font-size: 20px;
+    color: grey;
 }
 
 .listing img {
@@ -136,7 +191,7 @@ header p {
 }
 
 .listing:last-child {
-    margin-bottom: 100px;
+    margin-bottom: 50px;
 }
 
 footer {
@@ -154,14 +209,14 @@ footer {
 /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 1000px;
+        height: 960px;
         width: 20%;
         float: left;
       }
 
 .parallax-window {
-    height: 500px;
+    height: 540px;
     width: 100vw;
-    min-height: 500px;
+    min-height: 540px;
     background: transparent;
 }

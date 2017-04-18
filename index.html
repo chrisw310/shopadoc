@@ -4,6 +4,7 @@
     <title>ShopADoc</title>
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- jQuery -->
     <script   src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
@@ -25,12 +26,21 @@
   </head>
   <body>
       <bar>
+         <div id="logo"><div id="plus">+</div></div>
           <p>Login/Sign Up</p>
       </bar>
     <header>
        <div class="parallax-window" data-parallax="scroll" data-image-src="/images/background.jpg"></div>
         <h1>ShopADoc</h1>
         <p>For All of Your Doctorey Needs</p>
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search name, location, speciality...">
+            <span class="input-group-btn" >
+                <button class="btn btn-default" type="button">
+                    <img src="images/search.png" id="searchlogo"/>
+                </button>
+            </span>
+        </div><!-- /input-group -->
     </header>
     <div id="panels" class="container-fluid">
         <div class="row" id="category">
@@ -45,7 +55,7 @@
         </div>
         </div>
     </div>
-    <div class="container-fluid" style="">
+    <div class="container-fluid">
        <div class="row" id="dropdowns">
             <div class="col-sm-3">
                 <div class="dropdown">
@@ -82,8 +92,6 @@
                         <li><a href="#">&#9733;&#9733;&#9733;&#9733;&#9733;</a></li>
                     </ul>
                 </div>
-        
-        
             </div>
             <div class="col-sm-3">
                 <div class="dropdown">
@@ -103,30 +111,32 @@
     <div id="content">
     <div id="map"></div>
     <div class="listing">
-        <p class="name">Cameron Weber</p>
-        <p class="type">General Practitioner</p>
-        <p class="location">St Lucia, QLD</p>
-        <p class="price">$199-299</p>
+        <p>Cameron Weber</p>
+        <p>General Practitioner</p>
+        <p>St Lucia, QLD</p>
+        <p>$199-299</p>
+        <p>&#9733;&#9733;&#9733;&#9733;&#9734;</p>
+        <p>17 Reviews</p>
         <img />
     </div>
     <div class="listing">
-        <p class="name">Harry Hoyland</p>
-        <p class="type">Brexit Enthusiast</p>
-        <p class="location">Caboolture, QLD</p>
-        <p class="price">$99-129</p>
+        <p>Harry Hoyland</p>
+        <p>Brexit Enthusiast</p>
+        <p>Caboolture, QLD</p>
+        <p>$99-129</p>
+        <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+        <p>2 Reviews</p>
         <img />
     </div>
     <div class="listing">
-        <p class="name">Chris Wilkinson</p>
-        <p class="type">Cognitive Psychologist</p>
-        <p class="location">Toowoomba, QLD</p>
-        <p class="price">$49-99</p>
+        <p>Chris Wilkinson</p>
+        <p>Cognitive Psychologist</p>
+        <p>Toowoomba, QLD</p>
+        <p>$49-99</p>
+        <p>&#9733;&#9734;&#9734;&#9734;&#9734;</p>
+        <p>97 Reviews</p>
         <img />
     </div>
     </div>
-<footer>
-
-</footer>
-    
   </body>
 </html>
