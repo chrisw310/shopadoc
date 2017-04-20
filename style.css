@@ -46,9 +46,14 @@ bar p {
     margin-top:-2px;
 }
 
+#searchListing {
+    top: 65px;
+    width: 70%;
+}
+
 #content {
     height: 1200px;
-    background-color:#EFEFEF
+    background-color:#EFEFEF;
 }
 
 header  {
@@ -59,6 +64,10 @@ header  {
 header img  {
     height: 500px;
     width: 100vw;
+}
+
+#listing {
+    height: 100px;
 }
 
 header :not(img):not(.input-group *)   {
@@ -116,7 +125,6 @@ header p {
 
 #dropdowns {
     background-color:#EFEFEF;
-    
 }
 
 .dropdown button {
@@ -141,6 +149,7 @@ header p {
     width: 74%;
     height: 300px;
     padding-left: 20px;
+    margin-bottom: 20px;
     background-color: white;
 }
 
@@ -181,6 +190,21 @@ header p {
     color: grey;
 }
 
+.listing p:nth-child(7) {
+    padding-top: 300px;
+    font-size: 20px;
+}
+
+#single > button {
+    position: absolute;
+    top: 640px;
+    font-size: 17px;
+    min-width: 150px
+}
+
+#single > button:nth-of-type(2) {right: 310px}
+#single > button:nth-of-type(3) {right: 60px;}
+
 .listing img {
     float: right;
     position: relative;
@@ -188,6 +212,34 @@ header p {
     height: 250px;
     margin: 20px;
     background-image: url(images/me.jpg)
+}
+
+#single {
+    position: absolute;
+    height: 700px;
+    padding: 40px;
+    min-width: 900px;
+    margin-top: 30px
+}
+
+#single img {
+    height: 400px;
+    width: 400px;
+    background-size: 100%;
+}
+
+#reviews {
+    position: absolute;
+    background-color: white;
+    height: auto;
+    width: 96%;
+    top: 880px;
+    padding: 30px;
+    margin-left: 50px;
+}
+
+#reviews p {
+    font-size: 20px;
 }
 
 .listing:last-child {
@@ -199,7 +251,6 @@ footer {
 }
 
 #content > div {
-    margin-top: 30px;
     margin-left: 2%;
     
     border: 1px solid #DDDDDD;
@@ -214,9 +265,88 @@ footer {
         float: left;
       }
 
+      .mapListing {
+        float: right;
+      }
+
 .parallax-window {
     height: 540px;
     width: 100vw;
     min-height: 540px;
     background: transparent;
+}
+
+#times {
+    top: 370px;
+    position:absolute;
+    width: 382px;
+}
+
+#times * {
+    position: static;
+}
+
+#times button {
+    width: 80px;
+    color: white;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-right: 5px;
+    
+}
+
+.col-sm-1 {
+    padding: 0;
+}
+
+.review:first-of-type {
+    border-top: 1px solid lightgrey;
+}
+
+.review {
+    margin-left: 40px;
+    border-bottom: 1px solid lightgrey;
+
+}
+
+
+.review p:first-of-type {
+    font-weight: bold;
+    font-size: 17px;
+}
+
+.review p:nth-of-type(3) {
+    font-style: italic;
+}
+
+fieldset {
+    font-size: 20px;
+}
+
+textarea {
+    height: 200px;
+    width: 500px;
+}
+
+#similar {
+    position: absolute;
+    top: 2100px;
+    width: calc(100% - 75px);
+    height: 1100px;
+    background-color: white;
+    padding: 40px;
+}
+
+#similar h1 {
+    padding-bottom: 30px;
+    font-size: 45px;
+    text-align: center;
+}
+
+#similar .listing {
+    border: 1px solid #DDDDDD;
+    box-shadow: 2px 5px 10px rgba(0,0,0,0.13), 1px 3px 3px rgba(0,0,0,0.13);
+    margin-bottom: 20px;
+    margin-left: 13%;
+    min-width: 687px;
 }

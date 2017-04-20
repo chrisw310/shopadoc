@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ShopADoc</title>
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- jQuery -->
+    <script   src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="/parallax.js-1.4.2/parallax.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap viewport -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADWEyT0t77SmQhezZxrTmJadAXuHnREMU&callback=initMap"
+    async defer></script>
+  </head>
+  <body>
+      <bar>
+         <div id="logo"><div id="plus">+</div></div>
+          <p>Welcome, <b>ChrisW123!</b></p>
+      </bar>
+    <header id="listing">
+       <div class="parallax-window" data-parallax="scroll" data-image-src="/images/background.jpg"></div>
+        <div id="searchListing" class="input-group">
+            <input type="text" class="form-control" placeholder="Search name, location, speciality...">
+            <span class="input-group-btn" >
+                <button class="btn btn-default" type="button">
+                    <img src="images/search.png" id="searchlogo"/>
+                </button>
+            </span>
+        </div><!-- /input-group -->
+    </header>
+    <div id="content">
+        <div id="map" style="float:right;margin:30px;height:700px;"></div>
+        <div class="listing" id="single">
+            <p>Cameron Weber</p>
+            <p>General Practitioner</p>
+            <p>St Lucia, QLD</p>
+            <p>$199-299</p>
+            <p>&#9733;&#9733;&#9733;&#9733;&#9734;</p>
+            <p>17 Reviews</p>
+            <p>Available Times:</p>
+            <img />
+            <div id="times" class="container">
+                <div class="row">
+                    <div class="col-sm-1">
+                        <button type="button" class="btn btn-success">7:00am</button>
+                        <button type="button" class="btn btn-basic">7:30am</button>
+                        <button type="button" class="btn btn-success">8:00am</button>
+                        <button type="button" class="btn btn-basic">8:30am</button>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" class="btn btn-basic">9:00am</button>
+                        <button type="button" class="btn btn-success">9:30am</button>
+                        <button type="button" class="btn btn-success">10:00am</button>
+                        <button type="button" class="btn btn-basic">10:30am</button>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" class="btn btn-basic">11:00am</button>
+                        <button type="button" class="btn btn-success">11:30am</button>
+                        <button type="button" class="btn btn-basic">12:00pm</button>
+                        <button type="button" class="btn btn-success">12:30pm</button>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" class="btn btn-basic">1:00pm</button>
+                        <button type="button" class="btn btn-basic">1:30pm</button>
+                        <button type="button" class="btn btn-success">2:00pm</button>
+                        <button type="button" class="btn btn-success">2:30pm</button>
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="button" class="btn btn-basic">3:00pm</button>
+                        <button type="button" class="btn btn-success">3:30pm</button>
+                        <button type="button" class="btn btn-success">4:00pm</button>
+                        <button type="button" class="btn btn-basic">4:30pm</button>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-default">Confirm Booking</button>
+            <button type="button" class="btn btn-default">Save</button>
+            <button type="button" class="btn btn-default">Visit Site</button>
+        </div>
+        <div id="reviews">
+            <h1>Description</h1>
+            <p>G'day my name's Chris and I am the best brain surgeon in Bishop Street, St Lucia. <br> Successful brain surgery or you get your money back.</p>
+            <h2>Reviews</h2>
+            <div class="review">
+                <p>Boogie2988</p>
+                <p>&#9733;&#9733;&#9734;&#9734;&#9734;</p>
+                <p>Terrible Doctor. Bad Service. Very rude. D-. Never again.<br>Do not do business with this man.</p>
+            </div>
+            <div class="review">
+                <p>HarryHoyland321</p>
+                <p>&#9733;&#9734;&#9734;&#9734;&#9734;</p>
+                <p>Abysmal Surgery. Never got my money back</p>
+            </div>
+            <div class="review">
+                <p>ChrisW123</p>
+                <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                <p>Very friendly, and very quick! A++</p>
+            </div>
+
+            <form action="#">
+            <br>
+                <fieldset>
+                    <legend><h3>Leave a Comment:</h3></legend>
+                    Rating:<br>
+                        <input type="radio" name="rating" value="one" checked> &#9733;&#9734;&#9734;&#9734;&#9734;<br>
+                        <input type="radio" name="rating" value="one" checked> &#9733;&#9733;&#9734;&#9734;&#9734;<br>
+                        <input type="radio" name="rating" value="one" checked> &#9733;&#9733;&#9733;&#9734;&#9734;<br>
+                        <input type="radio" name="rating" value="one" checked> &#9733;&#9733;&#9733;&#9733;&#9734;<br>
+                        <input type="radio" name="rating" value="one" checked> &#9733;&#9733;&#9733;&#9733;&#9733;<br><br>
+                    Comment:<br>
+                    <textarea name="comment"></textarea><br><br>
+                    <input type="submit" value="Submit">
+              </fieldset>
+            </form>
+        </div>
+        <div id="similar">
+                <h1>Similar Listings</h1>
+                <div class="listing">
+                    <p>Cameron Weber</p>
+                    <p>General Practitioner</p>
+                    <p>St Lucia, QLD</p>
+                    <p>$199-299</p>
+                    <p>&#9733;&#9733;&#9733;&#9733;&#9734;</p>
+                    <p>17 Reviews</p>
+                    <img />
+            </div>
+            <div class="listing">
+                <p>Harry Hoyland</p>
+                <p>Brexit Enthusiast</p>
+                <p>Caboolture, QLD</p>
+                <p>$99-129</p>
+                <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+                <p>2 Reviews</p>
+                <img />
+            </div>
+            <div class="listing">
+                <p>Chris Wilkinson</p>
+                <p>Cognitive Psychologist</p>
+                <p>Toowoomba, QLD</p>
+                <p>$49-99</p>
+                <p>&#9733;&#9734;&#9734;&#9734;&#9734;</p>
+                <p>97 Reviews</p>
+                <img />
+            </div>
+        </div>
+    </div>
+  </body>
+</html>
