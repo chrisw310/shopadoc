@@ -211,7 +211,7 @@ header p {
     width: 250px;
     height: 250px;
     margin: 20px;
-    background-image: url(images/me.jpg)
+    background-image: url(../images/me.jpg)
 }
 
 #single {
