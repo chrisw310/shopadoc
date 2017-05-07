@@ -10,7 +10,7 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 
 //server port
-var port = 80;
+var port = 3000;
 
 //import the routes.js file
 var router = require('./app/routes');

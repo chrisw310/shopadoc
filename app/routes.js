@@ -32,6 +32,11 @@ router.get('/cameron',function(req,res){
     res.sendFile(path.join(__dirname,'../html/testing.html'));
 });
 
+//HEARTBEAT TO CHECK SERVER HEALTH
+router.get('/heartbeat',function(req,res){
+   res.send('OK');
+});
+
 
 //client request to the server
 //learn how to make this secure (do I use POST method along with a key?)
