@@ -16,6 +16,9 @@ var port = 80;
 var router = require('./app/routes');
 app.use('/', router);
 
+//import the databse.js file
+var mydb = require('./app/database');
+
 //static files (css, images etc)
 //publicly available
 app.use(express.static(__dirname + '/public'));
@@ -28,8 +31,28 @@ server.listen(port,function(){
 
 //socket for client-server communication
 io.on('connection', function (socket) {
-    socket.emit('news', { hello: 'world' });
-    socket.on('my other event', function (data) {
+    socket.emit('connectedToServer', 'Server Connection Established!');
+
+    socket.on('clientConnect', function (data) {
         console.log(data);
     });
+
+    socket.on('searchContacts',function(data){
+        console.log(data); //probably use DATA in the future to ensure user is authentic
+
+        //query the database using database.js
+        mydb.getContacts(function(str){
+            //return results to the client
+            socket.emit('contacts',str);
+        });
+
+    });
+
+    socket.on('addContact',function(data){
+        console.log("Attempting to add a client");
+        //console.log(data);
+        mydb.addContact(data, function(msg){
+            socket.emit('addContact',msg);
+        })
+    })
 });

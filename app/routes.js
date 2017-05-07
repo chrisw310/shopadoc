@@ -7,7 +7,7 @@
 var express = require('express');
 var path = require('path');
 //import the databas.js script
-var mydb = require('./database');
+//var mydb = require('./database');
 
 //create the router
 var router = express.Router();
@@ -36,7 +36,7 @@ router.get('/cameron',function(req,res){
 //client request to the server
 //learn how to make this secure (do I use POST method along with a key?)
 //probably change this to socket.io code??
-router.get('/server',function(req,res){
+//router.get('/server',function(req,res){
     //call "dbResponse" from the databse.js script
-    mydb.dbResponse(req,res);
-});
+//    mydb.dbResponse(req,res);
+//});

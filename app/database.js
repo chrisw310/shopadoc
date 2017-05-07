@@ -9,20 +9,47 @@ var assert = require('assert');
 var uri = "mongodb://infs3202dbadmin:wrQn3qmF1x7inzgn@cluster0-shard-00-00-mvxrs.mongodb.net:27017,cluster0-shard-00-01-mvxrs.mongodb.net:27017,cluster0-shard-00-02-mvxrs.mongodb.net:27017/shopAdoc?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
 
 
-function connectDb() {
+function getContacts(callback){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
-        console.log('connected to the databse');
-        findCollections(db, function() {
+        db.collection('contacts').find().toArray(function(err, docs){
+            assert.equal(null, err);
+            callback(docs);
             db.close();
-            console.log('connection closed');
         });
+
     });
-    //MongoClient.close();
-    //console.log('connection closed');
 }
 
-var findCollections = function(db, callback) {
+function addContact(data,callback){
+
+    if(data.name && data.email && data.phone){
+        MongoClient.connect(uri, function (err, db) {
+            assert.equal(null, err);
+
+            var doc = {_id: data.email, phone: data.phone, name:data.name};
+            db.collection('contacts').insertOne(doc,function(err,r){
+                if(err === null) {
+                    assert.equal(1, r.insertedCount);
+                    callback('ContactAdded');
+                    db.close();
+                }else{
+                    switch(err.code){
+                        case 11000:
+                            callback('Email Already in use');
+                            break;
+                        default: callback('Invalid Contact Data');
+                    }
+                }
+            });
+
+        });
+    }else{
+        callback('Invalid Contact Data')
+    }
+}
+
+/*var findCollections = function(db, callback) {
     var cursor =db.collection('contacts').find( );
     //var cursor =db.listCollections();
     cursor.each(function(err, doc) {
@@ -34,25 +61,6 @@ var findCollections = function(db, callback) {
             callback();
         }
     });
-};
-
-var createValidatedCollection = function(db, callback) {
-    db.createCollection("contacts",
-        {
-            'validator': { '$or':
-                [
-                    { 'phone': { '$type': "string" } },
-                    { 'email': { '$regex': /@mongodb\.com$/ } },
-                    { 'status': { '$in': [ "Unknown", "Incomplete" ] } }
-                ]
-            }
-        },
-        function(err, results) {
-            assert.equal(err, null);
-            console.log("Collection created.");
-            callback();
-        }
-    );
 };
 
 var insertData = function(db, callback){
@@ -71,8 +79,10 @@ function dbResponse(req,res){
     connectDb();
     res.send("string test");
     //return connectDb();
-}
+}*/
 
 //export the functions in this script to be used by routes.js
-module.exports.connectDb = connectDb;
-module.exports.dbResponse = dbResponse;
+module.exports.getContacts = getContacts;
+module.exports.addContact = addContact;
+//module.exports.connectDb = connectDb;
+//module.exports.dbResponse = dbResponse;

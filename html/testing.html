@@ -9,6 +9,34 @@
     <script src="testing/camTestScript.js"></script>
 </head>
 <body>
-    <button onclick="queryDb()">Query the Databse?</button>
+    <button onclick="getContacts()">Get Contacts</button>
+
+    <div>
+        <table id="contactsTable" border = "1">
+            <tr>
+                <th>Name:</th>
+                <th>Email:</th>
+                <th>Phone:</th>
+            </tr>
+        </table>
+    </div>
+
+    <div>
+        <h2> Add a New Contact</h2>
+        <div>
+            <b>Name:</b>
+            <textarea id="nameTextArea"></textarea>
+        </div>
+        <div>
+            <b>Email:</b>
+            <textarea id="emailTextArea"></textarea>
+        </div>
+        <div>
+            <b>Phone:</b>
+            <textarea id="phoneTextArea"></textarea>
+        </div>
+        <button onclick="addContact()">Add</button>
+        <b id="contactErrorText"></b>
+    </div>
 </body>
 </html>
