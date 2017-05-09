@@ -154,44 +154,46 @@ header p {
 }
 
 .listing * {
-    position: absolute;
+    position: static;
     width: auto;
 
 }
 
 .listing p:nth-child(1) {
-    padding-top: 10px;
+
     font-size: 50px;
 }
 
 .listing p:nth-child(2) {
-    padding-top: 80px;
+
     font-size: 30px;
 }
 
 .listing p:nth-child(3) {
-    padding-top: 130px;
+
     font-size: 20px;
 }
 
 .listing p:nth-child(4) {
-    padding-top: 170px;
     font-size: 15px;
 }
 
 .listing p:nth-child(5) {
-    padding-top: 200px;
+
     font-size: 35px;
 }
 
 .listing p:nth-child(6) {
-    padding-top: 250px;
     font-size: 20px;
     color: grey;
 }
 
 .listing p:nth-child(7) {
-    padding-top: 300px;
+    font-size: 20px;
+}
+
+.listing button {
+    position:
     font-size: 20px;
 }
 
@@ -228,6 +230,31 @@ header p {
     width: 95%;
     padding: 40px;
     margin-left: 0px;
+}
+
+#singleConfirm button {
+    width: 100px;
+    font-weight: bold;
+}
+
+#singleConfirm input[type="textarea"] {
+    width: 80%;
+}
+
+#radioButtons {
+    text-align: left;
+    width: 50%;
+}
+
+#btnNext {
+    float: right;
+}
+
+form > div {
+    border: 1px solid #BBBBBB;
+    box-shadow: 1px 2px 1px #DDDDDD;
+    text-align: center;
+    padding-bottom: 20px;
 }
 
 #single img {
@@ -314,7 +341,6 @@ footer {
 .review {
     margin-left: 40px;
     border-bottom: 1px solid lightgrey;
-
 }
 
 

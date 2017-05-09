@@ -29,22 +29,27 @@
          <div id="logo"><div id="plus">+</div></div>
           <p>Welcome, <b>ChrisW123!</b></p>
       </bar>
+       
         <div class="listing" id="singleConfirm">
-            <p>First, answer some questions:</p>
             <form action="#">
+            <p>First, answer some questions:</p>
+            <div id="page1">
+            <h1>What is your favourite colour?</h1>
+            <input type="textarea"><br>
+            </div>
+            <div id="page1">
+            <h1>What is your favourite question?</h1><br>
+            <div id="radioButtons">
+            <input type="radio" name="form" value="one" checked> This one<br>
+            <input type="radio" name="form" value="one" checked> Last one<br>
+            <input type="radio" name="form" value="one" checked> Next one<br>
+            <input type="radio" name="form" value="one" checked> None of the above<br>
+            </div>
+            </div>
             <br>
-                <fieldset style="position:absolute;top:100px;">
-                    <legend><h3>Leave a Comment:</h3></legend>
-                    Rating:<br>
-                        <input type="radio" name="rating" value="one" checked> &#9733;&#9734;&#9734;&#9734;&#9734;<br>
-                        <input type="radio" name="rating" value="one" checked> &#9733;&#9733;&#9734;&#9734;&#9734;<br>
-                        <input type="radio" name="rating" value="one" checked> &#9733;&#9733;&#9733;&#9734;&#9734;<br>
-                        <input type="radio" name="rating" value="one" checked> &#9733;&#9733;&#9733;&#9733;&#9734;<br>
-                        <input type="radio" name="rating" value="one" checked> &#9733;&#9733;&#9733;&#9733;&#9733;<br><br>
-                    Comment:<br>
-                    <textarea name="comment"></textarea><br><br>
-                    <input type="submit" value="Submit">
-              </fieldset>
+            
+            <button type="button" class="btn btn-danger"  id="btnPrev">Previous</button>
+            <button type="button" class="btn btn-danger"  id="btnNext">Next</button>
             </form>
     </div>
   </body>
