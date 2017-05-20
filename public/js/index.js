@@ -3,7 +3,7 @@ $(document).ready(function() {
 });
 
 
-
+//~~Google Maps API functions~~//
 var map;
 var bounds;
 var geocoder;
@@ -37,6 +37,18 @@ function addMapMarker(address,i) {
     });
 }
 
+//~~Search database function~~//
+window.onload = function(e){
+    console.log("onload");
+    document.getElementById('searchBar').onkeydown = function(event) {
+        if (event.keyCode === 13) {
+            searchDoctors();
+        }
+    }
+};
+
+
+//~~Update the list of doctors on the index.html page~~//
 function listDoctors(docs){
     var htmlStr = "";
     for(var i=0; i<docs.length; i++){
@@ -60,7 +72,7 @@ function listDoctors(docs){
                 '<p>$' + minCost + '-$' + maxCost + '</p>' +
                 '<p>' + starsString+ '</p>' +
                 '<p>' + reviewStr + '</p>' +
-                '<img src='+imgurl+' />' + '</div>';
+                '<img style="background-image:url(' + imgurl +')"/>' + '</div>';
     }
 
     document.getElementById("doctorContainer").innerHTML = htmlStr;
@@ -80,3 +92,8 @@ socket.on('doctors', function(data){
     console.log("Got doctors data.... Updating List");
     listDoctors(data);
 });
+
+function searchDoctors(){
+    var str = document.getElementById("searchBar").value;
+    socket.emit('searchDoctors',str);
+}
