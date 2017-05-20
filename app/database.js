@@ -11,7 +11,7 @@ var uri = "mongodb://infs3202dbadmin:wrQn3qmF1x7inzgn@cluster0-shard-00-00-mvxrs
 function getDoctors(data,callback){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
-        var conditions
+        var conditions;
         if(data === "all"){
             conditions = null;
         }else {

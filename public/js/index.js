@@ -17,7 +17,7 @@ function initMap() {
 
 function addMapMarker(address,i) {
     geocoder.geocode( { 'address': address}, function(results, status) {
-        if (status == google.maps.GeocoderStatus.OK) {
+        if (status === google.maps.GeocoderStatus.OK) {
             var pos = results[0].geometry.location;
             if(i === 1){
                 bounds = new google.maps.LatLngBounds(pos);
@@ -74,8 +74,13 @@ function listDoctors(docs){
                 '<p>' + reviewStr + '</p>' +
                 '<img style="background-image:url(' + imgurl +')"/>' + '</div>';
     }
-
+    //update the doctor content
     document.getElementById("doctorContainer").innerHTML = htmlStr;
+    //update the height
+    var h = docs.length*320 + 30;
+    document.getElementById("content").style.height = h.toString() + 'px';
+    h = docs.length*320 - 20;
+    document.getElementById("map").style.height = h.toString() + 'px';
 }
 
 //socket to talk to the server
@@ -95,5 +100,7 @@ socket.on('doctors', function(data){
 
 function searchDoctors(){
     var str = document.getElementById("searchBar").value;
-    socket.emit('searchDoctors',str);
+    if(str !== '') {
+        socket.emit('searchDoctors', str);
+    }
 }
