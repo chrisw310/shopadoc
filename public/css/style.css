@@ -109,19 +109,19 @@ header :not(img):not(.input-group *)   {
 }
 
 header h1 {
-    top: 9%;
+    top: 70px;
     font-size: 150px;
 }
 
 header p {
-    top: 28%;
+    top: 110px;
     font-size: 33px;
     font-weight: 800;
 }
 
 .input-group {
-    top: 40%;
-    width: 40%;
+    top: 350px;
+    width: 70%;
 }
 
 .input-group * {
