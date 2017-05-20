@@ -184,42 +184,38 @@ header p {
 }
 
 .listing * {
-    position: static;
+    position: absolute;
     width: auto;
-
 }
 
 .listing p:nth-child(1) {
-
     font-size: 50px;
 }
 
 .listing p:nth-child(2) {
-
+    margin-top: 60px;
     font-size: 30px;
 }
 
 .listing p:nth-child(3) {
-
+    margin-top: 110px;
     font-size: 20px;
 }
 
 .listing p:nth-child(4) {
+    margin-top: 150px;
     font-size: 15px;
 }
 
 .listing p:nth-child(5) {
-
+    margin-top: 180px;
     font-size: 35px;
 }
 
 .listing p:nth-child(6) {
+    margin-top: 240px;
     font-size: 20px;
     color: grey;
-}
-
-.listing p:nth-child(7) {
-    font-size: 20px;
 }
 
 .listing button {
@@ -243,7 +239,6 @@ header p {
     width: 250px;
     height: 250px;
     margin: 20px;
-    background-image: url(../public/images/me.jpg)
 }
 
 header h1, header p {
@@ -334,7 +329,7 @@ footer {
     height: 200px;
 }
 
-#content > div {
+#doctorContainer > div {
     margin-left: 2%;
     
     border: 1px solid #DDDDDD;
