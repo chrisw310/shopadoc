@@ -8,6 +8,17 @@ var assert = require('assert');
 
 var uri = "mongodb://infs3202dbadmin:wrQn3qmF1x7inzgn@cluster0-shard-00-00-mvxrs.mongodb.net:27017,cluster0-shard-00-01-mvxrs.mongodb.net:27017,cluster0-shard-00-02-mvxrs.mongodb.net:27017/shopAdoc?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
 
+function getDoctors(data,callback){
+    MongoClient.connect(uri, function (err, db) {
+        assert.equal(null, err);
+        db.collection('doctors').find().toArray(function(err, docs){
+            assert.equal(null, err);
+            callback(docs);
+            db.close();
+        });
+
+    });
+}
 
 function getContacts(callback){
     MongoClient.connect(uri, function (err, db) {
@@ -84,5 +95,6 @@ function dbResponse(req,res){
 //export the functions in this script to be used by routes.js
 module.exports.getContacts = getContacts;
 module.exports.addContact = addContact;
+module.exports.getDoctors = getDoctors;
 //module.exports.connectDb = connectDb;
 //module.exports.dbResponse = dbResponse;

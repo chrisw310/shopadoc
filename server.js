@@ -54,5 +54,14 @@ io.on('connection', function (socket) {
         mydb.addContact(data, function(msg){
             socket.emit('addContact',msg);
         })
-    })
+    });
+
+    socket.on('searchDoctors',function(data){
+        console.log("Request to search doctors - " + data);
+        //query the database using database.js
+        mydb.getDoctors(data,function(str){
+            //return results to the client
+            socket.emit('doctors',str);
+        });
+    });
 });

@@ -20,9 +20,27 @@ router.get('/',function(req,res){
     res.sendFile(path.join(__dirname,'../html/index.html'));
 });
 
+// parameter middleware that will run before the next routes
+router.param('name', function(req, res, next, name) {
+
+    // check if the user with that name exists
+    //query db to find name, if the name doesnt exist, go to a page not found page
+    console.log(name);
+
+    if (name === 'wrong') {
+        next('no doctor found by that name');
+    }else{
+        //continue to desired page
+        next();
+    }
+
+});
+
 //LISTING PAGE
-router.get('/listing',function(req,res){
-    res.sendFile(path.join(__dirname,'../html/listing.html'));
+router.get('/listing/:name',function(req,res){
+    console.log('listing route');
+    res.sendFile(path.join(__dirname,'../html/index.html'));
+
 });
 
 
