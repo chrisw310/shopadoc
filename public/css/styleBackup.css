@@ -52,44 +52,18 @@ bar p {
 }
 
 #content {
-    height: 1670px;
+    height: 1200px;
     background-color:#EFEFEF;
 }
 
 header  {
     overflow: hidden;
     height: 500px;
-    display: flex;
-    justify-content: center;
-    color: black;
-    
 }
 
-header > h1 {
-    padding: 10px;
-    font-weight: 100;
-}
-
-header > p {
-    position: absolute;
-    top: 50%;
-    padding: 10px;
-}
-
-header > img  {
-    position: absolute;
-    top:0;
-    z-index: -1;
-    height: auto;
+header img  {
+    height: 500px;
     width: 100vw;
-}
-
-header .input-group {
-    top: 70%;
-}
-
-.btn-default {
-    width: 70px;
 }
 
 #listing {
@@ -105,19 +79,19 @@ header :not(img):not(.input-group *)   {
 }
 
 header h1 {
-    top: 90px;
+    top: 9%;
     font-size: 150px;
 }
 
 header p {
-    top: 110px;
+    top: 28%;
     font-size: 33px;
     font-weight: 800;
 }
 
 .input-group {
-    top: 350px;
-    width: 60%;
+    top: 40%;
+    width: 40%;
 }
 
 .input-group * {
@@ -180,38 +154,42 @@ header p {
 }
 
 .listing * {
-    position: absolute;
+    position: static;
     width: auto;
+
 }
 
 .listing p:nth-child(1) {
+
     font-size: 50px;
 }
 
 .listing p:nth-child(2) {
-    margin-top: 60px;
+
     font-size: 30px;
 }
 
 .listing p:nth-child(3) {
-    margin-top: 110px;
+
     font-size: 20px;
 }
 
 .listing p:nth-child(4) {
-    margin-top: 150px;
     font-size: 15px;
 }
 
 .listing p:nth-child(5) {
-    margin-top: 180px;
+
     font-size: 35px;
 }
 
 .listing p:nth-child(6) {
-    margin-top: 240px;
     font-size: 20px;
     color: grey;
+}
+
+.listing p:nth-child(7) {
+    font-size: 20px;
 }
 
 .listing button {
@@ -235,10 +213,7 @@ header p {
     width: 250px;
     height: 250px;
     margin: 20px;
-}
-
-header h1, header p {
-    position: absolute;
+    background-image: url(../images/me.jpg)
 }
 
 #single {
@@ -268,8 +243,7 @@ header h1, header p {
 
 #radioButtons {
     text-align: left;
-    padding-left: 10%;
-    font-size: 20px;
+    width: 50%;
 }
 
 #btnNext {
@@ -303,20 +277,6 @@ form > div {
     font-size: 20px;
 }
 
-table {
-    margin-top: 30px;
-    position: absolute;
-    left: calc(50% - 216px);
-}
-
-td {
-    padding: 30px;
-}
-
-td:first-child {
-    border-right: 3px solid #DDDDDD;
-}
-
 .listing:last-child {
     margin-bottom: 50px;
 }
@@ -325,7 +285,7 @@ footer {
     height: 200px;
 }
 
-#doctorContainer > div {
+#content > div {
     margin-left: 2%;
     
     border: 1px solid #DDDDDD;

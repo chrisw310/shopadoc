@@ -60,7 +60,7 @@ function listDoctors(docs){
                 '<p>$' + minCost + '-$' + maxCost + '</p>' +
                 '<p>' + starsString+ '</p>' +
                 '<p>' + reviewStr + '</p>' +
-                '<img style="background-image:url(' + imgurl +')"/>' + '</div>';
+                '<img src='+imgurl+' />' + '</div>';
     }
 
     document.getElementById("doctorContainer").innerHTML = htmlStr;
