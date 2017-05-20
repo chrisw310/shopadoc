@@ -15,11 +15,12 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Bootstrap viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+      <!-- IO script for server communication -->
+      <script src="/socket.io/socket.io.js"></script>
     <!-- Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
     <!-- JavaScript -->
-    <script src="js/script.js"></script>
+    <script src="../js/listing.js"></script>
     <!-- Google Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADWEyT0t77SmQhezZxrTmJadAXuHnREMU&callback=initMap"
     async defer></script>
@@ -35,7 +36,7 @@
             <input type="text" class="form-control" placeholder="Search name, location, speciality...">
             <span class="input-group-btn" >
                 <button class="btn btn-default" type="button">
-                    <img src="images/search.png" id="searchlogo"/>
+                    <img src="../images/search.png" id="searchlogo"/>
                 </button>
             </span>
         </div><!-- /input-group -->

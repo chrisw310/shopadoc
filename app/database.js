@@ -33,6 +33,18 @@ function getDoctors(data,callback){
     });
 }
 
+function checkDoctor(name,callback){
+    MongoClient.connect(uri, function (err, db) {
+        assert.equal(null, err);
+        db.collection('doctors').find({'name':name}).toArray(function(err, docs){
+            assert.equal(null, err);
+            callback(docs);
+            db.close();
+        });
+
+    });
+}
+
 function getContacts(callback){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
@@ -109,5 +121,6 @@ function dbResponse(req,res){
 module.exports.getContacts = getContacts;
 module.exports.addContact = addContact;
 module.exports.getDoctors = getDoctors;
+module.exports.checkDoctor = checkDoctor;
 //module.exports.connectDb = connectDb;
 //module.exports.dbResponse = dbResponse;

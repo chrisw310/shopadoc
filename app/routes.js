@@ -7,7 +7,7 @@
 var express = require('express');
 var path = require('path');
 //import the databas.js script
-//var mydb = require('./database');
+var mydb = require('./database');
 
 //create the router
 var router = express.Router();
@@ -22,27 +22,28 @@ router.get('/',function(req,res){
 
 // parameter middleware that will run before the next routes
 router.param('name', function(req, res, next, name) {
-
+    //console.log('Does doctor exist? ' + name);
     // check if the user with that name exists
     //query db to find name, if the name doesnt exist, go to a page not found page
-    console.log(name);
-
-    if (name === 'wrong') {
-        next('no doctor found by that name');
-    }else{
-        //continue to desired page
-        next();
-    }
-
+    //console.log(name);
+    /*mydb.checkDoctor(name,function(result){
+        console.log(result);
+        if (result.length === 0) {
+            next('no doctor found by that name (opportunity to add a new page)');
+        }else{
+            //continue to desired page
+            //next();
+            res.sendFile(path.join(__dirname,'../html/listing.html'));
+        }
+    });*/
+    next();
 });
 
 //LISTING PAGE
 router.get('/listing/:name',function(req,res){
-    console.log('listing route');
-    res.sendFile(path.join(__dirname,'../html/index.html'));
-
+    console.log('Providing the listing.html page');
+    res.sendFile(path.join(__dirname,'../html/listing.html'));
 });
-
 
 
 //CAMERON'S TESTING PAGE

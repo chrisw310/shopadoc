@@ -64,4 +64,12 @@ io.on('connection', function (socket) {
             socket.emit('doctors',str);
         });
     });
+
+    socket.on('listingDoctor',function(data){
+        console.log("Request to list doctor - " + data)
+        mydb.checkDoctor(data,function(str){
+            //resturn the resuts to the client
+            socket.emit('listingDoctor',str);
+        })
+    })
 });

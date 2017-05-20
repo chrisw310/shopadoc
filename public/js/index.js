@@ -65,14 +65,14 @@ function listDoctors(docs){
         var starsString = fullStar.repeat(starCount) + emptyStar.repeat(5-starCount);
         var reviewStr = docs[i].reviewCount + " Reviews";
         var imgurl = "../images/" + docs[i].photo;
-        htmlStr += '<div class="listing">' +
+        htmlStr += '<a class="listing" href="/listing/'+name+'">' +
                 '<p>' + name +'</p>' +
                 '<p>' + title +'</p>' +
                 '<p>' + address + '</p>' +
                 '<p>$' + minCost + '-$' + maxCost + '</p>' +
                 '<p>' + starsString+ '</p>' +
                 '<p>' + reviewStr + '</p>' +
-                '<img style="background-image:url(' + imgurl +')"/>' + '</div>';
+                '<img style="background-image:url(' + imgurl +')"/>' + '</a>';
     }
     //update the doctor content
     document.getElementById("doctorContainer").innerHTML = htmlStr;
