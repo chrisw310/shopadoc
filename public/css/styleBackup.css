@@ -59,41 +59,11 @@ bar p {
 header  {
     overflow: hidden;
     height: 500px;
-    display: flex;
-    justify-content: center;
-    color: white;
-    
 }
 
-header > h1 {
-    background-color: #FF9999;
-    border-radius: 10px;
-    padding: 10px;
-}
-
-header > p {
-    position: absolute;
-    border-radius: 5px;
-    top: 50%;
-    color:white;
-    background-color: #FF9999;
-    padding: 10px;
-}
-
-header > img  {
-    position: absolute;
-    top:0;
-    z-index: -1;
-    height: 600px;
+header img  {
+    height: 500px;
     width: 100vw;
-}
-
-header .input-group {
-    top: 60%;
-}
-
-.btn-default {
-    width: 70px;
 }
 
 #listing {
@@ -243,11 +213,7 @@ header p {
     width: 250px;
     height: 250px;
     margin: 20px;
-    background-image: url(../public/images/me.jpg)
-}
-
-header h1, header p {
-    position: absolute;
+    background-image: url(../images/me.jpg)
 }
 
 #single {
@@ -277,8 +243,7 @@ header h1, header p {
 
 #radioButtons {
     text-align: left;
-    padding-left: 10%;
-    font-size: 20px;
+    width: 50%;
 }
 
 #btnNext {
@@ -310,20 +275,6 @@ form > div {
 
 #reviews p {
     font-size: 20px;
-}
-
-table {
-    margin-top: 30px;
-    position: absolute;
-    left: calc(50% - 216px);
-}
-
-td {
-    padding: 30px;
-}
-
-td:first-child {
-    border-right: 3px solid #DDDDDD;
 }
 
 .listing:last-child {
