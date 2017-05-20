@@ -7,6 +7,17 @@
 var express = require('express');
 var app = express();
 var server = require('http').Server(app);
+//var https = require('https');
+
+//var fs = require('fs');
+//var privateKey = fs.readFileSync('security/shopadoc_me.key').toString();
+//var certificate = fs.readFileSync('security/shopadoc_me.crt').toString();
+//var ca = fs.readFileSync('security/shopadoc_me.ca-bundle').toString();
+//var credentials = { key: privateKey, cert: certificate, ca: ca };
+
+//var server = https.createServer(credentials, app);
+
+//var io = require('socket.io').listen(3456,credentials);
 var io = require('socket.io')(server);
 
 //server port

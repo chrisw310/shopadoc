@@ -18,7 +18,10 @@ function initMap() {
 
 
 //socket to talk to the server
-var socket = io.connect('http://' + window.location.hostname + ":3000"); //works for localhost
+//var port = "3000"; //remove later
+//if (window.location.hostname === 'www.shopadoc.me'){port = "80";}
+//var socket = io.connect('https://' + window.location.hostname + ":"+port); //works for localhost
+var socket = io.connect();
 socket.on('connectedToServer', function (data) {
     console.log(data); //prints the data from the server
     socket.emit('clientConnect', 'Client Connected! - Index.js');

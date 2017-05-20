@@ -64,7 +64,8 @@ function listDoctors(docs){
         var starCount = Math.floor(docs[i].averageRating);
         var starsString = fullStar.repeat(starCount) + emptyStar.repeat(5-starCount);
         var reviewStr = docs[i].reviewCount + " Reviews";
-        var imgurl = "../images/" + docs[i].photo;
+        //var imgurl = "../images/" + docs[i].photo;
+        var imgurl = "../images/me.jpg";
         htmlStr += '<a class="listing" href="/listing/'+name+'">' +
                 '<p>' + name +'</p>' +
                 '<p>' + title +'</p>' +
@@ -84,7 +85,10 @@ function listDoctors(docs){
 }
 
 //socket to talk to the server
-var socket = io.connect('http://' + window.location.hostname + ":3000"); //works for localhost
+//var port = "3456"; //remove later
+//if (window.location.hostname === 'www.shopadoc.me'){port = "80";}
+//var socket = io.connect('https://' + window.location.hostname + ":"+port ,{secure: true}); //works for localhost
+var socket = io.connect();
 socket.on('connectedToServer', function (data) {
     //listDoctors(5);
     console.log(data); //prints the data from the server
