@@ -20,7 +20,8 @@ bar p {
 }
 
 #logo {
-    position: absolute;
+    position: relative;
+	float:left;
     text-align: center;
     vertical-align: middle;
     width: 30px;
@@ -429,3 +430,23 @@ textarea {
     position: absolute;
     top: 390px;
 }
+
+.signin {
+	float: left;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+.signin div{
+	float: left;
+	height: 100%;
+	display: flex;
+	align-items: center;
+}
+
+#welcomeMsg, #signout {
+	display: none;
+	margin-left: 15px;
+}
+

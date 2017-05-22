@@ -82,5 +82,42 @@ io.on('connection', function (socket) {
             //resturn the resuts to the client
             socket.emit('listingDoctor',str);
         })
-    })
+    });
+	
+	var profile = {};
+	
+	socket.on('clientSignIn', function(data, callback) {
+		console.log("clientSignIn");
+		var GoogleAuth = require('google-auth-library');
+		var auth = new GoogleAuth;
+		var CLIENT_ID = '390784971133-mfjqrepf91ib0tlhekjo375qok0nf1v7.apps.googleusercontent.com';
+		var client = new auth.OAuth2(CLIENT_ID, '', '');
+		client.verifyIdToken(
+			data.token,
+			CLIENT_ID,
+			function(e, login) {
+				var returnData = {}; // data to return to client in callback
+				if (login != null) {
+					console.log("login verified");
+					var payload = login.getPayload();
+					// store data
+					profile.id = payload['sub'];
+					profile.name = payload['name'];
+					profile.email = payload['email'];
+					profile.pictureUrl = payload['picture'];
+					
+					//data to return to client in callback
+					returnData.name = profile.name;
+					returnData.pictureUrl = profile.pictureUrl;
+					
+					// TODO: store profile in database
+					
+				} else {
+					returnData.err = e;
+					console.log("login verification failed: "+ e);
+				}
+				callback(returnData);
+			}
+		);
+	});
 });

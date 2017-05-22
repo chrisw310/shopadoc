@@ -15,9 +15,12 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Bootstrap viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-      <!-- IO script for server communication -->
-      <script src="/socket.io/socket.io.js"></script>
+    <!-- IO script for server communication -->
+    <script src="/socket.io/socket.io.js"></script>
+	<!-- Google Platform Library for Google Sign-In -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<!-- Google Client ID -->
+	<meta name="google-signin-client_id" content="390784971133-mfjqrepf91ib0tlhekjo375qok0nf1v7.apps.googleusercontent.com">
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <!-- JavaScript -->
@@ -28,10 +31,18 @@
 
   </head>
   <body>
-      <bar>
-         <div id="logo"><div id="plus">+</div></div>
-          <p>Login/Sign Up</p>
-      </bar>
+	<bar>
+		<div id="logo"><div id="plus">+</div></div>
+		<div class="signin">
+			<div class="g-signin2" data-onsuccess="onSignIn">
+			</div>
+			<div id="welcomeMsg"></div>
+			<div id="signout">
+				<a href="#" onclick="signOut();">Sign out</a>
+			</div>
+		</div>
+    </bar>
+        
     <header>
         <h1>ShopADoc</h1>
         <p style="top:300px;font-weight:100;">For All of Your Doctorey Needs</p>
