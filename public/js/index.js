@@ -64,16 +64,16 @@ function listDoctors(docs){
         var starCount = Math.floor(docs[i].averageRating);
         var starsString = fullStar.repeat(starCount) + emptyStar.repeat(5-starCount);
         var reviewStr = docs[i].reviewCount + " Reviews";
-        //var imgurl = "../images/" + docs[i].photo;
-        var imgurl = "../images/me.jpg";
-        htmlStr += '<a class="listing" href="/listing/'+name+'">' +
+        var imgurl = "../images/" + docs[i].photo;
+        //var imgurl = "../images/me.jpg";
+        htmlStr += '<div class="listing" onclick="redirect(&#39'+name.toString()+'&#39)">' +
                 '<p>' + name +'</p>' +
                 '<p>' + title +'</p>' +
                 '<p>' + address + '</p>' +
                 '<p>$' + minCost + '-$' + maxCost + '</p>' +
                 '<p>' + starsString+ '</p>' +
                 '<p>' + reviewStr + '</p>' +
-                '<img style="background-image:url(' + imgurl +')"/>' + '</a>';
+                '<img style="background-image:url(' + imgurl +')"/>' + '</div>';
     }
     //update the doctor content
     document.getElementById("doctorContainer").innerHTML = htmlStr;
@@ -82,6 +82,10 @@ function listDoctors(docs){
     document.getElementById("content").style.height = h.toString() + 'px';
     h = docs.length*320 - 20;
     document.getElementById("map").style.height = h.toString() + 'px';
+}
+
+function redirect(name){
+    window.location.replace('/listing/'+name);
 }
 
 //socket to talk to the server
