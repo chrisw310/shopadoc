@@ -57,6 +57,16 @@ bar p {
     background-color:#EFEFEF;
 }
 
+#contentSingle {
+    height:2000px;
+    background-color:#EFEFEF;
+
+}
+
+#contentSingle > div {
+    box-shadow: 2px 5px 10px rgba(0,0,0,0.13), 1px 3px 3px rgba(0,0,0,0.13);
+}
+
 header  {
     overflow: hidden;
     height: 500px;
@@ -190,9 +200,11 @@ header p {
     float: left;
     width: 74%;
     height: 300px;
-    padding-left: 20px;
+    padding: 10px;
+    padding-left: 30px;
     margin-bottom: 20px;
     background-color: white;
+    min-width: 770px;
 }
 
 .listing * {
@@ -200,12 +212,17 @@ header p {
     width: auto;
 }
 
+#single {
+    margin: 30px;
+    margin-bottom: 0;
+}
+
 .listing p:nth-child(1) {
     font-size: 50px;
 }
 
 .listing p:nth-child(2) {
-    margin-top: 60px;
+    margin-top: 64px;
     font-size: 30px;
 }
 
@@ -215,17 +232,23 @@ header p {
 }
 
 .listing p:nth-child(4) {
-    margin-top: 150px;
+    margin-top: 147px;
     font-size: 15px;
 }
 
 .listing p:nth-child(5) {
-    margin-top: 180px;
+    margin-top: 185px;
     font-size: 35px;
 }
 
 .listing p:nth-child(6) {
     margin-top: 240px;
+    font-size: 20px;
+    color: grey;
+}
+
+.listing p:nth-child(7) {
+    margin-top: 300px;
     font-size: 20px;
     color: grey;
 }
@@ -250,7 +273,7 @@ header p {
     position: relative;
     width: 250px;
     height: 250px;
-    margin: 20px;
+    margin: 15px;
 }
 
 header h1, header p {
@@ -310,13 +333,21 @@ form > div {
     background-color: white;
     height: auto;
     width: 96%;
-    top: 880px;
+    top: 800px;
     padding: 30px;
-    margin-left: 50px;
+    margin-left: 30px;
 }
 
 #reviews p {
     font-size: 20px;
+}
+
+#reviews h2 {
+    margin-bottom: 30px;
+}
+
+.review:last-of-type {
+    margin-bottom: 30px;
 }
 
 table {
@@ -357,7 +388,7 @@ footer {
       }
 
       .mapListing {
-        float: right;
+        float: left;
       }
 
 .parallax-window {
