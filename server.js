@@ -34,6 +34,10 @@ var mydb = require('./app/database');
 //publicly available
 app.use(express.static(__dirname + '/public'));
 
+app.use(function(req, res){
+    res.send('Not found page goes here');
+});
+
 // start the server and listen on port 80
 server.listen(port,function(){
     console.log('ShopADoc Server started');
@@ -77,7 +81,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('listingDoctor',function(data){
-        console.log("Request to list doctor - " + data)
+        console.log("Request to list doctor - " + data);
         mydb.checkDoctor(data,function(str){
             //resturn the resuts to the client
             socket.emit('listingDoctor',str);

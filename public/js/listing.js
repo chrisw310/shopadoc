@@ -3,17 +3,55 @@
  */
 //Js to control the listings page
 
-
-
 //~~Google Maps API functions~~//
 var map;
 var geocoder;
+//Initalize the map
 function initMap() {
     geocoder = new google.maps.Geocoder();
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -27.469, lng: 153.025},
         zoom: 12
     });
+}
+//to add a marker and make it the focus of the map
+function addMapMarker(address) {
+    geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status === google.maps.GeocoderStatus.OK) {
+            var pos = results[0].geometry.location;
+            var image = "https://raw.githubusercontent.com/Concept211/Google-Maps-Markers/master/images/marker_red1.png";
+            var marker = new google.maps.Marker({
+                map: map,
+                position: pos,
+                icon : image
+            });
+            map.setCenter(pos);
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
+        }
+    });
+}
+
+function updateDoctorInfo(docs) {
+    if (docs.length > 0){
+    	var i =0;
+		console.log(docs[i]);
+        document.getElementById("name").innerHTML = docs[i].name;
+        document.getElementById("title").innerHTML = docs[i].title;
+        document.getElementById("address").innerHTML = docs[i].address;
+        document.getElementById("doctorCost").innerHTML = '$' + docs[i].avgMinCost + '-$' + docs[i].avgMaxCost;
+        var starCount = Math.floor(docs[i].averageRating);
+        var starsString = "&#9733".repeat(starCount) + "&#9734".repeat(5 - starCount);
+        document.getElementById("reviewStars").innerHTML = starsString;
+        document.getElementById("reviewCount").innerHTML = docs[i].reviewCount + " Reviews";
+        var imgurl = "../images/" + docs[i].photo;
+        document.getElementById("doctorImage").style.backgroundImage = 'url(' + imgurl + ')';
+        //document.getElementById("doctorDescription").innerHTML = docs[i].description;
+        addMapMarker(docs[i].address);
+	}else{
+    	//potential to add html functionality to display no doctor found (new page?)
+    	console.error('No doctors found from DB')
+	}
 }
 
 
@@ -29,8 +67,12 @@ socket.on('connectedToServer', function (data) {
 });
 
 socket.on('listingDoctor', function(data){
+	console.log('Doctor response:');
    console.log(data);
+    updateDoctorInfo(data);
 });
+
+
 
 var profile = null; // Google Sign-In profile
 

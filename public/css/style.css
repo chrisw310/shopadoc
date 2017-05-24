@@ -328,7 +328,7 @@ form > div {
     background-size: 100%;
 }
 
-#reviews {
+#revDesContainer {
     position: absolute;
     background-color: white;
     height: auto;
@@ -338,11 +338,11 @@ form > div {
     margin-left: 30px;
 }
 
-#reviews p {
+#revDesContainer p {
     font-size: 20px;
 }
 
-#reviews h2 {
+#revDesContainer h2 {
     margin-bottom: 30px;
 }
 

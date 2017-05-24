@@ -72,7 +72,6 @@ router.get('/heartbeat',function(req,res){
     res.send('OK');
 });
 
-
 //client request to the server
 //learn how to make this secure (do I use POST method along with a key?)
 //probably change this to socket.io code??
