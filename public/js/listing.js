@@ -35,7 +35,7 @@ function addMapMarker(address) {
 function updateDoctorInfo(docs) {
     if (docs.length > 0){
     	var i =0;
-		console.log(docs[i]);
+		//console.log(docs[i]);
         document.getElementById("name").innerHTML = docs[i].name;
         document.getElementById("title").innerHTML = docs[i].title;
         document.getElementById("address").innerHTML = docs[i].address;
@@ -46,12 +46,46 @@ function updateDoctorInfo(docs) {
         document.getElementById("reviewCount").innerHTML = docs[i].reviewCount + " Reviews";
         var imgurl = "../images/" + docs[i].photo;
         document.getElementById("doctorImage").style.backgroundImage = 'url(' + imgurl + ')';
-        //document.getElementById("doctorDescription").innerHTML = docs[i].description;
+        document.getElementById("doctorDescription").innerHTML = docs[i].description;
         addMapMarker(docs[i].address);
 	}else{
     	//potential to add html functionality to display no doctor found (new page?)
     	console.error('No doctors found from DB')
 	}
+}
+
+function updateDoctorReviews(docs){
+    if (docs.length > 0){
+        var reviewStr = '';
+        console.log(docs);
+        for(var i=0; i<docs.length; i++){
+            var username = docs[i].reviewerName;
+            var starCount = Math.floor(docs[i].rating);
+            var comment = docs[i].comment;
+            var starsString = "&#9733".repeat(starCount) + "&#9734".repeat(5-starCount);
+            reviewStr += '<div class="review"><p>' + username + '</p><p>' + starsString + '</p><p>' + comment + '</p></div>';
+
+        }
+        document.getElementById("reviewContainer").innerHTML = reviewStr;
+    }else{
+        //potential to add html functionality to display no doctor found (new page?)
+        console.error('No reviews found in the DB')
+    }
+}
+
+function addReview(){
+    var docName = decodeURI(window.location.pathname.split('/')[2]);
+    var rName = profile.name;
+    var photoURL = profile.pictureUrl;
+    var r = document.getElementById("reviewForm").rating.value;
+    if (r === ''){
+        document.getElementById('ratingFeedback').innerHTML = "Please Selected A Rating";
+    }else {
+        document.getElementById('ratingFeedback').innerHTML = '';
+        var c = document.getElementById('reviewCommentBox').value;
+        var doc = {doctorName: docName, rating: r, reviewerName: rName, reviewerPhotoURL: photoURL, comment: c};
+        socket.emit('addReview', doc);
+    }
 }
 
 
@@ -63,13 +97,24 @@ var socket = io.connect();
 socket.on('connectedToServer', function (data) {
     console.log(data); //prints the data from the server
     socket.emit('clientConnect', 'Client Connected! - Index.js');
-    socket.emit('listingDoctor',decodeURI(window.location.pathname.split('/')[2]));
+    var docName = decodeURI(window.location.pathname.split('/')[2]);
+    socket.emit('listingDoctor',docName);
+    socket.emit('requestReviews',docName);
 });
 
 socket.on('listingDoctor', function(data){
-	console.log('Doctor response:');
-   console.log(data);
+	//console.log('Doctor response:');
+    //console.log(data);
     updateDoctorInfo(data);
+});
+
+socket.on('recievedReviews',function(data){
+    console.log('Recieved reviews');
+    updateDoctorReviews(data);
+});
+
+socket.on('addReviewResponse',function(data){
+    document.getElementById('ratingFeedback').innerHTML = data;
 });
 
 

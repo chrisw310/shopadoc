@@ -51,7 +51,7 @@ io.on('connection', function (socket) {
     socket.on('clientConnect', function (data) {
         console.log(data);
     });
-
+    //Search the contacts collection in the DB
     socket.on('searchContacts',function(data){
         console.log(data); //probably use DATA in the future to ensure user is authentic
 
@@ -63,6 +63,7 @@ io.on('connection', function (socket) {
 
     });
 
+    //add a new contact to the contacts collection
     socket.on('addContact',function(data){
         console.log("Attempting to add a client");
         //console.log(data);
@@ -71,6 +72,7 @@ io.on('connection', function (socket) {
         })
     });
 
+    //search all the doctors in the databse
     socket.on('searchDoctors',function(data){
         console.log("Request to search doctors - " + data);
         //query the database using database.js
@@ -80,11 +82,30 @@ io.on('connection', function (socket) {
         });
     });
 
+    //get the info on a specific doctor
     socket.on('listingDoctor',function(data){
         console.log("Request to list doctor - " + data);
         mydb.checkDoctor(data,function(str){
             //resturn the resuts to the client
             socket.emit('listingDoctor',str);
+        })
+    });
+
+    //get the reviews for a specific doctor
+    socket.on('requestReviews',function(data){
+        //console.log("Request to get " + data + "'s reviews");
+        mydb.getReviews(data,function(str){
+            //resturn the results to the client
+            //console.log('Returning reviews');
+            socket.emit('recievedReviews',str);
+        })
+    });
+
+    socket.on('addReview',function(data){
+        console.log('adding a review');
+        console.log(data);
+        mydb.addReview(data,function(str){
+            socket.emit('addReviewResponse',str)
         })
     });
 	

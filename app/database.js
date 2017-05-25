@@ -8,6 +8,8 @@ var assert = require('assert');
 
 var uri = "mongodb://infs3202dbadmin:wrQn3qmF1x7inzgn@cluster0-shard-00-00-mvxrs.mongodb.net:27017,cluster0-shard-00-01-mvxrs.mongodb.net:27017,cluster0-shard-00-02-mvxrs.mongodb.net:27017/shopAdoc?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
 
+//returns a list of doctors based on a query
+//if data = "all" returns all doctors in the databse
 function getDoctors(data,callback){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
@@ -43,6 +45,47 @@ function checkDoctor(name,callback){
         });
 
     });
+}
+
+function getReviews(name,callback){
+    MongoClient.connect(uri, function (err, db) {
+        assert.equal(null, err);
+        db.collection('reviews').find({'doctorName':name}).toArray(function(err, docs){
+            assert.equal(null, err);
+            callback(docs);
+            db.close();
+        });
+
+    });
+}
+
+function addReview(data,cb){
+    if(typeof(data.doctorName)!== 'undefined' && typeof(data.rating)!== 'undefined' && typeof(data.reviewerName)!== 'undefined' && typeof(data.reviewerPhotoURL)!== 'undefined' && typeof(data.comment)!== 'undefined'){
+        MongoClient.connect(uri, function (err, db) {
+            if (err === null) {
+                //data.rating = parseInt(data.rating);
+                if((data.rating >0) && (data.rating < 6)){
+                    var doc = {doctorName: data.doctorName, rating: data.rating, reviewerName: data.reviewerName, reviewerPhotoURL: data.reviewerPhotoURL, comment:data.comment};
+                    console.log(doc);
+                    db.collection('reviews').insertOne(doc, function (err, r) {
+                        if (err === null) {
+                            assert.equal(1, r.insertedCount);
+                            cb('Review Added');
+                            db.close();
+                        } else {
+                            //cb('Invalid Review data');
+                            cb(err.message);
+                        }
+                    });
+                }else{
+                    cb('Invaild rating');
+                }
+            }
+
+        });
+    }else{
+        cb('Invalid Review Format');
+    }
 }
 
 function getContacts(callback){
@@ -122,5 +165,7 @@ module.exports.getContacts = getContacts;
 module.exports.addContact = addContact;
 module.exports.getDoctors = getDoctors;
 module.exports.checkDoctor = checkDoctor;
+module.exports.getReviews = getReviews;
+module.exports.addReview = addReview;
 //module.exports.connectDb = connectDb;
 //module.exports.dbResponse = dbResponse;
