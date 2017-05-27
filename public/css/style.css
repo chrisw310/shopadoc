@@ -79,6 +79,7 @@ header  {
 header > h1 {
     padding: 10px;
     font-weight: 100;
+    font-size: 10px;
 }
 
 header > p {
@@ -125,6 +126,28 @@ header p {
     font-size: 33px;
     font-weight: 800;
 }
+
+@media (max-width: 1024px) {
+    header h1 {
+    top: 90px;
+    font-size: 100px;
+    }
+    
+    header p {
+    top: 110px;
+    font-size: 33px;
+    font-weight: 800;
+}
+}
+
+@media (max-width: 632px) {
+    header h1 {
+    top: 90px;
+    font-size: 50px;
+    }
+}
+
+
 
 .input-group {
     top: 350px;

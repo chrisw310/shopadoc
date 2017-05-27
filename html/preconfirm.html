@@ -19,7 +19,7 @@
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="/css/style.css">
     <!-- JavaScript -->
-    <script src="js/script.js"></script>
+    <script src="../js/preconfirm.js"></script>
     <!-- Google Maps -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADWEyT0t77SmQhezZxrTmJadAXuHnREMU&callback=initMap"
     async defer></script>
@@ -33,16 +33,33 @@
             <form action="#">
             <h1>First, answer some questions:</h1>
             <div id="page1">
-                <h2>What is your favourite colour?</h2>
+                <h2>Do you have any pre-existing conditions?</h2>
                 <input type="textarea"><br>
             </div>
             <div id="page2">
-                <h2>What is your favourite question?</h2><br>
+                <h2>When was the last time you have visited a doctor?</h2><br>
                     <div id="radioButtons">
-                    <input type="radio" name="form" value="one" checked> This one<br>
-                    <input type="radio" name="form" value="one" checked> Last one<br>
-                    <input type="radio" name="form" value="one" checked> Next one<br>
-                    <input type="radio" name="form" value="one" checked> None of the above<br>
+                    <input type="radio" name="form" value="one" checked> Last Week<br>
+                    <input type="radio" name="form" value="one" checked> Last Month<br>
+                    <input type="radio" name="form" value="one" checked> Lasy Year<br>
+                    <input type="radio" name="form" value="one" checked> Never<br>
+                </div>
+            </div>
+            <div id="page3">
+                <h2>Please describe your symptom:</h2><br>
+                    <div id="radioButtons">
+                    <input type="radio" name="form" value="one" checked> Coughing<br>
+                    <input type="radio" name="form" value="one" checked> Wheezing<br>
+                    <input type="radio" name="form" value="one" checked> Spluttering<br>
+                    <input type="radio" name="form" value="one" checked> Dying<br>
+                </div>
+            </div>
+            <div id="page4">
+                <h2>Anything else we should know about? If yes, write in the text box below:</h2><br>
+                    <div id="radioButtons">
+                    <input type="radio" name="form" value="one" checked> No<br>
+                    <input type="radio" name="form" value="one" checked> Yes<br>
+                    <input type="textarea"><br>
                 </div>
             </div>
             <br>
