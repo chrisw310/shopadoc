@@ -67,12 +67,12 @@ function listDoctors(docs){
         var imgurl = "../images/" + docs[i].photo;
         //var imgurl = "../images/me.jpg";
         htmlStr += '<div class="listing" onclick="redirect(&#39'+name.toString()+'&#39)">' +
-                '<p>' + name +'</p>' +
-                '<p>' + title +'</p>' +
-                '<p>' + address + '</p>' +
-                '<p>$' + minCost + '-$' + maxCost + '</p>' +
-                '<p>' + starsString+ '</p>' +
-                '<p>' + reviewStr + '</p>' +
+                '<p id="name">' + name +'</p>' +
+                '<p id="title">' + title +'</p>' +
+                '<p id="address">' + address + '</p>' +
+                '<p id="doctorCost">$' + minCost + '-$' + maxCost + '</p>' +
+                '<p id="reviewStars">' + starsString+ '</p>' +
+                '<p id="reviewCount">' + reviewStr + '</p>' +
                 '<img style="background-image:url(' + imgurl +')"/>' + '</div>';
     }
     //update the doctor content

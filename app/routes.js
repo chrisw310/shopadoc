@@ -53,6 +53,26 @@ router.get('/listing/:name',function(req,res){
     res.sendFile(path.join(__dirname,'../html/listing.html'));
 });
 
+//PRECONFIRM PAGE
+router.get('/preConfirm/:name',function(req,res){
+    if((req.headers['x-forwarded-proto'] === 'http') && (req.headers['host'] === 'www.shopadoc.me')){
+        console.log('Redirecting http request to https');
+        res.redirect('https://'+req.headers['host']+req.url)
+    }
+    console.log('Providing the preconfirm.html page');
+    res.sendFile(path.join(__dirname,'../html/preconfirm.html'));
+});
+
+//CONFIRM PAGE
+router.get('/confirm/:name',function(req,res){
+    if((req.headers['x-forwarded-proto'] === 'http') && (req.headers['host'] === 'www.shopadoc.me')){
+        console.log('Redirecting http request to https');
+        res.redirect('https://'+req.headers['host']+req.url)
+    }
+    console.log('Providing the confirm.html page');
+    res.sendFile(path.join(__dirname,'../html/confirm.html'));
+});
+
 
 //CAMERON'S TESTING PAGE
 router.get('/cameron',function(req,res){

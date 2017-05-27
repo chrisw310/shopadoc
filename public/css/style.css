@@ -217,40 +217,48 @@ header p {
     margin-bottom: 0;
 }
 
-.listing p:nth-child(1) {
+#name {
     font-size: 50px;
 }
 
-.listing p:nth-child(2) {
+#title {
     margin-top: 64px;
     font-size: 30px;
 }
 
-.listing p:nth-child(3) {
+#address {
     margin-top: 110px;
     font-size: 20px;
 }
 
-.listing p:nth-child(4) {
+#doctorCost {
     margin-top: 147px;
     font-size: 15px;
 }
 
-.listing p:nth-child(5) {
+#reviewStars {
     margin-top: 185px;
     font-size: 35px;
 }
 
-.listing p:nth-child(6) {
+#reviewCount {
     margin-top: 240px;
     font-size: 20px;
     color: grey;
 }
 
-.listing p:nth-child(7) {
+/* "available times" label */
+#timeLabel {
+    margin-top: 290px;
+    font-size: 30px;
+    color: black;
+}
+
+/* for confirm page only */
+#time {
     margin-top: 300px;
-    font-size: 20px;
-    color: grey;
+    font-size: 30px;
+    color: black;
 }
 
 .listing button {
@@ -297,7 +305,9 @@ header h1, header p {
 }
 
 #singleConfirm button {
-    width: 100px;
+    position: absolute;
+    top: 400px;
+    width: auto;
     font-weight: bold;
 }
 
@@ -470,11 +480,6 @@ textarea {
     margin-bottom: 20px;
     margin-left: 13%;
     min-width: 687px;
-}
-
-#finalConfirm {
-    position: absolute;
-    top: 390px;
 }
 
 .signin {

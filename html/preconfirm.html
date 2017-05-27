@@ -17,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <!-- JavaScript -->
     <script src="js/script.js"></script>
     <!-- Google Maps -->
@@ -29,25 +29,23 @@
          <div id="logo"><div id="plus">+</div></div>
           <p>Welcome, <b>ChrisW123!</b></p>
       </bar>
-       
-        <div class="listing" id="singleConfirm">
+        <div style="margin:30px;">
             <form action="#">
-            <p>First, answer some questions:</p>
+            <h1>First, answer some questions:</h1>
             <div id="page1">
-            <h1>What is your favourite colour?</h1>
-            <input type="textarea"><br>
+                <h2>What is your favourite colour?</h2>
+                <input type="textarea"><br>
             </div>
-            <div id="page1">
-            <h1>What is your favourite question?</h1><br>
-            <div id="radioButtons">
-            <input type="radio" name="form" value="one" checked> This one<br>
-            <input type="radio" name="form" value="one" checked> Last one<br>
-            <input type="radio" name="form" value="one" checked> Next one<br>
-            <input type="radio" name="form" value="one" checked> None of the above<br>
-            </div>
+            <div id="page2">
+                <h2>What is your favourite question?</h2><br>
+                    <div id="radioButtons">
+                    <input type="radio" name="form" value="one" checked> This one<br>
+                    <input type="radio" name="form" value="one" checked> Last one<br>
+                    <input type="radio" name="form" value="one" checked> Next one<br>
+                    <input type="radio" name="form" value="one" checked> None of the above<br>
+                </div>
             </div>
             <br>
-            
             <button type="button" class="btn btn-danger"  id="btnPrev">Previous</button>
             <button type="button" class="btn btn-danger"  id="btnNext">Next</button>
             </form>
