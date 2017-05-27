@@ -73,7 +73,7 @@ header  {
     display: flex;
     justify-content: center;
     color: black;
-    
+    background-image: url(/images/background.png);
 }
 
 header > h1 {
@@ -133,11 +133,7 @@ header p {
     font-size: 100px;
     }
     
-    header p {
-    top: 110px;
-    font-size: 33px;
-    font-weight: 800;
-}
+    
 }
 
 @media (max-width: 632px) {
