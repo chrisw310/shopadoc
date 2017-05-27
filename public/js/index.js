@@ -1,5 +1,12 @@
 $(document).ready(function() {
-    $('.parallax-window').parallax({imageSrc: '/images/background.jpg'});
+
+    $(".col-sm-3").css("z-index","0");
+    $(".col-sm-3").click(function () {
+        $(".col-sm-3").not(this).css("z-index","0");
+       $(this).css("z-index","1");
+        alert($(this).parent().contains(".open"));
+    });
+    
 });
 
 

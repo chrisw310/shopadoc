@@ -127,22 +127,6 @@ header p {
     font-weight: 800;
 }
 
-@media (max-width: 1024px) {
-    header h1 {
-    top: 90px;
-    font-size: 100px;
-    }
-    
-    
-}
-
-@media (max-width: 632px) {
-    header h1 {
-    top: 90px;
-    font-size: 50px;
-    }
-}
-
 
 
 .input-group {
@@ -188,15 +172,20 @@ header p {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    width: 300px;
+    width: 100%;
     font-size: 20px
     
 }
 
-.dropdown .dropdown-menu {
+.dropdown {
     left: 50%;
     transform: translateX(-50%);
-    width: 300px;
+    width: 100%;
+}
+
+.dropdown-menu {
+    width: 100%;
+    top:54px;
 }
 
 #loading {
@@ -223,7 +212,6 @@ header p {
     padding-left: 30px;
     margin-bottom: 20px;
     background-color: white;
-    min-width: 770px;
 }
 
 .listing * {
@@ -251,7 +239,7 @@ header p {
 }
 
 #doctorCost {
-    margin-top: 147px;
+    margin-top: 167px;
     font-size: 15px;
 }
 
@@ -301,6 +289,7 @@ header p {
     width: 250px;
     height: 250px;
     margin: 15px;
+    background-size: 100%;
 }
 
 header h1, header p {
@@ -403,7 +392,6 @@ footer {
 
 #doctorContainer > div:not(#loading) {
     margin-left: 2%;
-    
     border: 1px solid #DDDDDD;
     box-shadow: 2px 5px 10px rgba(0,0,0,0.13), 1px 3px 3px rgba(0,0,0,0.13);
 }
@@ -498,7 +486,6 @@ textarea {
     box-shadow: 2px 5px 10px rgba(0,0,0,0.13), 1px 3px 3px rgba(0,0,0,0.13);
     margin-bottom: 20px;
     margin-left: 13%;
-    min-width: 687px;
 }
 
 .signin {
@@ -520,3 +507,152 @@ textarea {
 	margin-left: 15px;
 }
 
+.container-fluid * {
+    position: relative;
+    z-index: 1;
+}
+
+.container-fluid .dropdown-menu {
+    position: absolute;
+    z-index: 99;
+    top: 55x;
+}
+
+/* large devices */
+@media (max-width: 1200px) {
+    
+}
+
+/* medium devices */
+@media (max-width: 992px) {
+    header h1 {
+    top: 90px;
+    font-size: 130px;
+    }
+    
+    .listing img {
+        width: 200px;
+        height: 200px;
+        top: 50px;
+    }
+    
+    #address {
+        font-size: 17px;
+        width: 300px;
+    }
+}
+
+/* small devices */
+@media (max-width: 768px) {
+    header h1 {
+    top: 90px;
+    font-size: 100px;
+    }
+    
+        .col-sm-3 {
+        padding:0;
+    }
+    
+    .dropdown-toggle {
+        height: 100%;
+       
+    }
+    
+    #mapContainer {
+        visibility: hidden;
+        position: absolute;
+    }
+    
+    #dropdowns {
+        z-index: 999;
+    }
+    
+    .dropdown-menu {
+        z-index: 1;
+    }
+    
+    .listing {
+        width: 100vw;
+        margin: 0;
+    }
+    
+    .listing img {
+        width: 200px;
+        height: 200px;
+        top: 50px;
+
+    }
+    
+    #doctorContainer > div:not(#loading) {
+        margin-left: 0;
+    }
+    
+     #address {
+        font-size: 17px;
+        width: 300px;
+    }
+    
+}
+
+/* Extra Small */
+@media (max-width: 544px) {
+    #content {
+        height:1500px;
+    }
+    
+    header h1 {
+    top: 90px;
+    font-size: 90px;
+    }
+    
+    header p {
+        font-size: 30px;
+    }
+    
+    #mapContainer {
+        visibility: hidden;
+        position: absolute;
+        float: none;
+        margin: 0;
+    }
+    
+    .input-group {
+        min-width: 100%;
+    }
+    
+    .col-sm-3 {
+        padding:0;
+    }
+    
+    .dropdown-toggle {
+        height: 100%;
+       
+    }
+    
+    #dropdowns {
+        z-index: 999;
+    }
+    
+    .dropdown-menu {
+        z-index: 1;
+    }
+    
+    .listing #name {
+        font-size: 40px;
+    }
+    
+    .listing {
+        width: 100vw;
+        margin: 0;
+    }
+    
+    .listing img {
+        width: 100px;
+        height: 100px;
+        top: 150px;
+    }
+    
+        #doctorContainer > div:not(#loading) {
+        margin-left: 0;
+    }
+}
