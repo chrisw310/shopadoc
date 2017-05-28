@@ -187,18 +187,6 @@ header p {
     top:54px;
 }
 
-#loading {
-    border: 16px solid lightgrey; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-    position: absolute;
-    left: calc(60% - 120px);
-    top: 700px;
-}
-
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -217,6 +205,18 @@ header p {
 .listing * {
     position: absolute;
     width: auto;
+}
+
+.SaDloading {
+    border: 16px solid lightgrey; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    left: calc(60% - 120px);
+    top: 700px;
 }
 
 #single {
@@ -388,7 +388,7 @@ footer {
     height: 200px;
 }
 
-#doctorContainer > div:not(#loading) {
+#doctorContainer > div:not(.SaDloading) {
     margin-left: 2%;
     border: 1px solid #DDDDDD;
     box-shadow: 2px 5px 10px rgba(0,0,0,0.13), 1px 3px 3px rgba(0,0,0,0.13);
@@ -588,7 +588,7 @@ textarea {
 
     }
     
-    #doctorContainer > div:not(#loading) {
+    #doctorContainer > div:not(.SaDloading) {
         margin-left: 0;
     }
     
@@ -596,8 +596,8 @@ textarea {
         font-size: 17px;
         width: 300px;
     }
-    
-        #loading {
+
+    .SaDloading {
         top: 900px;
     }
     
@@ -698,11 +698,11 @@ textarea {
         top: 150px;
     }
     
-        #doctorContainer > div:not(#loading) {
+        #doctorContainer > div:not(.SaDloading) {
         margin-left: 0;
     }
     
-    #loading {
+    .SaDloading {
         top: 900px;
     }
     

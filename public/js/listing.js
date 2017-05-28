@@ -6,12 +6,14 @@
 //~~Google Maps API functions~~//
 var map;
 var geocoder;
+var docName;
 //Initalize the map
 function initMap() {
     geocoder = new google.maps.Geocoder();
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -27.469, lng: 153.025},
-        zoom: 12
+        zoom: 12,
+        scrollwheel: false
     });
 }
 //to add a marker and make it the focus of the map
@@ -23,8 +25,7 @@ function addMapMarker(address) {
             var marker = new google.maps.Marker({
                 map: map,
                 position: pos,
-                icon : image,
-                scrollwheel: false
+                icon : image
             });
             map.setCenter(pos);
         } else {
@@ -34,6 +35,7 @@ function addMapMarker(address) {
 }
 
 function updateDoctorInfo(docs) {
+    document.getElementById('doctorLoading').style.display = 'none';
     if (docs.length > 0){
     	var i =0;
 		//console.log(docs[i]);
@@ -82,7 +84,7 @@ function updateDoctorAvailability(docs){
 }
 
 function makeBooking(){
-    var docName = decodeURI(window.location.pathname.split('/')[2]);
+    //var docName = decodeURI(window.location.pathname.split('/')[2]);
     window.location = window.location.origin + '/preconfirm/' + docName;
 }
 
@@ -99,6 +101,7 @@ function updateDoctorReviews(docs){
 
         }
         document.getElementById("reviewContainer").innerHTML = reviewStr;
+        document.getElementById("reviewContainer").style.height = '';
     }else{
         //potential to add html functionality to display no doctor found (new page?)
         console.error('No reviews found in the DB')
@@ -106,7 +109,11 @@ function updateDoctorReviews(docs){
 }
 
 function addReview(){
-    var docName = decodeURI(window.location.pathname.split('/')[2]);
+    //var docName = decodeURI(window.location.pathname.split('/')[2]);
+    if(profile === null){
+        document.getElementById('ratingFeedback').innerHTML = "Please Sign in to submit a review";
+        return;
+    }
     var rName = profile.name;
     var photoURL = profile.pictureUrl;
     var r = document.getElementById("reviewForm").rating.value;
@@ -129,7 +136,7 @@ var socket = io.connect();
 socket.on('connectedToServer', function (data) {
     console.log(data); //prints the data from the server
     socket.emit('clientConnect', 'Client Connected! - Index.js');
-    var docName = decodeURI(window.location.pathname.split('/')[2]);
+    docName = decodeURI(window.location.pathname.split('/')[2]);
     socket.emit('listingDoctor',docName);
     socket.emit('requestReviews',docName);
     socket.emit('requestTimes',docName);
@@ -153,6 +160,10 @@ socket.on('recievedTimes',function(data){
 });
 
 socket.on('addReviewResponse',function(data){
+    if(data === 'Review Added'){
+        //document.getElementById("reviewContainer").innerHTML = '<div class="SaDloading" style="top:300px"></div>';
+        socket.emit('requestReviews',docName);
+    }
     document.getElementById('ratingFeedback').innerHTML = data;
 });
 
@@ -189,6 +200,7 @@ function onSignIn(googleUser) {
 * Sign out of website (does not sign user out of Google)
 */
 function signOut() {
+    profile = null;
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function () {
       console.log('User signed out');
