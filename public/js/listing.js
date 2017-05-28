@@ -80,6 +80,11 @@ function updateDoctorAvailability(docs){
     document.getElementById("times").innerHTML = htmlString;
 }
 
+function makeBooking(){
+    var docName = decodeURI(window.location.pathname.split('/')[2]);
+    window.location = window.location.origin + '/preconfirm/' + docName;
+}
+
 function updateDoctorReviews(docs){
     if (docs.length > 0){
         var reviewStr = '';

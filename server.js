@@ -108,6 +108,15 @@ io.on('connection', function (socket) {
             socket.emit('addReviewResponse',str)
         })
     });
+
+    socket.on('requestTimes',function(data){
+        console.log("Request to get " + data + "'s avaiable hours");
+        mydb.getAvailability(data,function(str){
+            //resturn the results to the client
+            //console.log('Returning reviews');
+            socket.emit('recievedTimes',str);
+        })
+    });
 	
 	var profile = {};
 	
