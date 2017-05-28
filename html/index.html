@@ -63,9 +63,6 @@
         <div class="col-sm-4">
           <p>Popular</p>
         </div>
-        <div class="col-sm-4">
-          <p>Local</p>
-        </div>
         </div>
     </div>
     <div class="container-fluid">
@@ -81,18 +78,6 @@
                   </ul>
                 </div> 
             </div>
-           <div class="col-sm-3">
-                <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Distance
-                  <span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">0-9km</a></li>
-                    <li><a href="#">10-49km</a></li>
-                    <li><a href="#">50-100km</a></li>
-                    <li><a href="#">100km+</a></li>
-                  </ul>
-                </div>
-            </div>
             <div class="col-sm-3">
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Rating
@@ -106,16 +91,28 @@
                     </ul>
                 </div>
             </div>
+           <div class="col-sm-3">
+                <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Price Min
+                  <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">$0</a></li>
+                    <li><a href="#">$10</a></li>
+                    <li><a href="#">$100</a></li>
+                    <li><a href="#">$1000</a></li>
+                  </ul>
+                </div>
+            </div>
+            
             <div class="col-sm-3">
                 <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Price
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Price Max
                 <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">$</a></li>
-                    <li><a href="#">$$</a></li>
-                    <li><a href="#">$$$</a></li>
-                    <li><a href="#">$$$$</a></li>
-                    <li><a href="#">$$$$$</a></li>
+                    <li><a href="#">$10</a></li>
+                    <li><a href="#">$100</a></li>
+                    <li><a href="#">$1000</a></li>
+                    <li><a href="#">$10000</a></li>
                 </ul>
                 </div>
             </div>
@@ -123,7 +120,7 @@
     </div>
     <div id="content">
         <div id="mapContainer">
-            <div id="map" style="float:left;margin-left:30px;height:1585px;"></div>
+            <div id="map" class="mapIndex"></div>
         </div>
         <div id="doctorContainer">
            <div id="loading">

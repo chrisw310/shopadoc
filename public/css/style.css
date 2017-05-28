@@ -195,7 +195,8 @@ header p {
     height: 120px;
     animation: spin 2s linear infinite;
     position: absolute;
-    left: 50%;
+    left: calc(60% - 120px);
+    top: 900px;
 }
 
 @keyframes spin {
@@ -399,11 +400,17 @@ footer {
         height: 960px;
         width: 20%;
         float: left;
+          margin-left: 2%;
       }
 
       .mapListing {
         float: left;
+        margin:30px !important;
+        height:700px !important;
+        left:75.5% !important;
       }
+
+
 
 .parallax-window {
     height: 540px;
@@ -555,9 +562,10 @@ textarea {
        
     }
     
-    #mapContainer {
-        visibility: hidden;
-        position: absolute;
+    #map {
+        margin: 0;
+        width: 100%;
+        height: 200px;
     }
     
     #dropdowns {
@@ -589,6 +597,10 @@ textarea {
         width: 300px;
     }
     
+        #loading {
+        top: 1200px;
+    }
+    
         /* Listing page */
         #single {
         margin: 0;
@@ -603,14 +615,22 @@ textarea {
     }
     
     #revDesContainer {
-        top: 741px;
+        top: 941px;
         margin: 0;
         width: 100vw;
     }
     
-        #reviewCommentBox {
+    #reviewCommentBox {
         width: 100%;
     }
+    
+    .mapListing {
+        float: left;
+        margin:0px !important;
+        height:200px !important;
+        left:0% !important;
+        top: 700px !important;
+      }
     
     
 }
@@ -630,12 +650,13 @@ textarea {
         font-size: 22px;
     }
     
-    #mapContainer {
-        visibility: hidden;
-        position: absolute;
-        float: none;
+    
+    #map {
         margin: 0;
+        width: 100%;
+        height: 200px !important;
     }
+    
     
     .input-group {
         min-width: 100%;
@@ -681,6 +702,10 @@ textarea {
         margin-left: 0;
     }
     
+    #loading {
+        top: 1200px;
+    }
+    
     /* Listing page */
     #single {
         margin: 0;
@@ -694,7 +719,7 @@ textarea {
     }
     
     #revDesContainer {
-        top: 741px;
+        top: 941px;
         margin: 0;
         width: 100%
     }

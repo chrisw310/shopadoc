@@ -2,12 +2,18 @@ $(document).ready(function() {
 
     $(".col-sm-3").css("z-index","0");
     $(".col-sm-3").click(function () {
+        
         $(".col-sm-3").not(this).css("z-index","0");
        $(this).css("z-index","1");
         alert($(this).parent().contains(".open"));
     });
     
+   
 });
+
+window.onresize = function() {
+      google.maps.event.trigger(map, 'resize');  
+    };
 
 
 //~~Google Maps API functions~~//
@@ -18,7 +24,8 @@ function initMap() {
     geocoder = new google.maps.Geocoder();
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -27.469, lng: 153.025},
-        zoom: 12
+        zoom: 12,
+        scrollwheel: false
     });
 }
 
@@ -88,7 +95,7 @@ function listDoctors(docs){
     var h = docs.length*320 + 30;
     document.getElementById("content").style.height = h.toString() + 'px';
     h = docs.length*320 - 20;
-    document.getElementById("map").style.height = h.toString() + 'px';
+    //document.getElementById("map").style.height = h.toString() + 'px';
 }
 
 function redirect(name){
@@ -134,12 +141,12 @@ function onSignIn(googleUser) {
 		console.log("User logged in");
 		var dataToEmit = {
 			token: googleUser.getAuthResponse().id_token
-		};
+		}
 		socket.emit('clientSignIn', dataToEmit, function(data) {
 			console.log("User login confirmed on server");
 			console.log(data);
 
-			if (typeof data.err === "undefined") {
+			if (typeof data.err == "undefined") {			
 				profile.name = data.name;
 				profile.pictureUrl = data.pictureUrl;
 				$("#welcomeMsg").text("Welcome, " + profile.name);
