@@ -23,7 +23,8 @@ function addMapMarker(address) {
             var marker = new google.maps.Marker({
                 map: map,
                 position: pos,
-                icon : image
+                icon : image,
+                scrollwheel: false
             });
             map.setCenter(pos);
         } else {
@@ -52,37 +53,6 @@ function updateDoctorInfo(docs) {
     	//potential to add html functionality to display no doctor found (new page?)
     	console.error('No doctors found from DB')
 	}
-}
-
-function updateDoctorAvailability(docs){
-    var keys = ['seven','seventhirty','eight','eightthirty','nine','ninethirty','ten','tenthirty','eleven','eleventhirty','twelve','twelvethirty','thirteen','thirteenthirty','fourteen','fourteenthirty','fifteen','fifteenthirty','sixteen','sixteenthirty'];
-    var timeStrings = ['7:00am','7:30am','8:00am','8:30am','9:00am','9:30am','10:00am','10:30am','11:00am','11:30am','12:00pm','12:30pm','1:00pm','1:30pm','2:00pm','2:30pm','3:00pm','3:30pm','4:00pm','4:30pm'];
-    var today = docs[1];
-    console.log(today.times);
-    //Object.keys(today.times).length
-    htmlString = '<div class="row">';
-        for (var i=0; i<keys.length; i++){
-            if (i%4 === 0){
-                if (i > 1){htmlString += '</div>';}
-                htmlString += '<div class="col-sm-1">'
-            }
-            htmlString += '<button type="button" class="btn btn-';
-            if(today.times[keys[i]] === 1) {
-                htmlString += 'success">'
-            }else{
-                htmlString += 'basic">'
-            }
-
-            htmlString += timeStrings[i] + '</button>';
-        }
-
-    htmlString += '</div></div>';
-    document.getElementById("times").innerHTML = htmlString;
-}
-
-function makeBooking(){
-    var docName = decodeURI(window.location.pathname.split('/')[2]);
-    window.location = window.location.origin + '/preconfirm/' + docName;
 }
 
 function updateDoctorReviews(docs){
@@ -131,7 +101,6 @@ socket.on('connectedToServer', function (data) {
     var docName = decodeURI(window.location.pathname.split('/')[2]);
     socket.emit('listingDoctor',docName);
     socket.emit('requestReviews',docName);
-    socket.emit('requestTimes',docName);
 });
 
 socket.on('listingDoctor', function(data){
@@ -141,14 +110,8 @@ socket.on('listingDoctor', function(data){
 });
 
 socket.on('recievedReviews',function(data){
-    console.log('Received reviews');
+    console.log('Recieved reviews');
     updateDoctorReviews(data);
-});
-
-socket.on('recievedTimes',function(data){
-    console.log('Received Availability');
-    console.log(data);
-    updateDoctorAvailability(data);
 });
 
 socket.on('addReviewResponse',function(data){
@@ -169,12 +132,12 @@ function onSignIn(googleUser) {
 		console.log("User logged in");
 		var dataToEmit = {
 			token: googleUser.getAuthResponse().id_token
-		};
+		}
 		socket.emit('clientSignIn', dataToEmit, function(data) {
 			console.log("User login confirmed on server");
 			console.log(data);
 
-			if (typeof data.err === "undefined") {
+			if (typeof data.err == "undefined") {			
 				profile.name = data.name;
 				profile.pictureUrl = data.pictureUrl;
 				$("#welcomeMsg").text("Welcome, " + profile.name);

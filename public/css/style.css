@@ -632,6 +632,10 @@ textarea {
         top: 700px !important;
       }
     
+    #times button {
+        width: 60px;
+        padding: 0;
+    }
     
 }
 
@@ -726,6 +730,11 @@ textarea {
     
     #reviewCommentBox {
         width: 100%;
+    }
+    
+    #times button {
+        width: 60px;
+        padding: 0;
     }
     
 }
