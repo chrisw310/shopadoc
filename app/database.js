@@ -59,18 +59,6 @@ function getReviews(name,callback){
     });
 }
 
-function getAvailability(name,callback){
-    MongoClient.connect(uri, function (err, db) {
-        assert.equal(null, err);
-        db.collection('doctorAvailability').find({'doctorName':name}).toArray(function(err, docs){
-            assert.equal(null, err);
-            callback(docs);
-            db.close();
-        });
-
-    });
-}
-
 function addReview(data,cb){
     if(typeof(data.doctorName)!== 'undefined' && typeof(data.rating)!== 'undefined' && typeof(data.reviewerName)!== 'undefined' && typeof(data.reviewerPhotoURL)!== 'undefined' && typeof(data.comment)!== 'undefined'){
         MongoClient.connect(uri, function (err, db) {
@@ -179,6 +167,5 @@ module.exports.getDoctors = getDoctors;
 module.exports.checkDoctor = checkDoctor;
 module.exports.getReviews = getReviews;
 module.exports.addReview = addReview;
-module.exports.getAvailability = getAvailability;
 //module.exports.connectDb = connectDb;
 //module.exports.dbResponse = dbResponse;
