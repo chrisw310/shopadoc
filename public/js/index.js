@@ -134,12 +134,12 @@ function onSignIn(googleUser) {
 		console.log("User logged in");
 		var dataToEmit = {
 			token: googleUser.getAuthResponse().id_token
-		}
+		};
 		socket.emit('clientSignIn', dataToEmit, function(data) {
 			console.log("User login confirmed on server");
 			console.log(data);
 
-			if (typeof data.err == "undefined") {			
+			if (typeof data.err === "undefined") {
 				profile.name = data.name;
 				profile.pictureUrl = data.pictureUrl;
 				$("#welcomeMsg").text("Welcome, " + profile.name);
