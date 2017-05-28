@@ -112,7 +112,6 @@ header :not(img):not(.input-group *)   {
     position:absolute;
     left: 50%;
     transform: translateX(-50%);
-    color: white;
     border: black;
 }
 
@@ -277,11 +276,10 @@ header p {
     position: absolute;
     top: 640px;
     font-size: 17px;
-    min-width: 150px
 }
 
-#single > button:nth-of-type(2) {right: 310px}
-#single > button:nth-of-type(3) {right: 60px;}
+#single > button:nth-of-type(2) {left: 215px}
+#single > button:nth-of-type(3) {left: 298px}
 
 .listing img {
     float: right;
@@ -300,7 +298,6 @@ header h1, header p {
     position: absolute;
     height: 700px;
     padding: 40px;
-    min-width: 900px;
     margin-top: 30px
 }
 
@@ -341,8 +338,8 @@ form > div {
 }
 
 #single img {
-    height: 400px;
-    width: 400px;
+    height: 200px;
+    width: 200px;
     background-size: 100%;
 }
 
@@ -592,6 +589,26 @@ textarea {
         width: 300px;
     }
     
+        /* Listing page */
+        #single {
+        margin: 0;
+        width: 100vw;
+    }
+    
+        #single img {
+        width: 200px;
+        height: 200px;
+        top: 50px;
+
+    }
+    
+    #revDesContainer {
+        top: 741px;
+        margin: 0;
+        width: 100vw;
+    }
+    
+    
 }
 
 /* Extra Small */
@@ -655,4 +672,23 @@ textarea {
         #doctorContainer > div:not(#loading) {
         margin-left: 0;
     }
+    
+    /* Listing page */
+    #single {
+        margin: 0;
+        width: 100vw;
+    }
+    
+    #single img {
+        width: 100px;
+        height: 100px;
+        top: 150px;
+    }
+    
+    #revDesContainer {
+        top: 741px;
+        margin: 0;
+        width: 100%
+    }
+    
 }
