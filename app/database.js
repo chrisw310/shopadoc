@@ -8,6 +8,11 @@ var assert = require('assert');
 
 var uri = "mongodb://infs3202dbadmin:wrQn3qmF1x7inzgn@cluster0-shard-00-00-mvxrs.mongodb.net:27017,cluster0-shard-00-01-mvxrs.mongodb.net:27017,cluster0-shard-00-02-mvxrs.mongodb.net:27017/shopAdoc?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
 
+
+//emails sending
+var myEmailer = require('./emailer');
+
+
 //returns a list of doctors based on a query
 //if data = "all" returns all doctors in the databse
 function getDoctors(data,callback){
@@ -100,6 +105,88 @@ function addReview(data,cb){
     }
 }
 
+function updateAvailibility(availData){
+    MongoClient.connect(uri, function (err, db) {
+        assert.equal(null, err);
+        var res = db.collection('doctorAvailability').updateOne({_id: availData._id},availData,{ upsert: false });
+        if(res.nModified === 1){
+            console.log('availability updated');
+        }
+        db.close();
+    });
+}
+
+function addBooking(bookingData){
+    if(typeof(bookingData.doctorName)!== 'undefined' && typeof(bookingData.day)!== 'undefined' && typeof(bookingData.time)!== 'undefined' && typeof(bookingData.clientEmail)!== 'undefined') {
+        MongoClient.connect(uri, function (err, db) {
+            if (err === null) {
+                //data.rating = parseInt(data.rating);
+                var doc = {
+                    doctorName: bookingData.doctorName,
+                    day: bookingData.day,
+                    time: bookingData.time,
+                    clientEmail: bookingData.clientEmail
+                };
+                //console.log(doc);
+                db.collection('bookings').insertOne(doc, function (err, r) {
+                    if (err === null) {
+                        assert.equal(1, r.insertedCount);
+                        console.log('Booking Added');
+                        db.close();
+                    } else {
+                        //cb('Invalid Review data');
+                        console.log(err.message);
+                    }
+                });
+            }
+        });
+    }
+}
+
+function makeBooking(bookingData,cb){
+    //check time isnt already booked
+    getAvailability(bookingData.doctorName,function(availData){
+        //console.log(data);
+
+        for(var i=0; i<availData.length; i++){
+            var day1 = new Date(availData[i].day);
+            var day2 = new Date(bookingData.day);
+            if((day1.getFullYear() === day2.getFullYear())&&(day1.getMonth() === day2.getMonth())&&(day1.getDate()===day2.getDate())){
+                console.log('same day found, checking time');
+                //console.log(availData[i]);
+                var available = availData[i].times[bookingData.time];
+                if(available === undefined){
+                    console.log('time undefined');
+                    cb('Invalid Appointment Time')
+                }else if(available === 1){
+                    console.log('doctor available,allocating booking');
+                    //modify avaiabliity
+                    availData[i].times[bookingData.time] = 0;
+                    //console.log(availData[i]);
+                    updateAvailibility(availData[i]);
+                    //addbooking
+                    addBooking(bookingData);
+                    //email the client
+                    myEmailer.sendEmail(bookingData);
+                    cb('Booking Confirmed, you should receive a confirmation email shortly');
+
+                }else{
+                    cb('Sorry, doctor unavaiable at this time');
+                }
+                return
+            }
+        }
+        cb('Doctor\'s Availability not found');
+        console.log('availability not found');
+
+    });
+
+
+    //email the client (and doctor)
+
+
+}
+
 function getContacts(callback){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
@@ -180,5 +267,6 @@ module.exports.checkDoctor = checkDoctor;
 module.exports.getReviews = getReviews;
 module.exports.addReview = addReview;
 module.exports.getAvailability = getAvailability;
+module.exports.makeBooking = makeBooking;
 //module.exports.connectDb = connectDb;
 //module.exports.dbResponse = dbResponse;

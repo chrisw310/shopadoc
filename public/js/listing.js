@@ -6,7 +6,6 @@
 //~~Google Maps API functions~~//
 var map;
 var geocoder;
-var docName;
 //Initalize the map
 function initMap() {
     geocoder = new google.maps.Geocoder();
@@ -33,6 +32,11 @@ function addMapMarker(address) {
         }
     });
 }
+
+var docName;
+var bookingDay = '';
+var bookingTime = '';
+var lastTimeSelected = '';
 
 function updateDoctorInfo(docs) {
     document.getElementById('doctorLoading').style.display = 'none';
@@ -61,7 +65,8 @@ function updateDoctorAvailability(docs){
     var keys = ['seven','seventhirty','eight','eightthirty','nine','ninethirty','ten','tenthirty','eleven','eleventhirty','twelve','twelvethirty','thirteen','thirteenthirty','fourteen','fourteenthirty','fifteen','fifteenthirty','sixteen','sixteenthirty'];
     var timeStrings = ['7:00am','7:30am','8:00am','8:30am','9:00am','9:30am','10:00am','10:30am','11:00am','11:30am','12:00pm','12:30pm','1:00pm','1:30pm','2:00pm','2:30pm','3:00pm','3:30pm','4:00pm','4:30pm'];
     var today = docs[1];
-    console.log(today.times);
+    setBookingDay(today.day);
+    //console.log(today.times);
     //Object.keys(today.times).length
     htmlString = '<div class="row">';
         for (var i=0; i<keys.length; i++){
@@ -69,9 +74,9 @@ function updateDoctorAvailability(docs){
                 if (i > 1){htmlString += '</div>';}
                 htmlString += '<div class="col-sm-1">'
             }
-            htmlString += '<button type="button" class="btn btn-';
+            htmlString += '<button id="book' + keys[i]+'" type="button" class="btn btn-';
             if(today.times[keys[i]] === 1) {
-                htmlString += 'success">'
+                htmlString += 'success" onclick="setBookingTime(&#39'+keys[i]+'&#39)">';
             }else{
                 htmlString += 'basic">'
             }
@@ -83,9 +88,28 @@ function updateDoctorAvailability(docs){
     document.getElementById("times").innerHTML = htmlString;
 }
 
+function setBookingDay(day){
+    bookingDay = day;
+}
+
+//called when the user clicks one of the available booking times
+//saves the time selected
+//changes the button selected to blue and the last selected button (if there was one) back to green
+function setBookingTime(time){
+    document.getElementById('book'+time).classList.remove('btn-success');
+    document.getElementById('book'+time).classList.add('btn-info');
+    if (lastTimeSelected !== ''){
+        document.getElementById(lastTimeSelected).classList.remove('btn-info');
+        document.getElementById(lastTimeSelected).classList.add('btn-success');
+    }
+    lastTimeSelected = 'book'+time;
+    bookingTime = time;
+    //console.log('Slecting time: ' + time);
+}
+
 function makeBooking(){
     //var docName = decodeURI(window.location.pathname.split('/')[2]);
-    window.location = window.location.origin + '/preconfirm/' + docName;
+    window.location = window.location.origin + '/preconfirm/' + docName + '#day=' + bookingDay + '&time=' + bookingTime;
 }
 
 function updateDoctorReviews(docs){
@@ -176,6 +200,7 @@ var profile = null; // Google Sign-In profile
 */
 function onSignIn(googleUser) {
 	profile = googleUser.getBasicProfile();
+	//console.log(profile.getEmail());
 	
 	if (socket.connected) {
 		console.log("User logged in");
@@ -189,6 +214,8 @@ function onSignIn(googleUser) {
 			if (typeof data.err === "undefined") {
 				profile.name = data.name;
 				profile.pictureUrl = data.pictureUrl;
+				//profile.email = data.email;
+				//console.log(data);
 				$("#welcomeMsg").text("Welcome, " + profile.name);
 				$("#welcomeMsg, #signout").css("display","flex")
 			}

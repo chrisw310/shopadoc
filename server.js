@@ -117,6 +117,14 @@ io.on('connection', function (socket) {
             socket.emit('recievedTimes',str);
         })
     });
+
+    socket.on('makeBooking',function(data){
+        console.log('Request to make a booking');
+        console.log(data);
+        mydb.makeBooking(data,function(str){
+            socket.emit('bookingResponse',str)
+        })
+    });
 	
 	var profile = {};
 	
@@ -143,6 +151,7 @@ io.on('connection', function (socket) {
 					//data to return to client in callback
 					returnData.name = profile.name;
 					returnData.pictureUrl = profile.pictureUrl;
+					returnData.email = profile.email;
 					
 					// TODO: store profile in database
 					
