@@ -153,7 +153,7 @@ header p {
 }
 
 .col-sm-4 {
-    background-color: #FFFFFF;
+    background-color: white;
     font-size: 24px;
     font-weight: 800;
 }
@@ -618,12 +618,12 @@ textarea {
     }
     
     header h1 {
-    top: 90px;
-    font-size: 90px;
+    top: 70px;
+    font-size: 60px;
     }
     
     header p {
-        font-size: 30px;
+        font-size: 22px;
     }
     
     #mapContainer {
@@ -655,7 +655,11 @@ textarea {
     }
     
     .listing #name {
-        font-size: 40px;
+        font-size: 30px;
+    }
+    
+    .listing #title {
+        font-size: 25px;
     }
     
     .listing {
