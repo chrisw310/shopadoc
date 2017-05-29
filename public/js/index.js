@@ -120,7 +120,7 @@ function listDoctors(docs) {
     var str = document.getElementById("map").style.height;
     if ((str.substring(0,str.length-2) > 200) && docs.length > 0){
         document.getElementById("map").style.height = h.toString() + 'px';
-        map.fitBounds(bounds);
+        //map.fitBounds(bounds);
     }
     //show the map
 
@@ -131,6 +131,10 @@ function listDoctors(docs) {
 
 function redirect(name){
     window.location = window.location.origin + ('/listing/'+name);
+}
+
+function gotosaved(){
+    window.location = window.location.origin + '/saved';
 }
 
 //socket to talk to the server
@@ -157,7 +161,7 @@ socket.on('doctors', function(data){
 
 function searchDoctors(){
     //show loading gif
-    document.getElementById("doctorContainer").innerHTML = '<div id="loading"></div>';
+    document.getElementById("doctorContainer").innerHTML = '<div class="SaDloading"></div>';
     //document.getElementById('mapContainer').style.display = 'none';
     //document.getElementById("content").style.height = '400px';
     //querey the db
