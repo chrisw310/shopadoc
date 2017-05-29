@@ -22,7 +22,7 @@ $.when(
     });
 	
 	$(".col-sm-6:contains('Saved')").click(function() {
-        location.href = "https://www.shopadoc.me/saved"
+        window.location.replace('/saved');
     });
 	
 	$(".col-sm-3").css("z-index","0");
