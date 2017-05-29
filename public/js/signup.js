@@ -21,6 +21,7 @@ $.when(
 			//window.location.replace('/');
 		} else {
 			$("#signInDiv").show();
+			//$("#login").css("display","flex");
 			//$("#signUpName").text(profile.name);
 			//$("#signUpEmail").text(profile.email);
 		}

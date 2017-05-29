@@ -1,8 +1,24 @@
 var page = 1;
 
+var socket = io.connect();
+var onSignIn;
+var signOut;
+var profile = null; // Google Sign-In profile
+var loggedIn = null;
 
-$(document).ready(function() {
-    
+$.when(
+    $.getScript("js/util.js"),
+    $.Deferred(function( deferred ){
+        $( deferred.resolve );
+    })
+).done(function(){
+	if (loggedIn()) {
+		profile = JSON.parse(sessionStorage.getItem("profile"));
+		$("#welcomeMsg").text("Welcome, " + profile.name);
+		$("#welcomeMsg, #signout").css("display","flex");
+		$("#login").css("display","none");
+	}
+	
     // hide pages that aren't the first page
     for (i=2; $("#page"+i).length === 1; i++) {
         $("#page"+i).hide();

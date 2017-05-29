@@ -1,9 +1,3 @@
-$(document).ready(function() {
-    $('.parallax-window').parallax({imageSrc: '/images/background.jpg'});
-});
-
-
-
 var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -11,3 +5,24 @@ var map;
           zoom: 12
         });
       }
+	  
+	  var socket = io.connect();
+var onSignIn;
+var signOut;
+var profile = null; // Google Sign-In profile
+var loggedIn = null;
+
+$.when(
+    $.getScript("js/util.js"),
+    $.Deferred(function( deferred ){
+        $( deferred.resolve );
+    })
+).done(function(){
+	if (loggedIn()) {
+		profile = JSON.parse(sessionStorage.getItem("profile"));
+		$("#welcomeMsg").text("Welcome, " + profile.name);
+		$("#welcomeMsg, #signout").css("display","flex");
+		$("#login").css("display","none");
+	}
+	$('.parallax-window').parallax({imageSrc: '/images/background.jpg'});
+});

@@ -23,21 +23,15 @@
 	<meta name="google-signin-client_id" content="390784971133-mfjqrepf91ib0tlhekjo375qok0nf1v7.apps.googleusercontent.com">
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-    <!-- JavaScript -->
-    <script src="js/index.js"></script>
-    <!-- Google Maps -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADWEyT0t77SmQhezZxrTmJadAXuHnREMU&callback=initMap"
-    async defer></script>
 
   </head>
   <body>
 	<bar>
         <a href="https://www.shopadoc.me/"><div id="logo"><div id="plus">+</div></div></a>
 		<div class="signin">
-			<div class="g-signin2" data-onsuccess="onSignIn">
-			</div>
-			<div id="welcomeMsg"></div>
-			<div id="signout">
+			<div id="login">Login / Signup</div>
+			<div id="welcomeMsg" class="hiddenStart"></div>
+			<div id="signout" class="hiddenStart">
 				<a href="#" onclick="signOut();">Sign out</a>
 			</div>
 		</div>
@@ -53,5 +47,10 @@
             </div>
         </div>
     </div>
+	<!-- JavaScript -->
+    <script src="js/index.js"></script>
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADWEyT0t77SmQhezZxrTmJadAXuHnREMU&callback=initMap"
+    async defer></script>
   </body>
 </html>
