@@ -19,8 +19,8 @@ $.when(
 		profile = JSON.parse(sessionStorage.getItem("profile"));
 		$("#welcomeMsg").text("Welcome, " + profile.name);
 		$("#welcomeMsg, #signout").css("display","flex");
-		$("#login").css("display","none");
-	}
+		$("#login").css("display","none");	
+    }
 });
 
 //~~Google Maps API functions~~//
@@ -236,14 +236,15 @@ socket.on('connectedToServer', function (data) {
     socket.emit('listingDoctor',docName);
     socket.emit('requestReviews',docName);
     socket.emit('requestTimes',docName);
-	socket.emit('getSavedDoctors',{token: profile.token},function(resp){
-        for (var i = 0; i < resp.length; i++) {
-            if (resp[i].name == docName) {
-                $("#saveDoctor").text("Remove from Mydoctors");
-            }
-        }        
-    })
-
+	if(!(typeof(profile.token) === 'undefined')){
+		socket.emit('getSavedDoctors',{token: profile.token},function(resp){
+			for (var i = 0; i < resp.length; i++) {
+				if (resp[i].name == docName) {
+					$("#saveDoctor").text("Remove from Mydoctors");
+				}
+			}
+		});		
+	}	
 });
 
 socket.on('listingDoctor', function(data){

@@ -105,11 +105,12 @@ function listDoctors(docs, isSavedList) {
             '<p id="address">' + address + '</p>' +
             '<p id="doctorCost">$' + minCost + '-$' + maxCost + '</p>' +
             '<p id="reviewStars">' + starsString + '</p>' +
-            '<p id="reviewCount">' + reviewStr + '</p>';
+            '<p id="reviewCount">' + reviewStr + '</p> ' +
+			'<img style="background-image:url(' + imgurl + ')"/> ';
 		if (isSavedList) {
-			htmlStr += '<button class="removeFromSaved">X</button>';
+			htmlStr += '<button class="removeFromSaved btn-lg">X</button>';
 		}
-		htmlStr += '<img style="background-image:url(' + imgurl + ')"/> </div>';
+		htmlStr += '</div>';
     }
     //update the doctor content
     document.getElementById("doctorContainer").innerHTML = htmlStr;

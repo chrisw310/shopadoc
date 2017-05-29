@@ -303,8 +303,20 @@ function removeSavedDocs(data, callback){
 
                 for( var j=0; j<myNewDoc.savedDocs.length;j++){
                     if(myNewDoc.savedDocs[j] === data.docName){
-						var myquery = {email: data.email, savedDocs: [data.docName]};
+						/*var myquery = {email: data.email, savedDocs: [data.docName]};
 						db.collection('savedDoctors').remove(myquery, function(err, r) {
+							if (err === null) {
+								console.log('Doctor removed');
+								//console.log(r);
+								callback('Doctor removed');
+								db.close();
+								
+							} else {
+								console.log(err.message);
+								callback('Removing Doctor from saved list failed');
+							}
+						});*/
+						db.collection('savedDoctors').update({email: data.email, savedDocs : data.docName}, {$pull: {"savedDocs" : data.docName}}, function(err, r) {
 							if (err === null) {
 								console.log('Doctor removed');
 								//console.log(r);

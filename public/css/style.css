@@ -212,6 +212,8 @@ header p {
 	background-color: #EFEFEF;
 }
 
+
+
 #signUpDiv {
 	text-align: center;
 }
@@ -795,4 +797,10 @@ a, a:link, a:visited, a:hover, a:active {
         width: 100%;
     }
     
+}
+
+.removeFromSaved {
+	float:right;
+	position: relative;
+	margin: 15px;
 }
