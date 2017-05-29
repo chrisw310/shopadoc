@@ -297,22 +297,28 @@ function removeSavedDocs(data, callback){
                 console.log('Doctor not in saved doctor list');
             }else{
                 var myNewDoc = docs[0];
-                //console.log(myNewDoc);
+                console.log(myNewDoc);
 
                 for( var j=0; j<myNewDoc.savedDocs.length;j++){
+					var removeSuccess = false;
                     if(myNewDoc.savedDocs[j] === data.docName){
 						var myquery = {email:data.email, savedDocs: [data.docName]};
 						db.collection('savedDoctors').remove(myquery, function(err, r) {
 							if (err === null) {
 								console.log('Doctor removed');
-								callback('Doctor removed');
-								db.close();
+								console.log(r);
+								removeSuccess = true;
+								
 							} else {
 								console.log(err.message);
 								callback('Removing Doctor from saved list failed');
 							}
 						});
                     }
+					if (removeSuccess) {
+						callback('Doctor removed');
+						db.close();
+					}
                 }
 
             }

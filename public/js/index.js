@@ -21,10 +21,6 @@ $.when(
         }
     });
 	
-	$(".col-sm-6:contains('Saved')").click(function() {
-        window.location.replace('/saved');
-    });
-	
 	$(".col-sm-3").css("z-index","0");
     $(".col-sm-3").click(function () {
 		$(".col-sm-3").not(this).css("z-index","0");
@@ -84,7 +80,8 @@ function addMapMarker(address,i) {
 
 
 //~~Update the list of doctors on the index.html page~~//
-function listDoctors(docs) {
+function listDoctors(docs, isSavedList) {
+	initMap();
     //document.getElementById('mapContainer').style.display = '';
     var htmlStr = "";
     for (var i = 0; i < docs.length; i++) {
@@ -102,14 +99,17 @@ function listDoctors(docs) {
         var reviewStr = docs[i].reviewCount + " Reviews";
         var imgurl = "../images/" + docs[i].photo;
         //var imgurl = "../images/me.jpg";
-        htmlStr += '<div class="listing" onclick="redirect(&#39' + name.toString() + '&#39)">' +
+        htmlStr += '<div class="listing">' +
             '<p id="name">' + name + '</p>' +
             '<p id="title">' + title + '</p>' +
             '<p id="address">' + address + '</p>' +
             '<p id="doctorCost">$' + minCost + '-$' + maxCost + '</p>' +
             '<p id="reviewStars">' + starsString + '</p>' +
-            '<p id="reviewCount">' + reviewStr + '</p>' +
-            '<img style="background-image:url(' + imgurl + ')"/>' + '</div>';
+            '<p id="reviewCount">' + reviewStr + '</p>';
+		if (isSavedList) {
+			htmlStr += '<button class="removeFromSaved">X</button>';
+		}
+		htmlStr += '<img style="background-image:url(' + imgurl + ')"/> </div>';
     }
     //update the doctor content
     document.getElementById("doctorContainer").innerHTML = htmlStr;
@@ -128,15 +128,28 @@ function listDoctors(docs) {
     //for (i = 0; i < docs.length; i++) {
     //    addMapMarker(docs[i].address, i + 1);
     //}
+	
+	//register click events
+	$(".listing").click(function(e) {
+		if (!$(e.target).is("button")) {
+			window.location = window.location.origin + ('/listing/'+name);
+		}
+	});
+
+	$(".removeFromSaved").click(function(e) {
+		var docName = $(e.target).siblings("#name").text();
+		
+		var data = {token: profile.token, docName: docName};
+		socket.emit('removeSavedDoctors',data,function(resp){
+			if (resp == "Doctor removed") {
+				$(".listing #name").filter(function() {return $(this).text() == docName}).parent().remove(); 
+			}
+		})
+		e.stopPropagation();
+	});
+
 }
 
-function redirect(name){
-    window.location = window.location.origin + ('/listing/'+name);
-}
-
-function gotosaved(name){
-    window.location = window.location.origin + '/saved';
-}
 
 
 //socket to talk to the server
@@ -156,12 +169,14 @@ socket.on('connectedToServer', function (data) {
 socket.on('doctors', function(data){
     console.log("Got doctors data.... Updating List");
     console.log(data);
-    listDoctors(data);
+    listDoctors(data, false);
 });
 
 
 
 function searchDoctors(){
+	//TODO: set as not popular or saved
+	
     //show loading gif
     document.getElementById("doctorContainer").innerHTML = '<div class="SaDloading"></div>';
     //document.getElementById('mapContainer').style.display = 'none';
@@ -174,3 +189,36 @@ function searchDoctors(){
         socket.emit('searchDoctors', 'all');
     }
 }
+
+/*
+* generate list of popular doctors
+*/
+$("#popularTab").click(function() {
+	$("#savedTab").removeClass("activeTab");
+	$("#popularTab").addClass("activeTab");
+	$("#doctorContainer").html("<div class='SaDloading'></div>");
+	
+	socket.emit('searchDoctors','all');
+	
+});
+
+
+/*
+* generate list of saved doctors
+*/
+$("#savedTab").click(function() {
+	$("#popularTab").removeClass("activeTab");
+	$("#savedTab").addClass("activeTab");
+	$("#doctorContainer").html("<div class='SaDloading'></div>");
+	
+	if(typeof(profile.token) === 'undefined'){
+            //document.getElementById('listingResponse').innerHTML = 'Please Sign in to save a doctor';
+	} else {
+		socket.emit('getSavedDoctors',{token: profile.token},function(resp){
+            console.log('recieved saved doctors');
+            listDoctors(resp, true);
+            //console.log(resp);
+        });
+	}
+});
+

@@ -187,7 +187,7 @@ io.on('connection', function (socket) {
 
 
     socket.on('getSavedDoctors', function(data, callback) {
-        console.log("Request to get saved dcctors");
+        console.log("Request to get saved doctors");
         var auth = new GoogleAuth;
 
         var client = new auth.OAuth2(CLIENT_ID, '', '');
@@ -198,6 +198,8 @@ io.on('connection', function (socket) {
                 var returnData = []; // data to return to client in callback
                 if (login !== null) {
                     console.log("login verified");
+					console.log(login);
+					console.log(e);
                     var payload = login.getPayload();
                     // store data
                     //profile.email = payload['email'];

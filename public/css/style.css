@@ -178,10 +178,6 @@ header p {
     font-weight: 800;
 }
 
-.col-sm-6:first-child {
-    background-color: #EFEFEF;
-}
-
 #dropdowns {
     background-color:#EFEFEF;
 }
@@ -205,6 +201,15 @@ header p {
 .dropdown-menu {
     width: 100%;
     top:54px;
+}
+
+#popularTab:hover, #savedTab:hover {
+	background-color: #D6D6D6;
+}
+
+
+.activeTab {
+	background-color: #EFEFEF;
 }
 
 @keyframes spin {
