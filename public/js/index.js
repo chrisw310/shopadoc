@@ -1,3 +1,4 @@
+
 var socket = io.connect();
 var onSignIn;
 var signOut;
@@ -18,6 +19,10 @@ $.when(
         if (event.keyCode === 13) {
             searchDoctors();
         }
+    });
+	
+	$(".col-sm-6:contains('Saved')").click(function() {
+        location.href = "https://www.shopadoc.me/saved"
     });
 	
 	$(".col-sm-3").css("z-index","0");

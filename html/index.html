@@ -26,7 +26,7 @@
   </head>
   <body>
 	<bar>
-		<div id="logo"><div id="plus">+</div></div>
+		<a href="https://www.shopadoc.me/"><div id="logo"><div id="plus">+</div></div></a>
 		<div class="signin">
 			<div id="login">Login / Signup</div>
 			<div id="welcomeMsg" class="hiddenStart"></div>
@@ -34,16 +34,13 @@
 				<a href="#" onclick="signOut();">Sign out</a>
 			</div>
 		</div>
-        <div>
-            Disclaimer: This is a student project created for the course INFS3202. No information presented should be considered factual!
-        </div>
     </bar>
         
     <header>
         <h1>ShopADoc</h1>
         <p style="top:300px;font-weight:100;">Find your Doctor. In an Instant.</p>
         <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search name, location, speciality..." id="searchBar">
+            <input type="text" class="form-control" placeholder="Search..." id="searchBar">
             <span class="input-group-btn" >
                 <button class="btn btn-default" type="button" onclick="searchDoctors()">
                     <img src="/images/search.png" id="searchlogo"/>
@@ -61,69 +58,14 @@
         </div>
         </div>
     </div>
-    <!--
-    <div class="container-fluid">
-       <div class="row" id="dropdowns">
-            <div class="col-sm-3">
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Field
-                    <span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">General Practitioner</a></li>
-                    <li><a href="#">Dermatologist</a></li>
-                    <li><a href="#">Psychiatrist</a></li>
-                  </ul>
-                </div> 
-            </div>
-            <div class="col-sm-3">
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Rating
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">&#9733;</a></li>
-                        <li><a href="#">&#9733;&#9733;</a></li>
-                        <li><a href="#">&#9733;&#9733;&#9733;</a></li>
-                        <li><a href="#">&#9733;&#9733;&#9733;&#9733;</a></li>
-                        <li><a href="#">&#9733;&#9733;&#9733;&#9733;&#9733;</a></li>
-                    </ul>
-                </div>
-            </div>
-           <div class="col-sm-3">
-                <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Price Min
-                  <span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">$0</a></li>
-                    <li><a href="#">$10</a></li>
-                    <li><a href="#">$100</a></li>
-                    <li><a href="#">$1000</a></li>
-                  </ul>
-                </div>
-            </div>
-            
-            <div class="col-sm-3">
-                <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Price Max
-                <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li><a href="#">$10</a></li>
-                    <li><a href="#">$100</a></li>
-                    <li><a href="#">$1000</a></li>
-                    <li><a href="#">$10000</a></li>
-                </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
-    <div id="content">
+    <div id="content" style="padding-top:30px">
         <div id="mapContainer">
             <div id="map" class="mapIndex" style="height: 300px;"></div>
         </div>
         <div id="doctorContainer">
-           <div class="SaDloading">
-            </div>
+           <div class="SaDloading"></div>
         </div>
+        
     </div>
 	<!-- JavaScript -->
     <script src="js/index.js"></script>

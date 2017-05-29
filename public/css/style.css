@@ -108,6 +108,10 @@ header .input-group {
     height: 100px;
 }
 
+.abcRioButton {
+    height: 30px !important;
+}
+
 header :not(img):not(.input-group *)   {
     position:absolute;
     left: 50%;
@@ -264,7 +268,7 @@ header p {
 /* for confirm page only */
 #time {
     margin-top: 300px;
-    font-size: 30px;
+    font-size: 20px;
     color: black;
 }
 
@@ -486,6 +490,11 @@ textarea {
     width: 500px;
 }
 
+a, a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: white;
+}
+
 #similar {
     position: absolute;
     top: 2100px;
@@ -540,6 +549,11 @@ textarea {
     top: 55x;
 }
 
+#bookingFeedback {
+    top: 450px;
+    color: red;
+}
+
 /* large devices */
 @media (max-width: 1200px) {
     
@@ -569,6 +583,10 @@ textarea {
     header h1 {
     top: 90px;
     font-size: 100px;
+    }
+    
+    #content {
+        padding-top: 0 !important;
     }
     
         .col-sm-3 {
@@ -657,6 +675,7 @@ textarea {
 @media (max-width: 544px) {
     #content {
         height:1500px;
+        padding-top: 0 !important;
     }
     
     header h1 {
