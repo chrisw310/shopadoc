@@ -55,6 +55,7 @@ $("#login").click(function() {
 		$("#welcomeMsg").text("Welcome, " + profile.name);
 		$("#welcomeMsg, #signout").css("display","flex");
 		$("#login").css("display","none");
+	}
 });
 
 /**
@@ -62,4 +63,4 @@ $("#login").click(function() {
 */
 $("#logoLink").click(function() {
     window.location.replace('/');
- No newline at end of file
+});

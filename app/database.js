@@ -189,7 +189,7 @@ function getSavedDocs(email,callback){
             assert.equal(null, err);
             if(docs.length === 0){
                 console.log('User is not part of our database');
-                callback([]);
+                callback('User is not part of our database');
             }else{
                 var savedList = docs[0].savedDocs;
                 if(savedList.length === 0){
@@ -257,7 +257,7 @@ function addSavedDocs(data, callback){
                 for( var j=0; j<myNewDoc.savedDocs.length;j++){
                     if(myNewDoc.savedDocs[j] === data.docName){
                         docAlreadSaved = 1;
-                        console.log('Doctor already part of client's saved list');
+                        console.log("Doctor already part of client's saved list");
                         callback('Doctor already in your list of saved doctors');
                     }
                 }
@@ -302,14 +302,14 @@ function removeSavedDocs(data, callback){
                 console.log(myNewDoc);
 
                 for( var j=0; j<myNewDoc.savedDocs.length;j++){
-					var removeSuccess = false;
                     if(myNewDoc.savedDocs[j] === data.docName){
-						var myquery = {email:data.email, savedDocs: [data.docName]};
+						var myquery = {email: data.email, savedDocs: [data.docName]};
 						db.collection('savedDoctors').remove(myquery, function(err, r) {
 							if (err === null) {
 								console.log('Doctor removed');
-								console.log(r);
-								removeSuccess = true;
+								//console.log(r);
+								callback('Doctor removed');
+								db.close();
 								
 							} else {
 								console.log(err.message);
@@ -317,11 +317,8 @@ function removeSavedDocs(data, callback){
 							}
 						});
                     }
-					if (removeSuccess) {
-						callback('Doctor removed');
-						db.close();
-					}
                 }
+				
 
             }
             db.close();

@@ -2,11 +2,11 @@
 var socket = io.connect();
 var onSignIn;
 var signOut;
-var profile = null; // Google Sign-In profile
+var profile = {}; // Google Sign-In profile
 var loggedIn = null;
 
 $.when(
-    $.getScript("js/util.js"),
+    $.getScript("/js/util.js"),
     $.Deferred(function( deferred ){
         $( deferred.resolve );
     })
@@ -134,19 +134,24 @@ function listDoctors(docs, isSavedList) {
 	//register click events
 	$(".listing").click(function(e) {
 		if (!$(e.target).is("button")) {
-			window.location = window.location.origin + ('/listing/'+name);
+			window.location = window.location.origin + ('/listing/' + $(e.target).closest(".listing").children("#name").text());
 		}
+		e.stopPropagation();
 	});
 
 	$(".removeFromSaved").click(function(e) {
 		var docName = $(e.target).siblings("#name").text();
 		
-		var data = {token: profile.token, docName: docName};
-		socket.emit('removeSavedDoctors',data,function(resp){
-			if (resp == "Doctor removed") {
-				$(".listing #name").filter(function() {return $(this).text() == docName}).parent().remove(); 
-			}
-		})
+		if(typeof(profile.token) === 'undefined'){
+            //document.getElementById('listingResponse').innerHTML = 'Please Sign in to save a doctor';
+		} else {
+			var data = {token: profile.token, docName: docName};
+			socket.emit('removeSavedDoctors',data,function(resp){
+				if (resp == "Doctor removed") {
+					$(".listing #name").filter(function() {return $(this).text() == docName}).parent().remove(); 
+				}
+			});
+		}
 		e.stopPropagation();
 	});
 

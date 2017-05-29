@@ -5,7 +5,7 @@ var profile = {}; // Google Sign-In profile
 var loggedIn = null;
 
 $.when(
-    $.getScript("js/util.js"),
+    $.getScript("/js/util.js"),
     $.Deferred(function( deferred ){
         $( deferred.resolve );
     })
@@ -21,9 +21,7 @@ $.when(
 			//window.location.replace('/');
 		} else {
 			$("#signInDiv").show();
-			//$("#login").css("display","flex");
-			//$("#signUpName").text(profile.name);
-			//$("#signUpEmail").text(profile.email);
+
 		}
 	});
 
@@ -52,7 +50,16 @@ $.when(
 					sessionStorage.setItem("loggedIn", true);
 					sessionStorage.setItem("profile", JSON.stringify(profile));
 					console.log(profile);
-					window.location.replace('/');
+					socket.emit('getSavedDoctors',{token: profile.token},function(resp){
+						if (resp == 'User is not part of our database') {
+							$("#signUpName").val(profile.name);
+							$("#signUpEmail").val(profile.email);
+							$("#signUpDiv").show();
+							$("#signInDiv").hide();
+						} else {
+							window.location.replace('/');
+						}
+					});
 				}
 			});
 			
@@ -60,7 +67,10 @@ $.when(
 	}
 	
 	
-	
+	$("#signUpSubmit").click(function(e) {
+		e.preventDefault();
+		window.location.replace('/');
+	});
 });
 
 	

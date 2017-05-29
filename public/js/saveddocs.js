@@ -7,7 +7,7 @@ var loggedIn = null;
 //var docName = '';
 
 $.when(
-    $.getScript("js/util.js"),
+    $.getScript("/js/util.js"),
     $.Deferred(function( deferred ){
         $( deferred.resolve );
     })
