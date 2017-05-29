@@ -57,3 +57,10 @@ $("#login").click(function() {
 		$("#login").css("display","none");
 	}	
 });
+
+/**
+* Redirect user to index page on logo click
+*/
+$("#logoLink").click(function() {
+	window.location.replace('/');
+});
