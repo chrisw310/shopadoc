@@ -121,8 +121,8 @@ function updateDoctorReviews(docs){
             var starCount = Math.floor(docs[i].rating);
             var comment = docs[i].comment;
             var starsString = "&#9733".repeat(starCount) + "&#9734".repeat(5-starCount);
-            reviewStr += '<img src="' + docs[i].reviewerPhotoURL + '" />';
-            reviewStr += '<div class="review"><p>' + username + '</p><p>' + starsString + '</p><p>' + comment + '</p></div>';
+            
+            reviewStr += '<div class="review">' + '<img src="' + docs[i].reviewerPhotoURL + '" />' + '<p>' + username + '</p><p>' + starsString + '</p><p>' + comment + '</p></div>';
 
         }
         document.getElementById("reviewContainer").innerHTML = reviewStr;
