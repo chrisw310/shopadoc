@@ -42,10 +42,11 @@ $.when(
 				console.log("User login confirmed on server");
 				console.log(data);
 
-				if (typeof data.err == "undefined") {			
+				if (typeof data.err === "undefined") {
 					profile.name = data.name;
 					profile.pictureUrl = data.pictureUrl;
 					profile.email = data.email;
+					profile.token = dataToEmit.token;
 					$("#welcomeMsg").text("Welcome, " + profile.name);
 					$("#welcomeMsg, #signout").css("display","flex")
 					sessionStorage.setItem("loggedIn", true);

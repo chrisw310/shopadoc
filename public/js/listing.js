@@ -116,6 +116,7 @@ function setBookingDay(day){
 //saves the time selected
 //changes the button selected to blue and the last selected button (if there was one) back to green
 function setBookingTime(time){
+    document.getElementById('listingResponse').innerHTML = '';
     document.getElementById('book'+time).classList.remove('btn-success');
     document.getElementById('book'+time).classList.add('btn-info');
     if (lastTimeSelected !== '' && lastTimeSelected !== 'book'+time){
@@ -129,7 +130,11 @@ function setBookingTime(time){
 
 function makeBooking(){
     //var docName = decodeURI(window.location.pathname.split('/')[2]);
-    window.location = window.location.origin + '/preconfirm/' + docName + '#day=' + bookingDay + '&time=' + bookingTime;
+    if (bookingTime ==='') {
+        document.getElementById('listingResponse').innerHTML = 'Please Select a time first';
+    }else {
+        window.location = window.location.origin + '/preconfirm/' + docName + '#day=' + bookingDay + '&time=' + bookingTime;
+    }
 }
 
 function updateDoctorReviews(docs){
@@ -230,11 +235,12 @@ socket.on('addReviewResponse',function(data){
 
 
 
-var profile = null; // Google Sign-In profile
+//var profile = null; // Google Sign-In profile
 
 /**
 * Retrieve profile information on user signin
 */
+/*
 function onSignIn(googleUser) {
 	profile = googleUser.getBasicProfile();
 	//console.log(profile.getEmail());
@@ -266,11 +272,12 @@ function onSignIn(googleUser) {
 			}
 		});
 	}
-}
+}*/
 
 /**
 * Sign out of website (does not sign user out of Google)
 */
+/*
 function signOut() {
     profile = null;
     var auth2 = gapi.auth2.getAuthInstance();
@@ -278,4 +285,4 @@ function signOut() {
       console.log('User signed out');
 	  $("#welcomeMsg, #signout").hide();
     });
-}
+}*/
