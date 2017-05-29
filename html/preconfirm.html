@@ -26,8 +26,15 @@
   </head>
   <body>
       <bar>
-          <a href="https://www.shopadoc.me/"><div id="logo"><div id="plus">+</div></div></a>
-          <p>Welcome, <b>ChrisW123!</b></p>
+          <div id="logo"><div id="plus">+</div></div>
+          <div class="signin">
+              <div class="g-signin2" data-onsuccess="onSignIn">
+              </div>
+              <div id="welcomeMsg"></div>
+              <div id="signout">
+                  <a href="#" onclick="signOut();">Sign out</a>
+              </div>
+          </div>
       </bar>
         <div style="margin:30px;">
             <form action="#">
