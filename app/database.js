@@ -180,14 +180,110 @@ function makeBooking(bookingData,cb){
         console.log('availability not found');
 
     });
-
-
-    //email the client (and doctor)
-
-
 }
 
-function getContacts(callback){
+function getSavedDocs(email,callback){
+    MongoClient.connect(uri, function (err, db) {
+        assert.equal(null, err);
+        db.collection('savedDoctors').find({'email':email}).toArray(function(err, docs){
+            assert.equal(null, err);
+            if(docs.length === 0){
+                console.log('User is not part of our database');
+                callback([]);
+            }else{
+                var savedList = docs[0].savedDocs;
+                if(savedList.length === 0){
+                    console.log('user has no saved doctors');
+                    callback([]);
+                }else{
+                    var returnData = [];
+                    for(var j=0; j<savedList.length;j++){
+                        console.log('Getting doctor info for: ' + savedList[j]);
+                        db.collection('doctors').find({'name':savedList[j]}).toArray(function(err, docs){
+                            assert.equal(null, err);
+                            if(docs.length !== 0){
+                                //callback(docs[0]);
+                                //console.log(docs[0]);
+                                returnData[returnData.length] = docs[0];
+                                if(returnData.length === savedList.length){
+                                    callback(returnData);
+                                }
+                                //console.log(returnData);
+                            }
+                        });
+                    }
+                    //callback(returnData);
+                }
+            }
+            //var returnData = [];
+           //for(var j=0,j<docs[0].savedDocs.length, j++){
+            //
+            //};
+            //callback(docs);
+            db.close();
+        });
+    });
+}
+
+function addSavedDocs(data, callback){
+    console.log(data);
+    MongoClient.connect(uri, function (err, db) {
+        assert.equal(null, err);
+
+        //try get the user's
+        db.collection('savedDoctors').find({'email':data.email}).toArray(function(err, docs){
+            assert.equal(null, err);
+            //console.log(docs);
+
+            if(docs.length === 0){
+                console.log('New entry detected, creating saved doctor list');
+                db.collection('savedDoctors').insertOne({email:data.email, savedDocs: [data.docName]}, function (err, r) {
+                    if (err === null) {
+                        assert.equal(1, r.insertedCount);
+                        console.log('Doctor added to saved list');
+                        callback('Doctor saved');
+                        db.close();
+                    } else {
+                        //cb('Invalid Review data');
+                        console.log(err.message);
+                        callback('Adding Doctor Failed');
+                    }
+                });
+            }else{
+                var docAlreadSaved = 0;
+                var myNewDoc = docs[0];
+                //console.log(myNewDoc);
+
+                for( var j=0; j<myNewDoc.savedDocs.length;j++){
+                    if(myNewDoc.savedDocs[j] === data.docName){
+                        docAlreadSaved = 1;
+                        console.log('Doctor already part of client\'s saved list');
+                        callback('Doctor already in your list of saved doctors');
+                    }
+                }
+
+                if(docAlreadSaved === 0){
+                    console.log('Adding doc to client\'s saved doctors');
+                    myNewDoc.savedDocs[myNewDoc.savedDocs.length] = data.docName;
+                    //console.log(myNewDoc);
+                    var res = db.collection('savedDoctors').updateOne({email: data.email},myNewDoc,{ upsert: false });
+                    if(res.nModified >= 1){
+                        console.log('Doctor Saved');
+                        callback('Doctor saved');
+                    }else{
+                        console.log('Error saving doctor?');
+                        callback('Adding Doctor Failed');
+                    }
+
+                }
+
+            }
+            db.close();
+        });
+    });
+}
+
+/*function getContacts(callback){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
         db.collection('contacts').find().toArray(function(err, docs){
@@ -225,7 +321,7 @@ function addContact(data,callback){
     }else{
         callback('Invalid Contact Data')
     }
-}
+}*/
 
 /*var findCollections = function(db, callback) {
     var cursor =db.collection('contacts').find( );
@@ -260,13 +356,15 @@ function dbResponse(req,res){
 }*/
 
 //export the functions in this script to be used by routes.js
-module.exports.getContacts = getContacts;
-module.exports.addContact = addContact;
+//module.exports.getContacts = getContacts;
+//module.exports.addContact = addContact;
 module.exports.getDoctors = getDoctors;
 module.exports.checkDoctor = checkDoctor;
 module.exports.getReviews = getReviews;
 module.exports.addReview = addReview;
 module.exports.getAvailability = getAvailability;
 module.exports.makeBooking = makeBooking;
+module.exports.getSavedDocs = getSavedDocs;
+module.exports.addSavedDocs = addSavedDocs;
 //module.exports.connectDb = connectDb;
 //module.exports.dbResponse = dbResponse;

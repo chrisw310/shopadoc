@@ -9,6 +9,10 @@ var app = express();
 var server = require('http').Server(app);
 //var https = require('https');
 
+//google authentication
+var GoogleAuth = require('google-auth-library');
+var CLIENT_ID = '390784971133-mfjqrepf91ib0tlhekjo375qok0nf1v7.apps.googleusercontent.com';
+
 //var fs = require('fs');
 //var privateKey = fs.readFileSync('security/shopadoc_me.key').toString();
 //var certificate = fs.readFileSync('security/shopadoc_me.crt').toString();
@@ -51,7 +55,7 @@ io.on('connection', function (socket) {
     socket.on('clientConnect', function (data) {
         console.log(data);
     });
-    //Search the contacts collection in the DB
+    /*//Search the contacts collection in the DB
     socket.on('searchContacts',function(data){
         console.log(data); //probably use DATA in the future to ensure user is authentic
 
@@ -70,7 +74,7 @@ io.on('connection', function (socket) {
         mydb.addContact(data, function(msg){
             socket.emit('addContact',msg);
         })
-    });
+    });*/
 
     //search all the doctors in the databse
     socket.on('searchDoctors',function(data){
@@ -131,9 +135,9 @@ io.on('connection', function (socket) {
 	
 	socket.on('clientSignIn', function(data, callback) {
 		console.log("clientSignIn");
-		var GoogleAuth = require('google-auth-library');
+		//var GoogleAuth = require('google-auth-library');
 		var auth = new GoogleAuth;
-		var CLIENT_ID = '390784971133-mfjqrepf91ib0tlhekjo375qok0nf1v7.apps.googleusercontent.com';
+		//var CLIENT_ID = '390784971133-mfjqrepf91ib0tlhekjo375qok0nf1v7.apps.googleusercontent.com';
 		var client = new auth.OAuth2(CLIENT_ID, '', '');
 		client.verifyIdToken(
 			data.token,
@@ -180,4 +184,62 @@ io.on('connection', function (socket) {
 		//profile = {};
 		//profile.loggedIn = false;
 	});
+
+
+    socket.on('getSavedDoctors', function(data, callback) {
+        console.log("Request to get saved dcctors");
+        var auth = new GoogleAuth;
+
+        var client = new auth.OAuth2(CLIENT_ID, '', '');
+        client.verifyIdToken(
+            data.token,
+            CLIENT_ID,
+            function(e, login) {
+                var returnData = []; // data to return to client in callback
+                if (login !== null) {
+                    console.log("login verified");
+                    var payload = login.getPayload();
+                    // store data
+                    //profile.email = payload['email'];
+                    mydb.getSavedDocs(payload['email'], callback);
+                    // TODO: store profile in database
+
+                } else {
+                    returnData.err = e;
+                    console.log("login verification failed: "+ e);
+                    callback(returnData);
+                }
+            }
+        );
+    });
+
+    socket.on('addSavedDoctors', function(data, callback) {
+        console.log("Request to get saved dcctors");
+        var auth = new GoogleAuth;
+
+        var client = new auth.OAuth2(CLIENT_ID, '', '');
+        client.verifyIdToken(
+            data.token,
+            CLIENT_ID,
+            function(e, login) {
+                if (login !== null) {
+                    console.log("login verified");
+                    var payload = login.getPayload();
+                    // store data
+                    //profile.email = payload['email'];
+                    var addingInfo = {email: payload['email'], docName: data.docName};
+                    mydb.addSavedDocs(addingInfo, callback);
+
+
+                    // TODO: store profile in database
+
+                } else {
+                    returnData.err = e;
+                    callback('Adding Doctor Failed');
+                    console.log("login verification failed: "+ e);
+                }
+
+            }
+        );
+    });
 });

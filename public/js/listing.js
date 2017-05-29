@@ -118,7 +118,7 @@ function setBookingDay(day){
 function setBookingTime(time){
     document.getElementById('book'+time).classList.remove('btn-success');
     document.getElementById('book'+time).classList.add('btn-info');
-    if (lastTimeSelected !== ''){
+    if (lastTimeSelected !== '' && lastTimeSelected !== 'book'+time){
         document.getElementById(lastTimeSelected).classList.remove('btn-info');
         document.getElementById(lastTimeSelected).classList.add('btn-success');
     }
@@ -169,6 +169,22 @@ function addReview(){
         var c = document.getElementById('reviewCommentBox').value;
         var doc = {doctorName: docName, rating: r, reviewerName: rName, reviewerPhotoURL: photoURL, comment: c};
         socket.emit('addReview', doc);
+    }
+}
+
+function saveDoctor(){
+    if(profile !== null){
+        if(typeof(profile.token) === 'undefined'){
+            document.getElementById('listingResponse').innerHTML = 'Please Sign in to save a doctor';
+        }else{
+            //signed in a token is defined
+            var data = {token: profile.token, docName: docName};
+            socket.emit('addSavedDoctors',data,function(resp){
+                document.getElementById('listingResponse').innerHTML = resp;
+            })
+        }
+    }else{
+        document.getElementById('listingResponse').innerHTML = 'Please Sign in to save a doctor';
     }
 }
 
@@ -230,15 +246,23 @@ function onSignIn(googleUser) {
 		};
 		socket.emit('clientSignIn', dataToEmit, function(data) {
 			console.log("User login confirmed on server");
-			console.log(data);
+			//console.log(data);
 
 			if (typeof data.err === "undefined") {
+			    profile.token = dataToEmit.token;
 				profile.name = data.name;
 				profile.pictureUrl = data.pictureUrl;
 				//profile.email = data.email;
 				//console.log(data);
 				$("#welcomeMsg").text("Welcome, " + profile.name);
 				$("#welcomeMsg, #signout").css("display","flex")
+
+
+                var data = {token: profile.token, docName: docName};
+                socket.emit('getSavedDoctors',data,function(resp){
+                    console.log('recieved saved doctors');
+                    console.log(resp);
+                })
 			}
 		});
 	}

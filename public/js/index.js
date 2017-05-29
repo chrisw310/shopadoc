@@ -149,6 +149,7 @@ socket.on('connectedToServer', function (data) {
 
 socket.on('doctors', function(data){
     console.log("Got doctors data.... Updating List");
+    console.log(data);
     listDoctors(data);
 });
 

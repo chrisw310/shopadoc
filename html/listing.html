@@ -23,6 +23,11 @@
 	<meta name="google-signin-client_id" content="390784971133-mfjqrepf91ib0tlhekjo375qok0nf1v7.apps.googleusercontent.com">
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <!-- JavaScript -->
+    <script src="../js/listing.js"></script>
+    <!-- Google Maps -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADWEyT0t77SmQhezZxrTmJadAXuHnREMU&callback=initMap"
+    async defer></script>
   </head>
   <body>
 	<bar>
@@ -55,6 +60,10 @@
             </div>
             <button type="button" class="btn btn-default">Confirm Booking</button>
             <button type="button" class="btn btn-default">Save</button>
+            <div id="listingResponse">Doctor added to saved doctors</div>
+            <button type="button" class="btn btn-default" onclick="makeBooking()">Confirm Booking</button>
+            <button type="button" class="btn btn-default" onclick="saveDoctor()">Save to Mydoctors</button>
+
         </div>
 
 
@@ -87,10 +96,5 @@
 
         </div>
     </div>
-	    <!-- JavaScript -->
-    <script src="../js/listing.js"></script>
-    <!-- Google Maps -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADWEyT0t77SmQhezZxrTmJadAXuHnREMU&callback=initMap"
-    async defer></script>
   </body>
 </html>
