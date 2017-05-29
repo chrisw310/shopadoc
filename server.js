@@ -110,6 +110,7 @@ io.on('connection', function (socket) {
     });
 	
 	var profile = {};
+	profile.loggedIn = false;
 	
 	socket.on('clientSignIn', function(data, callback) {
 		console.log("clientSignIn");
@@ -130,7 +131,7 @@ io.on('connection', function (socket) {
 					profile.name = payload['name'];
 					profile.email = payload['email'];
 					profile.pictureUrl = payload['picture'];
-					
+					profile.loggedIn = true;
 					//data to return to client in callback
 					returnData.name = profile.name;
 					returnData.pictureUrl = profile.pictureUrl;
@@ -144,5 +145,15 @@ io.on('connection', function (socket) {
 				callback(returnData);
 			}
 		);
+	});
+	
+	socket.on('clientSignOut', function() {
+		console.log("clientLoggedOut");
+		profile = {};
+		profile.loggedIn = false;
+	});
+	
+	socket.on('checkLoginStatus', function(callback) {
+		callback(profile.loggedIn);
 	});
 });

@@ -15,19 +15,24 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Bootstrap viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<!-- IO script for server communication -->
+    <script src="/socket.io/socket.io.js"></script>
+	<!-- Google Platform Library for Google Sign-In -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<!-- Google Client ID -->
+	<meta name="google-signin-client_id" content="390784971133-mfjqrepf91ib0tlhekjo375qok0nf1v7.apps.googleusercontent.com">
     <!-- Stylesheet -->
-    <link rel="stylesheet" type="text/css" href="../style.css">
-    <!-- JavaScript -->
-    <script src="js/script.js"></script>
-    <!-- Google Maps -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADWEyT0t77SmQhezZxrTmJadAXuHnREMU&callback=initMap"
-    async defer></script>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">   
   </head>
   <body>
       <bar>
          <div id="logo"><div id="plus">+</div></div>
-          <p>Welcome, <b>ChrisW123!</b></p>
+		<div class="signin">
+			<div id="welcomeMsg"></div>
+			<div id="signout">
+				<a href="#" onclick="signOut();">Sign out</a>
+			</div>
+		</div>
       </bar>
     <div>
        <table>
@@ -52,20 +57,13 @@
             </form>
                </td>
                <td>
-                   <form action="#">
-                <h1>Log in</h1>
-                    <h3>Username</h3>
-                    <input type="textarea"><br>
-                <h3>Password</h3>
-                    <input type="password">
-                    <br>
-                    <br>
-            <button type="button" class="btn btn-danger">Log In</button>
-            </form>
+                   <div class="g-signin2" data-onsuccess="onSignIn"></div>  
                </td>
            </tr>
        </table>
             
     </div>
+	<!-- JavaScript -->
+    <script src="js/signup.js"></script>
   </body>
 </html>

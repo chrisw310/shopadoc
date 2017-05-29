@@ -92,6 +92,26 @@ router.get('/heartbeat',function(req,res){
     res.send('OK');
 });
 
+//SIGNUP PAGE
+router.get('/signup',function(req,res){
+    if((req.headers['x-forwarded-proto'] === 'http') && (req.headers['host'] === 'www.shopadoc.me')){
+        console.log('Redirecting http request to https');
+        res.redirect('https://'+req.headers['host']+req.url)
+    }
+    console.log('Providing the signup.html page');
+    res.sendFile(path.join(__dirname,'../html/signup.html'));
+});
+
+//LOGIN PAGE (REDIRECTS TO SIGNUP)
+router.get('/login',function(req,res){
+    if((req.headers['x-forwarded-proto'] === 'http') && (req.headers['host'] === 'www.shopadoc.me')){
+        console.log('Redirecting http request to https');
+        res.redirect('https://'+req.headers['host']+req.url)
+    }
+    console.log('Providing the signup.html page');
+    res.sendFile(path.join(__dirname,'../html/signup.html'));
+});
+
 //client request to the server
 //learn how to make this secure (do I use POST method along with a key?)
 //probably change this to socket.io code??

@@ -1,5 +1,20 @@
-$(document).ready(function() {
-    $('.parallax-window').parallax({imageSrc: '/images/background.jpg'});
+var socket = io.connect();
+
+$.when(
+    $.getScript("util.js"),
+    $.Deferred(function( deferred ){
+        $( deferred.resolve );
+    })
+).done(function(){
+    //$('.parallax-window').parallax({imageSrc: '/images/background.png'});
+	
+	//~~Search database function~~//
+    console.log("onload");
+    document.getElementById('searchBar').onkeydown = function(event) {
+        if (event.keyCode === 13) {
+            searchDoctors();
+        }
+    }
 });
 
 
@@ -37,15 +52,7 @@ function addMapMarker(address,i) {
     });
 }
 
-//~~Search database function~~//
-window.onload = function(e){
-    console.log("onload");
-    document.getElementById('searchBar').onkeydown = function(event) {
-        if (event.keyCode === 13) {
-            searchDoctors();
-        }
-    }
-};
+
 
 
 //~~Update the list of doctors on the index.html page~~//
@@ -92,7 +99,7 @@ function redirect(name){
 //var port = "3456"; //remove later
 //if (window.location.hostname === 'www.shopadoc.me'){port = "80";}
 //var socket = io.connect('https://' + window.location.hostname + ":"+port ,{secure: true}); //works for localhost
-var socket = io.connect();
+//var socket = io.connect();
 socket.on('connectedToServer', function (data) {
     //listDoctors(5);
     console.log(data); //prints the data from the server
