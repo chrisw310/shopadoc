@@ -267,15 +267,13 @@ function addSavedDocs(data, callback){
                     myNewDoc.savedDocs[myNewDoc.savedDocs.length] = data.docName;
                     //console.log(myNewDoc);
                     var res = db.collection('savedDoctors').updateOne({email: data.email},myNewDoc,{ upsert: false });
-                    console.log('Doctor Saved');
-                    callback('Doctor saved');
-                    /*if(res.nModified >= 1){
+                    if(res.nModified >= 1){
                         console.log('Doctor Saved');
                         callback('Doctor saved');
                     }else{
                         console.log('Error saving doctor?');
                         callback('Adding Doctor Failed');
-                    }*/
+                    }
 
                 }
 

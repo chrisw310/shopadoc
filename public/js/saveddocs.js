@@ -22,9 +22,9 @@ $.when(
         }
     });
 
-    /*$(".col-sm-6:contains('Saved')").click(function() {
+    $(".col-sm-6:contains('Saved')").click(function() {
         window.location.replace('/saved');
-    });*/
+    });
 
     $(".col-sm-3").css("z-index","0");
     $(".col-sm-3").click(function () {
@@ -45,8 +45,6 @@ $.when(
             listDoctors(resp);
             //console.log(resp);
         })
-    }else{
-        document.getElementById("doctorContainer").innerHTML = '<div class="listing"><p id="title"> Please sign in to view saved doctors </p></div>';
     }
 });
 

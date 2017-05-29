@@ -77,7 +77,6 @@ function updateDoctorInfo(docs) {
         addMapMarker(docs[i].address);
 	}else{
     	//potential to add html functionality to display no doctor found (new page?)
-        document.getElementById("address").innerHTML = 'Doctor Not found :(';
     	console.error('No doctors found from DB')
 	}
 }
@@ -85,36 +84,27 @@ function updateDoctorInfo(docs) {
 function updateDoctorAvailability(docs){
     var keys = ['seven','seventhirty','eight','eightthirty','nine','ninethirty','ten','tenthirty','eleven','eleventhirty','twelve','twelvethirty','thirteen','thirteenthirty','fourteen','fourteenthirty','fifteen','fifteenthirty','sixteen','sixteenthirty'];
     var timeStrings = ['7:00am','7:30am','8:00am','8:30am','9:00am','9:30am','10:00am','10:30am','11:00am','11:30am','12:00pm','12:30pm','1:00pm','1:30pm','2:00pm','2:30pm','3:00pm','3:30pm','4:00pm','4:30pm'];
-
-    if(docs.length >= 1) {
-        var today = docs[0];
-        setBookingDay(today.day);
-        //console.log(today.times);
-        //Object.keys(today.times).length
-        var d = new Date(today.day);
-        htmlString = d.toDateString();
-        htmlString += '<div class="row">';
-        for (var i = 0; i < keys.length; i++) {
-            if (i % 4 === 0) {
-                if (i > 1) {
-                    htmlString += '</div>';
-                }
+    var today = docs[1];
+    setBookingDay(today.day);
+    //console.log(today.times);
+    //Object.keys(today.times).length
+    htmlString = '<div class="row">';
+        for (var i=0; i<keys.length; i++){
+            if (i%4 === 0){
+                if (i > 1){htmlString += '</div>';}
                 htmlString += '<div class="col-sm-1">'
             }
-            htmlString += '<button id="book' + keys[i] + '" type="button" class="btn btn-';
-            if (today.times[keys[i]] === 1) {
-                htmlString += 'success" onclick="setBookingTime(&#39' + keys[i] + '&#39)">';
-            } else {
+            htmlString += '<button id="book' + keys[i]+'" type="button" class="btn btn-';
+            if(today.times[keys[i]] === 1) {
+                htmlString += 'success" onclick="setBookingTime(&#39'+keys[i]+'&#39)">';
+            }else{
                 htmlString += 'basic">'
             }
 
             htmlString += timeStrings[i] + '</button>';
         }
 
-        htmlString += '</div></div>';
-    }else{
-        htmlString = 'no available times found';
-    }
+    htmlString += '</div></div>';
     document.getElementById("times").innerHTML = htmlString;
 }
 
@@ -164,8 +154,7 @@ function updateDoctorReviews(docs){
         document.getElementById("reviewContainer").style.height = '';
     }else{
         //potential to add html functionality to display no doctor found (new page?)
-        console.error('No reviews found in the DB');
-        document.getElementById("reviewContainer").innerHTML = 'No Reviews Found';
+        console.error('No reviews found in the DB')
     }
 }
 
