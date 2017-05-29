@@ -1,13 +1,8 @@
 $(document).ready(function() {
-
-    $(".col-sm-3").css("z-index","0");
-    $(".col-sm-3").click(function () {
-        
-        $(".col-sm-3").not(this).css("z-index","0");
-       $(this).css("z-index","1");
-        alert($(this).parent().contains(".open"));
-    });
     
+    $(".col-sm-6:contains('Saved')").click(function() {
+        location.href = "https://www.shopadoc.me/saved"
+    });
    
 });
 
@@ -100,6 +95,7 @@ function listDoctors(docs) {
     if ((str.substring(0,str.length-2) > 200) && docs.length > 0){
         document.getElementById("map").style.height = h.toString() + 'px';
         map.fitBounds(bounds);
+        google.maps.event.trigger(map, 'resize');
     }
     //show the map
 

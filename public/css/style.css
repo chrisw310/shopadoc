@@ -108,6 +108,10 @@ header .input-group {
     height: 100px;
 }
 
+.abcRioButton {
+    height: 30px !important;
+}
+
 header :not(img):not(.input-group *)   {
     position:absolute;
     left: 50%;
@@ -468,6 +472,11 @@ fieldset {
 textarea {
     height: 200px;
     width: 500px;
+}
+
+a, a:link, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: white;
 }
 
 #similar {
