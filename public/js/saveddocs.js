@@ -44,7 +44,7 @@ $.when(
             console.log('recieved saved doctors');
             listDoctors(resp);
             //console.log(resp);
-        })
+        });
     }
 });
 

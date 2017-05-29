@@ -182,11 +182,30 @@ function saveDoctor(){
         if(typeof(profile.token) === 'undefined'){
             document.getElementById('listingResponse').innerHTML = 'Please Sign in to save a doctor';
         }else{
-            //signed in a token is defined
-            var data = {token: profile.token, docName: docName};
-            socket.emit('addSavedDoctors',data,function(resp){
-                document.getElementById('listingResponse').innerHTML = resp;
-            })
+			//signed in a token is defined
+			//check if saving or removing
+			if ($("#saveDoctor").text() == "Save to Mydoctors") {
+				//saving
+				var data = {token: profile.token, docName: docName};
+				socket.emit('addSavedDoctors',data,function(resp){
+					document.getElementById('listingResponse').innerHTML = resp;
+					if(resp == "Doctor saved") {
+						$("#saveDoctor").text("Remove from Mydoctors");
+					}
+				})
+			} else {
+				//removing
+				var data = {token: profile.token, docName: docName};
+				socket.emit('removeSavedDoctors',data,function(resp){
+					document.getElementById('listingResponse').innerHTML = resp;
+					if (resp == "Doctor removed") {
+						$("#saveDoctor").text("Save to Mydoctors");
+					}
+				})
+				
+				
+			}
+            
         }
     }else{
         document.getElementById('listingResponse').innerHTML = 'Please Sign in to save a doctor';
@@ -206,6 +225,14 @@ socket.on('connectedToServer', function (data) {
     socket.emit('listingDoctor',docName);
     socket.emit('requestReviews',docName);
     socket.emit('requestTimes',docName);
+	socket.emit('getSavedDoctors',{token: profile.token},function(resp){
+		for (var i = 0; i < resp.length; i++) {
+			if (resp[i].name == docName) {
+				$("#saveDoctor").text("Remove from Mydoctors");
+			}
+		}		
+	})
+	
 });
 
 socket.on('listingDoctor', function(data){

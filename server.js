@@ -214,7 +214,7 @@ io.on('connection', function (socket) {
     });
 
     socket.on('addSavedDoctors', function(data, callback) {
-        console.log("Request to get saved dcctors");
+        console.log("Request to get saved doctors");
         var auth = new GoogleAuth;
 
         var client = new auth.OAuth2(CLIENT_ID, '', '');
@@ -236,6 +236,36 @@ io.on('connection', function (socket) {
                 } else {
                     returnData.err = e;
                     callback('Adding Doctor Failed');
+                    console.log("login verification failed: "+ e);
+                }
+
+            }
+        );
+    });
+	
+	socket.on('removeSavedDoctors', function(data, callback) {
+        console.log("Request to remove saved doctors");
+        var auth = new GoogleAuth;
+
+        var client = new auth.OAuth2(CLIENT_ID, '', '');
+        client.verifyIdToken(
+            data.token,
+            CLIENT_ID,
+            function(e, login) {
+                if (login !== null) {
+                    console.log("login verified");
+                    var payload = login.getPayload();
+                    // store data
+                    //profile.email = payload['email'];
+                    var removingInfo = {email: payload['email'], docName: data.docName};
+                    mydb.removeSavedDocs(removingInfo, callback);
+
+
+                    // TODO: store profile in database
+
+                } else {
+                    returnData.err = e;
+                    callback('Removing Doctor Failed');
                     console.log("login verification failed: "+ e);
                 }
 
