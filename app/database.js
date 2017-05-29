@@ -257,7 +257,7 @@ function addSavedDocs(data, callback){
                 for( var j=0; j<myNewDoc.savedDocs.length;j++){
                     if(myNewDoc.savedDocs[j] === data.docName){
                         docAlreadSaved = 1;
-                        console.log("Doctor already part of client's saved list");
+                        console.log('Doctor already part of client's saved list');
                         callback('Doctor already in your list of saved doctors');
                     }
                 }
@@ -267,13 +267,15 @@ function addSavedDocs(data, callback){
                     myNewDoc.savedDocs[myNewDoc.savedDocs.length] = data.docName;
                     //console.log(myNewDoc);
                     var res = db.collection('savedDoctors').updateOne({email: data.email},myNewDoc,{ upsert: false });
-                    if(res.nModified >= 1){
+                    console.log('Doctor Saved');
+                    callback('Doctor saved');
+                    /*if(res.nModified >= 1){
                         console.log('Doctor Saved');
                         callback('Doctor saved');
                     }else{
                         console.log('Error saving doctor?');
                         callback('Adding Doctor Failed');
-                    }
+                    }*/
 
                 }
 
@@ -326,7 +328,6 @@ function removeSavedDocs(data, callback){
         });
     });
 }
-
 
 /*function getContacts(callback){
     MongoClient.connect(uri, function (err, db) {

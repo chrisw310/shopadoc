@@ -122,6 +122,8 @@ function listDoctors(docs, isSavedList) {
         document.getElementById("map").style.height = h.toString() + 'px';
         //map.fitBounds(bounds);
 		google.maps.event.trigger(map, 'resize'); 
+
+
     }
     //show the map
 

@@ -25,7 +25,7 @@ signOut = function () {
 	$("#welcomeMsg, #signout").css("display","none");
 	$("#login").css("display","flex");
 	//window.location.replace('/');
-}
+};
 
 /**
 * Checks with server if user is logged in.
@@ -41,7 +41,7 @@ loggedIn = function() {
 		return false;
 	}*/
 	return JSON.parse(sessionStorage.getItem("loggedIn"));
-}
+};
 
 
 /**
@@ -55,12 +55,11 @@ $("#login").click(function() {
 		$("#welcomeMsg").text("Welcome, " + profile.name);
 		$("#welcomeMsg, #signout").css("display","flex");
 		$("#login").css("display","none");
-	}	
 });
 
 /**
 * Redirect user to index page on logo click
 */
 $("#logoLink").click(function() {
-	window.location.replace('/');
-});
+    window.location.replace('/');
+ No newline at end of file
