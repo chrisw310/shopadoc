@@ -4,6 +4,7 @@ var onSignIn;
 var signOut;
 var profile = null; // Google Sign-In profile
 var loggedIn = null;
+//var docName = '';
 
 $.when(
     $.getScript("js/util.js"),
@@ -12,37 +13,44 @@ $.when(
     })
 ).done(function(){
     $('.parallax-window').parallax({imageSrc: '/images/background.png'});
-	
-	//~~Search database function~~//
+
+    //~~Search database function~~//
     console.log("onload");
     $("#searchBar").keydown(function() {
         if (event.keyCode === 13) {
             searchDoctors();
         }
     });
-	
-	$(".col-sm-6:contains('Saved')").click(function() {
+
+    $(".col-sm-6:contains('Saved')").click(function() {
         window.location.replace('/saved');
     });
-	
-	$(".col-sm-3").css("z-index","0");
+
+    $(".col-sm-3").css("z-index","0");
     $(".col-sm-3").click(function () {
-		$(".col-sm-3").not(this).css("z-index","0");
-		$(this).css("z-index","1");
-		alert($(this).parent().contains(".open"));
-	});
-	
-	if (loggedIn()) {
-		profile = JSON.parse(sessionStorage.getItem("profile"));
-		$("#welcomeMsg").text("Welcome, " + profile.name);
-		$("#welcomeMsg, #signout").css("display","flex");
-		$("#login").css("display","none");
-	}
+        $(".col-sm-3").not(this).css("z-index","0");
+        $(this).css("z-index","1");
+        alert($(this).parent().contains(".open"));
+    });
+
+    if (loggedIn()) {
+        profile = JSON.parse(sessionStorage.getItem("profile"));
+        $("#welcomeMsg").text("Welcome, " + profile.name);
+        $("#welcomeMsg, #signout").css("display","flex");
+        $("#login").css("display","none");
+
+        //var data = {token: profile.token, docN};
+        socket.emit('getSavedDoctors',{token: profile.token},function(resp){
+            console.log('recieved saved doctors');
+            listDoctors(resp);
+            //console.log(resp);
+        })
+    }
 });
 
 /*window.onresize = function() {
-      google.maps.event.trigger(map, 'resize');  
-};*/
+ google.maps.event.trigger(map, 'resize');
+ };*/
 
 
 //~~Google Maps API functions~~//
@@ -133,10 +141,9 @@ function redirect(name){
     window.location = window.location.origin + ('/listing/'+name);
 }
 
-function gotosaved(name){
+/*function gotosaved(){
     window.location = window.location.origin + '/saved';
-}
-
+}*/
 
 //socket to talk to the server
 //var port = "3456"; //remove later
@@ -147,20 +154,20 @@ socket.on('connectedToServer', function (data) {
     //listDoctors(5);
     console.log(data); //prints the data from the server
     socket.emit('clientConnect', 'Client Connected! - Index.js');
-    console.log('Searching Doctors');
+    //console.log('Searching Doctors');
     //document.getElementById('mapContainer').style.display = 'none';
-    socket.emit('searchDoctors','all');
+    //socket.emit('searchDoctors','all');
 });
 
-socket.on('doctors', function(data){
+/*socket.on('doctors', function(data){
     console.log("Got doctors data.... Updating List");
     console.log(data);
     listDoctors(data);
-});
+});*/
 
 
 
-function searchDoctors(){
+/*function searchDoctors(){
     //show loading gif
     document.getElementById("doctorContainer").innerHTML = '<div class="SaDloading"></div>';
     //document.getElementById('mapContainer').style.display = 'none';
@@ -172,4 +179,4 @@ function searchDoctors(){
     }else{
         socket.emit('searchDoctors', 'all');
     }
-}
+}*/
