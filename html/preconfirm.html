@@ -12,6 +12,10 @@
     <script src="/parallax.js-1.4.2/parallax.js"></script>
       <!-- IO script for server communication -->
       <script src="/socket.io/socket.io.js"></script>
+      <!-- Google Platform Library for Google Sign-In -->
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+      <!-- Google Client ID -->
+      <meta name="google-signin-client_id" content="390784971133-mfjqrepf91ib0tlhekjo375qok0nf1v7.apps.googleusercontent.com">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -20,8 +24,7 @@
 
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="/css/style.css">
-      <!-- JavaScript -->
-      <script src="../js/preconfirm.js"></script>
+
   </head>
   <body>
       <bar>
@@ -35,42 +38,41 @@
 		</div>
       </bar>
         <div style="margin:30px;">
-            <form action="#">
+            <form id="myForm" action="#">
             <h1>First, answer some questions:</h1>
             <div id="page1">
                 <h2>Is there a particular service you are requesting?</h2>
-                <input type="textarea"><br>
+                <input id="preExisting" type="textarea"><br>
             </div>
             <div id="page2">
                 <h2>When was the last time you have visited a doctor?</h2><br>
                     <div id="radioButtons">
-                    <input type="radio" name="form" value="one" checked> Last Week<br>
-                    <input type="radio" name="form" value="one" checked> Last Month<br>
-                    <input type="radio" name="form" value="one" checked> Lasy Year<br>
-                    <input type="radio" name="form" value="one" checked> Never<br>
+                    <input type="radio" name="doctor" value="Last Week" checked> Last Week<br>
+                    <input type="radio" name="doctor" value="Last Month" checked> Last Month<br>
+                    <input type="radio" name="doctor" value="Last Year" checked> Lasy Year<br>
+                    <input type="radio" name="doctor" value="Never" checked> Never<br>
                 </div>
             </div>
             <div id="page3">
                 <h2>Please describe your symptom:</h2><br>
                     <div id="radioButtons">
-                    <input type="radio" name="form" value="one" checked> Coughing<br>
-                    <input type="radio" name="form" value="one" checked> Wheezing<br>
-                    <input type="radio" name="form" value="one" checked> Spluttering<br>
-                    <input type="radio" name="form" value="one" checked> Dying<br>
+                    <input type="radio" name="symptom" value="Coughing"> Coughing<br>
+                    <input type="radio" name="symptom" value="Wheezing"> Wheezing<br>
+                    <input type="radio" name="symptom" value="Spluttering"> Spluttering<br>
+                    <input type="radio" name="symptom" value="Dying"> Dying<br>
                 </div>
             </div>
             <div id="page4">
-                <h2>Anything else we should know about? If yes, write in the text box below:</h2><br>
-                    <div id="radioButtons">
-                    <input type="radio" name="form" value="one" checked> No<br>
-                    <input type="radio" name="form" value="one" checked> Yes<br>
-                    <input type="textarea"><br>
-                </div>
+                <h2>Anything else we should know about?</h2><br>
+                    <input id="additional" type="textarea">
             </div>
             <br>
             <button type="button" class="btn btn-danger"  id="btnPrev">Previous</button>
             <button type="button" class="btn btn-danger"  id="btnNext">Next</button>
             </form>
+            <!-- JavaScript -->
+            <script src="../js/preconfirm.js"></script>
     </div>
+
   </body>
 </html>

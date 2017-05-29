@@ -7,7 +7,7 @@ var profile = null; // Google Sign-In profile
 var loggedIn = null;
 
 $.when(
-    $.getScript("js/util.js"),
+    $.getScript("../js/util.js"),
     $.Deferred(function( deferred ){
         $( deferred.resolve );
     })
@@ -18,7 +18,7 @@ $.when(
 		$("#welcomeMsg, #signout").css("display","flex");
 		$("#login").css("display","none");
 	}
-	
+
     // hide pages that aren't the first page
     for (i=2; $("#page"+i).length === 1; i++) {
         $("#page"+i).hide();
@@ -59,47 +59,4 @@ function sendToConfirm(){
     var additional = '&additional=' + document.getElementById('additional').value;
     window.location = window.location.origin + '/confirm/' + docName + window.location.hash +
         preExisting + lastDoctor + symptom + additional;
-}
-
-
-var profile = null; // Google Sign-In profile
-
-/**
- * Retrieve profile information on user signin
- */
-function onSignIn(googleUser) {
-    profile = googleUser.getBasicProfile();
-    //console.log(profile.getEmail());
-
-    if (socket.connected) {
-        console.log("User logged in");
-        var dataToEmit = {
-            token: googleUser.getAuthResponse().id_token
-        };
-        socket.emit('clientSignIn', dataToEmit, function(data) {
-            console.log("User login confirmed on server");
-            console.log(data);
-
-            if (typeof data.err === "undefined") {
-                profile.name = data.name;
-                profile.pictureUrl = data.pictureUrl;
-                //profile.email = data.email;
-                //console.log(data);
-                $("#welcomeMsg").text("Welcome, " + profile.name);
-                $("#welcomeMsg, #signout").css("display","flex")
-            }
-        });
-    }
-}
-
-/**
- * Sign out of website (does not sign user out of Google)
- */
-function signOut() {
-    profile = null;
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-        console.log('User signed out');
-        $("#welcomeMsg, #signout").hide();
-    });
 }
