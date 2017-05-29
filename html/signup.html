@@ -26,41 +26,39 @@
   </head>
   <body>
       <bar>
-         <div id="logo"><div id="plus">+</div></div>
+		<div id="logo"><div id="plus">+</div></div>
 		<div class="signin">
-			<div id="welcomeMsg"></div>
-			<div id="signout">
+			<div id="welcomeMsg" class="hiddenStart"></div>
+			<div id="signout" class="hiddenStart">
 				<a href="#" onclick="signOut();">Sign out</a>
 			</div>
 		</div>
       </bar>
     <div>
-       <table>
-           <tr>
-               <td>
+		<div id="signUpDiv" class="hiddenStart">
                <form action="#">
                     <h1>Sign Up</h1>
-                    <h3>Username</h3>
-                    <input type="textarea">
+					<h4>Name</h4>
+                    <input id="signUpName" type="textarea">
                     <br>
-                    <h3>Email</h3>
-                    <input type="textarea">
+					<h4>Email</h4>
+                    <input id="signUpEmail" type="textarea">
                     <br>
-                    <h3>Password</h3>
-                    <input type="password">
+                    <h4>Address</h4>
+                    <input id="signUpAddress" type="textarea">
                     <br>
-                    <h3>Confirm Password</h3>
-                    <input type="password">
+                    <h4>Phone Number</h4>
+                    <input id="signUpNumber" type="textarea">
                     <br>
                     <br>
-                    <button type="button" class="btn btn-danger">Sign Up</button>
+                    <button id="signUpSubmit" type="button" class="btn btn-danger">Sign Up</button>
             </form>
-               </td>
-               <td>
-                   <div class="g-signin2" data-onsuccess="onSignIn"></div>  
-               </td>
-           </tr>
-       </table>
+		</div>
+		<div id="signInDiv" class="hiddenStart">
+			<div class="g-signin2" data-onsuccess="onSignIn"></div>  
+		</div>
+                   
+
             
     </div>
 	<!-- JavaScript -->

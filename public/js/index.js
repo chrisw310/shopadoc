@@ -1,29 +1,39 @@
-<<<<<<< HEAD
 var socket = io.connect();
+var onSignIn;
+var signOut;
+var profile = null; // Google Sign-In profile
+var loggedIn = null;
 
 $.when(
-    $.getScript("util.js"),
+    $.getScript("js/util.js"),
     $.Deferred(function( deferred ){
         $( deferred.resolve );
     })
 ).done(function(){
-    //$('.parallax-window').parallax({imageSrc: '/images/background.png'});
+    $('.parallax-window').parallax({imageSrc: '/images/background.png'});
 	
 	//~~Search database function~~//
     console.log("onload");
-    document.getElementById('searchBar').onkeydown = function(event) {
+    $("#searchBar").keydown(function() {
         if (event.keyCode === 13) {
             searchDoctors();
         }
-    }
+    });
 	
 	$(".col-sm-3").css("z-index","0");
     $(".col-sm-3").click(function () {
-        
-	$(".col-sm-3").not(this).css("z-index","0");
-	$(this).css("z-index","1");
-	alert($(this).parent().contains(".open"));
-)};
+		$(".col-sm-3").not(this).css("z-index","0");
+		$(this).css("z-index","1");
+		alert($(this).parent().contains(".open"));
+	});
+	
+	if (loggedIn()) {
+		profile = JSON.parse(sessionStorage.getItem("profile"));
+		$("#welcomeMsg").text("Welcome, " + profile.name);
+		$("#welcomeMsg, #signout").css("display","flex");
+		$("#login").css("display","none");
+	}
+});
 
 /*window.onresize = function() {
       google.maps.event.trigger(map, 'resize');  
@@ -151,42 +161,4 @@ function searchDoctors(){
     }else{
         socket.emit('searchDoctors', 'all');
     }
-}
-
-var profile = null; // Google Sign-In profile
-
-/**
-* Retrieve profile information on user signin
-*/
-function onSignIn(googleUser) {
-	profile = googleUser.getBasicProfile();
-	
-	if (socket.connected) {
-		console.log("User logged in");
-		var dataToEmit = {
-			token: googleUser.getAuthResponse().id_token
-		};
-		socket.emit('clientSignIn', dataToEmit, function(data) {
-			console.log("User login confirmed on server");
-			console.log(data);
-
-			if (typeof data.err === "undefined") {
-				profile.name = data.name;
-				profile.pictureUrl = data.pictureUrl;
-				$("#welcomeMsg").text("Welcome, " + profile.name);
-				$("#welcomeMsg, #signout").css("display","flex")
-			}
-		});
-	}
-}
-
-/**
-* Sign out of website (does not sign user out of Google)
-*/
-function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out');
-	  $("#welcomeMsg, #signout").hide();
-    });
 }

@@ -174,4 +174,10 @@ io.on('connection', function (socket) {
 	socket.on('checkLoginStatus', function(callback) {
 		callback(profile.loggedIn);
 	});
+	
+	socket.on('disconnect', function() {
+		console.log("clientDisconnected");
+		//profile = {};
+		//profile.loggedIn = false;
+	});
 });

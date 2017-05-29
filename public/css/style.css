@@ -438,6 +438,22 @@ footer {
     
 }
 
+#signUpDiv {
+	text-align: center;
+}
+
+#signUpDiv input {
+	margin-top: 0px;
+}
+
+.g-signin2{
+  width: 100%;
+}
+
+.g-signin2 > div{
+  margin: 0 auto;
+}
+
 .col-sm-1 {
     padding: 0;
 }
@@ -502,12 +518,14 @@ textarea {
 .signin div{
 	float: left;
 	height: 100%;
-	display: flex;
 	align-items: center;
 }
 
-#welcomeMsg, #signout {
+.hiddenStart {
 	display: none;
+}
+
+#welcomeMsg, #signout {
 	margin-left: 15px;
 }
 
