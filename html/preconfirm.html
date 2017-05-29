@@ -7,43 +7,64 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <!-- jQuery -->
     <script   src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
     <!-- Bootstrap -->
     <script src="/parallax.js-1.4.2/parallax.js"></script>
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <!-- Bootstrap viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Stylesheet -->
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+      <!-- Google Platform Library for Google Sign-In -->
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+      <!-- Google Client ID -->
+      <meta name="google-signin-client_id" content="390784971133-mfjqrepf91ib0tlhekjo375qok0nf1v7.apps.googleusercontent.com">
     <!-- JavaScript -->
-    <script src="js/script.js"></script>
-    <!-- Google Maps -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyADWEyT0t77SmQhezZxrTmJadAXuHnREMU&callback=initMap"
-    async defer></script>
+    <script src="../js/preconfirm.js"></script>
   </head>
   <body>
       <bar>
-         <div id="logo"><div id="plus">+</div></div>
-          <p>Welcome, <b>ChrisW123!</b></p>
+          <div id="logo"><div id="plus">+</div></div>
+          <div class="signin">
+              <div class="g-signin2" data-onsuccess="onSignIn">
+              </div>
+              <div id="welcomeMsg"></div>
+              <div id="signout">
+                  <a href="#" onclick="signOut();">Sign out</a>
+              </div>
+          </div>
       </bar>
         <div style="margin:30px;">
-            <form action="#">
+            <form id="myForm" action="#">
             <h1>First, answer some questions:</h1>
             <div id="page1">
-                <h2>What is your favourite colour?</h2>
-                <input type="textarea"><br>
+                <h2>Do you have any pre-existing conditions?</h2>
+                <input id="preExisting" type="textarea"><br>
             </div>
             <div id="page2">
-                <h2>What is your favourite question?</h2><br>
+                <h2>When was the last time you have visited a doctor?</h2><br>
                     <div id="radioButtons">
-                    <input type="radio" name="form" value="one" checked> This one<br>
-                    <input type="radio" name="form" value="one" checked> Last one<br>
-                    <input type="radio" name="form" value="one" checked> Next one<br>
-                    <input type="radio" name="form" value="one" checked> None of the above<br>
+                    <input type="radio" name="doctor" value="Last Week" checked> Last Week<br>
+                    <input type="radio" name="doctor" value="Last Month" checked> Last Month<br>
+                    <input type="radio" name="doctor" value="Last Year" checked> Last Year<br>
+                    <input type="radio" name="doctor" value="Never" checked> Never<br>
                 </div>
+            </div>
+            <div id="page3">
+                <h2>Please describe your symptom:</h2><br>
+                    <div id="radioButtons">
+                    <input type="radio" name="symptom" value="Coughing" checked> Coughing<br>
+                    <input type="radio" name="symptom" value="Wheezing" checked> Wheezing<br>
+                    <input type="radio" name="symptom" value="Spluttering" checked> Spluttering<br>
+                    <input type="radio" name="symptom" value="Dying" checked> Dying<br>
+                </div>
+            </div>
+            <div id="page4">
+                <h2>Anything else we should know about? If yes, write in the text box below:</h2><br>
+                <input id="additional" type="textarea">
             </div>
             <br>
             <button type="button" class="btn btn-danger"  id="btnPrev">Previous</button>

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var socket = io.connect();
 
 $.when(
@@ -15,7 +16,18 @@ $.when(
             searchDoctors();
         }
     }
-});
+	
+	$(".col-sm-3").css("z-index","0");
+    $(".col-sm-3").click(function () {
+        
+	$(".col-sm-3").not(this).css("z-index","0");
+	$(this).css("z-index","1");
+	alert($(this).parent().contains(".open"));
+)};
+
+/*window.onresize = function() {
+      google.maps.event.trigger(map, 'resize');  
+};*/
 
 
 //~~Google Maps API functions~~//
@@ -26,7 +38,8 @@ function initMap() {
     geocoder = new google.maps.Geocoder();
     map = new google.maps.Map(document.getElementById('map'), {
         center: {lat: -27.469, lng: 153.025},
-        zoom: 12
+        zoom: 12,
+        scrollwheel: false
     });
 }
 
@@ -56,43 +69,53 @@ function addMapMarker(address,i) {
 
 
 //~~Update the list of doctors on the index.html page~~//
-function listDoctors(docs){
+function listDoctors(docs) {
+    //document.getElementById('mapContainer').style.display = '';
     var htmlStr = "";
-    for(var i=0; i<docs.length; i++){
+    for (var i = 0; i < docs.length; i++) {
         //console.log(docs[i]);
         var name = docs[i].name;
         var title = docs[i].title;
         var address = docs[i].address;
-        addMapMarker(address,i+1);
+        addMapMarker(address, i + 1);
         var minCost = docs[i].avgMinCost;
         var maxCost = docs[i].avgMaxCost;
         var fullStar = "&#9733";
         var emptyStar = "&#9734";
         var starCount = Math.floor(docs[i].averageRating);
-        var starsString = fullStar.repeat(starCount) + emptyStar.repeat(5-starCount);
+        var starsString = fullStar.repeat(starCount) + emptyStar.repeat(5 - starCount);
         var reviewStr = docs[i].reviewCount + " Reviews";
         var imgurl = "../images/" + docs[i].photo;
         //var imgurl = "../images/me.jpg";
-        htmlStr += '<div class="listing" onclick="redirect(&#39'+name.toString()+'&#39)">' +
-                '<p id="name">' + name +'</p>' +
-                '<p id="title">' + title +'</p>' +
-                '<p id="address">' + address + '</p>' +
-                '<p id="doctorCost">$' + minCost + '-$' + maxCost + '</p>' +
-                '<p id="reviewStars">' + starsString+ '</p>' +
-                '<p id="reviewCount">' + reviewStr + '</p>' +
-                '<img style="background-image:url(' + imgurl +')"/>' + '</div>';
+        htmlStr += '<div class="listing" onclick="redirect(&#39' + name.toString() + '&#39)">' +
+            '<p id="name">' + name + '</p>' +
+            '<p id="title">' + title + '</p>' +
+            '<p id="address">' + address + '</p>' +
+            '<p id="doctorCost">$' + minCost + '-$' + maxCost + '</p>' +
+            '<p id="reviewStars">' + starsString + '</p>' +
+            '<p id="reviewCount">' + reviewStr + '</p>' +
+            '<img style="background-image:url(' + imgurl + ')"/>' + '</div>';
     }
     //update the doctor content
     document.getElementById("doctorContainer").innerHTML = htmlStr;
     //update the height
-    var h = docs.length*320 + 30;
+    var h = docs.length * 320 + 30;
     document.getElementById("content").style.height = h.toString() + 'px';
-    h = docs.length*320 - 20;
-    document.getElementById("map").style.height = h.toString() + 'px';
+    h = docs.length * 320 - 20;
+    var str = document.getElementById("map").style.height;
+    if ((str.substring(0,str.length-2) > 200) && docs.length > 0){
+        document.getElementById("map").style.height = h.toString() + 'px';
+        map.fitBounds(bounds);
+    }
+    //show the map
+
+    //for (i = 0; i < docs.length; i++) {
+    //    addMapMarker(docs[i].address, i + 1);
+    //}
 }
 
 function redirect(name){
-    window.location.replace('/listing/'+name);
+    window.location = window.location.origin + ('/listing/'+name);
 }
 
 //socket to talk to the server
@@ -105,6 +128,7 @@ socket.on('connectedToServer', function (data) {
     console.log(data); //prints the data from the server
     socket.emit('clientConnect', 'Client Connected! - Index.js');
     console.log('Searching Doctors');
+    //document.getElementById('mapContainer').style.display = 'none';
     socket.emit('searchDoctors','all');
 });
 
@@ -116,9 +140,16 @@ socket.on('doctors', function(data){
 
 
 function searchDoctors(){
+    //show loading gif
+    document.getElementById("doctorContainer").innerHTML = '<div id="loading"></div>';
+    //document.getElementById('mapContainer').style.display = 'none';
+    //document.getElementById("content").style.height = '400px';
+    //querey the db
     var str = document.getElementById("searchBar").value;
     if(str !== '') {
         socket.emit('searchDoctors', str);
+    }else{
+        socket.emit('searchDoctors', 'all');
     }
 }
 
@@ -134,12 +165,12 @@ function onSignIn(googleUser) {
 		console.log("User logged in");
 		var dataToEmit = {
 			token: googleUser.getAuthResponse().id_token
-		}
+		};
 		socket.emit('clientSignIn', dataToEmit, function(data) {
 			console.log("User login confirmed on server");
 			console.log(data);
 
-			if (typeof data.err == "undefined") {			
+			if (typeof data.err === "undefined") {
 				profile.name = data.name;
 				profile.pictureUrl = data.pictureUrl;
 				$("#welcomeMsg").text("Welcome, " + profile.name);

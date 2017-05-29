@@ -108,6 +108,23 @@ io.on('connection', function (socket) {
             socket.emit('addReviewResponse',str)
         })
     });
+
+    socket.on('requestTimes',function(data){
+        console.log("Request to get " + data + "'s avaiable hours");
+        mydb.getAvailability(data,function(str){
+            //resturn the results to the client
+            //console.log('Returning reviews');
+            socket.emit('recievedTimes',str);
+        })
+    });
+
+    socket.on('makeBooking',function(data){
+        console.log('Request to make a booking');
+        console.log(data);
+        mydb.makeBooking(data,function(str){
+            socket.emit('bookingResponse',str)
+        })
+    });
 	
 	var profile = {};
 	profile.loggedIn = false;
@@ -135,6 +152,7 @@ io.on('connection', function (socket) {
 					//data to return to client in callback
 					returnData.name = profile.name;
 					returnData.pictureUrl = profile.pictureUrl;
+					returnData.email = profile.email;
 					
 					// TODO: store profile in database
 					

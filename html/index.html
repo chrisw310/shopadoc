@@ -36,6 +36,9 @@
 				<a href="#" onclick="signOut();">Sign out</a>
 			</div>
 		</div>
+        <div>
+            Disclaimer: This is a student project created for the course INFS3202. No information presented should be considered factual!
+        </div>
     </bar>
         
     <header>
@@ -49,21 +52,18 @@
                 </button>
             </span>
         </div><!-- /input-group -->
-        <img src="/images/background.png" style=height:550px;/>
     </header>
     <div id="panels" class="container-fluid">
         <div class="row" id="category">
-            <div class="col-sm-4">
-              <p>Saved</p>
+            <div class="col-sm-6">
+              <p>Popular</p>
             </div>
-        <div class="col-sm-4">
-          <p>Popular</p>
-        </div>
-        <div class="col-sm-4">
-          <p>Local</p>
+        <div class="col-sm-6">
+          <p>Saved</p>
         </div>
         </div>
     </div>
+    <!--
     <div class="container-fluid">
        <div class="row" id="dropdowns">
             <div class="col-sm-3">
@@ -76,18 +76,6 @@
                     <li><a href="#">Psychiatrist</a></li>
                   </ul>
                 </div> 
-            </div>
-           <div class="col-sm-3">
-                <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Distance
-                  <span class="caret"></span></button>
-                  <ul class="dropdown-menu">
-                    <li><a href="#">0-9km</a></li>
-                    <li><a href="#">10-49km</a></li>
-                    <li><a href="#">50-100km</a></li>
-                    <li><a href="#">100km+</a></li>
-                  </ul>
-                </div>
             </div>
             <div class="col-sm-3">
                 <div class="dropdown">
@@ -102,27 +90,40 @@
                     </ul>
                 </div>
             </div>
+           <div class="col-sm-3">
+                <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Price Min
+                  <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">$0</a></li>
+                    <li><a href="#">$10</a></li>
+                    <li><a href="#">$100</a></li>
+                    <li><a href="#">$1000</a></li>
+                  </ul>
+                </div>
+            </div>
+            
             <div class="col-sm-3">
                 <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Price
+                <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Price Max
                 <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                    <li><a href="#">$</a></li>
-                    <li><a href="#">$$</a></li>
-                    <li><a href="#">$$$</a></li>
-                    <li><a href="#">$$$$</a></li>
-                    <li><a href="#">$$$$$</a></li>
+                    <li><a href="#">$10</a></li>
+                    <li><a href="#">$100</a></li>
+                    <li><a href="#">$1000</a></li>
+                    <li><a href="#">$10000</a></li>
                 </ul>
                 </div>
             </div>
         </div>
     </div>
+    -->
     <div id="content">
         <div id="mapContainer">
-            <div id="map" style="float:left;margin-left:30px;height:1585px;"></div>
+            <div id="map" class="mapIndex" style="height: 300px;"></div>
         </div>
         <div id="doctorContainer">
-           <div id="loading">
+           <div class="SaDloading">
             </div>
         </div>
     </div>

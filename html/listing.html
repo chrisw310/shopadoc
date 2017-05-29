@@ -43,64 +43,38 @@
     </bar>
 
     <div id="contentSingle">
-        <div id="map" style="float:right;margin:30px;height:700px;"></div>
+        <div id="map" class="mapListing"
+        style=""></div>
         <div class="listing" id="single">
-            <p id="name">Cameron Weber</p>
-            <p id="title">General Practitioner</p>
-            <p id="address">St Lucia, QLD</p>
-            <p id="doctorCost">$199-299</p>
-            <p id="reviewStars">&#9733;&#9733;&#9733;&#9733;&#9734;</p>
-            <p id="reviewCount">17 Reviews</p>
+            <div id="doctorLoading" class="SaDloading" style="top:150px"></div>
+            <p id="name"></p>
+            <p id="title"></p>
+            <p id="address"></p>
+            <p id="doctorCost"></p>
+            <p id="reviewStars"></p>
+            <p id="reviewCount"></p>
             <p id="timeLabel">Available Times:</p>
             <img id="doctorImage" />
             <div id="times" class="container">
-                <div class="row">
-                    <div class="col-sm-1">
-                        <button type="button" class="btn btn-success">7:00am</button>
-                        <button type="button" class="btn btn-basic">7:30am</button>
-                        <button type="button" class="btn btn-success">8:00am</button>
-                        <button type="button" class="btn btn-basic">8:30am</button>
-                    </div>
-                    <div class="col-sm-1">
-                        <button type="button" class="btn btn-basic">9:00am</button>
-                        <button type="button" class="btn btn-success">9:30am</button>
-                        <button type="button" class="btn btn-success">10:00am</button>
-                        <button type="button" class="btn btn-basic">10:30am</button>
-                    </div>
-                    <div class="col-sm-1">
-                        <button type="button" class="btn btn-basic">11:00am</button>
-                        <button type="button" class="btn btn-success">11:30am</button>
-                        <button type="button" class="btn btn-basic">12:00pm</button>
-                        <button type="button" class="btn btn-success">12:30pm</button>
-                    </div>
-                    <div class="col-sm-1">
-                        <button type="button" class="btn btn-basic">1:00pm</button>
-                        <button type="button" class="btn btn-basic">1:30pm</button>
-                        <button type="button" class="btn btn-success">2:00pm</button>
-                        <button type="button" class="btn btn-success">2:30pm</button>
-                    </div>
-                    <div class="col-sm-1">
-                        <button type="button" class="btn btn-basic">3:00pm</button>
-                        <button type="button" class="btn btn-success">3:30pm</button>
-                        <button type="button" class="btn btn-success">4:00pm</button>
-                        <button type="button" class="btn btn-basic">4:30pm</button>
-                    </div>
+                <div class="SaDloading" style="top:200px">
                 </div>
             </div>
-            <button type="button" class="btn btn-default">Confirm Booking</button>
-            <button type="button" class="btn btn-default">Save</button>
-            <button type="button" class="btn btn-default">Visit Site</button>
+            <button type="button" class="btn btn-default" onclick="makeBooking()">Confirm Booking</button>
+            <button type="button" class="btn btn-default">Add to Favourites</button>
         </div>
 
 
         <div id="revDesContainer">
 
             <h1>Description</h1>
-            <p id="doctorDescription">G'day my name's Chris and I am the best brain surgeon in Bishop Street, St Lucia. <br> Successful brain surgery or you get your money back.</p>
+            <p id="doctorDescription">
+                <!--G'day my name's Chris and I am the best brain surgeon in Bishop Street, St Lucia. <br> Successful brain surgery or you get your money back.-->
+                </p>
 
             <h2>Reviews</h2>
-            <div id="reviewContainer">
-                <div class="review">
+            <div id="reviewContainer" style="height:200px">
+                <div class="SaDloading" style="top:300px"></div>
+                <!--<div class="review">
                     <p>Boogie2988</p>
                     <p>&#9733;&#9733;&#9734;&#9734;&#9734;</p>
                     <p>Terrible Doctor. Bad Service. Very rude. D-. Never again.<br>Do not do business with this man.</p>
@@ -114,7 +88,7 @@
                     <p>ChrisW123</p>
                     <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p>
                     <p>Very friendly, and very quick! A++</p>
-                </div>
+                </div>-->
             </div>
 
 
@@ -137,36 +111,6 @@
             <button onclick="addReview()">Submit</button>
 
         </div>
-        <!--<div id="similar">
-                <h1>Similar Listings</h1>
-                <div class="listing">
-                    <p>Cameron Weber</p>
-                    <p>General Practitioner</p>
-                    <p>St Lucia, QLD</p>
-                    <p>$199-299</p>
-                    <p>&#9733;&#9733;&#9733;&#9733;&#9734;</p>
-                    <p>17 Reviews</p>
-                    <img />
-            </div>
-            <div class="listing">
-                <p>Harry Hoyland</p>
-                <p>Brexit Enthusiast</p>
-                <p>Caboolture, QLD</p>
-                <p>$99-129</p>
-                <p>&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-                <p>2 Reviews</p>
-                <img />
-            </div>
-            <div class="listing">
-                <p>Chris Wilkinson</p>
-                <p>Cognitive Psychologist</p>
-                <p>Toowoomba, QLD</p>
-                <p>$49-99</p>
-                <p>&#9733;&#9734;&#9734;&#9734;&#9734;</p>
-                <p>97 Reviews</p>
-                <img />
-            </div>
-        </div>-->
     </div>
   </body>
 </html>

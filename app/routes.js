@@ -43,6 +43,16 @@ router.param('name', function(req, res, next, name) {
     next();
 });
 
+//SAVED PAGE
+router.get('/saved/',function(req,res){
+    if((req.headers['x-forwarded-proto'] === 'http') && (req.headers['host'] === 'www.shopadoc.me')){
+        console.log('Redirecting http request to https');
+        res.redirect('https://'+req.headers['host']+req.url)
+    }
+    console.log('Providing the listing.html page');
+    res.sendFile(path.join(__dirname,'../html/saved.html'));
+});
+
 //LISTING PAGE
 router.get('/listing/:name',function(req,res){
     if((req.headers['x-forwarded-proto'] === 'http') && (req.headers['host'] === 'www.shopadoc.me')){
@@ -73,6 +83,15 @@ router.get('/confirm/:name',function(req,res){
     res.sendFile(path.join(__dirname,'../html/confirm.html'));
 });
 
+//CONFIRM PAGE
+router.get('/signup/',function(req,res){
+    if((req.headers['x-forwarded-proto'] === 'http') && (req.headers['host'] === 'www.shopadoc.me')){
+        console.log('Redirecting http request to https');
+        res.redirect('https://'+req.headers['host']+req.url)
+    }
+    console.log('Providing the signup.html page');
+    res.sendFile(path.join(__dirname,'../html/signup.html'));
+});
 
 //CAMERON'S TESTING PAGE
 router.get('/cameron',function(req,res){

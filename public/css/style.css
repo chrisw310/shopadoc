@@ -73,12 +73,13 @@ header  {
     display: flex;
     justify-content: center;
     color: black;
-    
+    background-image: url(/images/background.png);
 }
 
 header > h1 {
     padding: 10px;
     font-weight: 100;
+    font-size: 10px;
 }
 
 header > p {
@@ -111,7 +112,6 @@ header :not(img):not(.input-group *)   {
     position:absolute;
     left: 50%;
     transform: translateX(-50%);
-    color: white;
     border: black;
 }
 
@@ -125,6 +125,8 @@ header p {
     font-size: 33px;
     font-weight: 800;
 }
+
+
 
 .input-group {
     top: 350px;
@@ -150,13 +152,13 @@ header p {
     line-height: 50px;    
 }
 
-.col-sm-4 {
-    background-color: #FFFFFF;
+.col-sm-6 {
+    background-color: white;
     font-size: 24px;
     font-weight: 800;
 }
 
-.col-sm-4:nth-child(2) {
+.col-sm-6:first-child {
     background-color: #EFEFEF;
 }
 
@@ -169,26 +171,20 @@ header p {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    width: 300px;
+    width: 100%;
     font-size: 20px
     
 }
 
-.dropdown .dropdown-menu {
+.dropdown {
     left: 50%;
     transform: translateX(-50%);
-    width: 300px;
+    width: 100%;
 }
 
-#loading {
-    border: 16px solid lightgrey; /* Light grey */
-    border-top: 16px solid #3498db; /* Blue */
-    border-radius: 50%;
-    width: 120px;
-    height: 120px;
-    animation: spin 2s linear infinite;
-    position: absolute;
-    left: 50%;
+.dropdown-menu {
+    width: 100%;
+    top:54px;
 }
 
 @keyframes spin {
@@ -204,12 +200,23 @@ header p {
     padding-left: 30px;
     margin-bottom: 20px;
     background-color: white;
-    min-width: 770px;
 }
 
 .listing * {
     position: absolute;
     width: auto;
+}
+
+.SaDloading {
+    border: 16px solid lightgrey; /* Light grey */
+    border-top: 16px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    position: absolute;
+    left: calc(60% - 120px);
+    top: 700px;
 }
 
 #single {
@@ -232,7 +239,7 @@ header p {
 }
 
 #doctorCost {
-    margin-top: 147px;
+    margin-top: 167px;
     font-size: 15px;
 }
 
@@ -270,11 +277,10 @@ header p {
     position: absolute;
     top: 640px;
     font-size: 17px;
-    min-width: 150px
 }
 
-#single > button:nth-of-type(2) {right: 310px}
-#single > button:nth-of-type(3) {right: 60px;}
+#single > button:nth-of-type(2) {left: 215px}
+#single > button:nth-of-type(3) {left: 298px}
 
 .listing img {
     float: right;
@@ -282,6 +288,7 @@ header p {
     width: 250px;
     height: 250px;
     margin: 15px;
+    background-size: 100%;
 }
 
 header h1, header p {
@@ -292,7 +299,6 @@ header h1, header p {
     position: absolute;
     height: 700px;
     padding: 40px;
-    min-width: 900px;
     margin-top: 30px
 }
 
@@ -333,8 +339,8 @@ form > div {
 }
 
 #single img {
-    height: 400px;
-    width: 400px;
+    height: 200px;
+    width: 200px;
     background-size: 100%;
 }
 
@@ -382,9 +388,8 @@ footer {
     height: 200px;
 }
 
-#doctorContainer > div:not(#loading) {
+#doctorContainer > div:not(.SaDloading) {
     margin-left: 2%;
-    
     border: 1px solid #DDDDDD;
     box-shadow: 2px 5px 10px rgba(0,0,0,0.13), 1px 3px 3px rgba(0,0,0,0.13);
 }
@@ -395,11 +400,17 @@ footer {
         height: 960px;
         width: 20%;
         float: left;
+          margin-left: 2%;
       }
 
       .mapListing {
         float: left;
+        margin:30px !important;
+        height:700px !important;
+        left:75.5% !important;
       }
+
+
 
 .parallax-window {
     height: 540px;
@@ -479,7 +490,6 @@ textarea {
     box-shadow: 2px 5px 10px rgba(0,0,0,0.13), 1px 3px 3px rgba(0,0,0,0.13);
     margin-bottom: 20px;
     margin-left: 13%;
-    min-width: 687px;
 }
 
 .signin {
@@ -501,3 +511,221 @@ textarea {
 	margin-left: 15px;
 }
 
+.container-fluid * {
+    position: relative;
+    z-index: 1;
+}
+
+.container-fluid .dropdown-menu {
+    position: absolute;
+    z-index: 99;
+    top: 55x;
+}
+
+/* large devices */
+@media (max-width: 1200px) {
+    
+}
+
+/* medium devices */
+@media (max-width: 992px) {
+    header h1 {
+    top: 90px;
+    font-size: 130px;
+    }
+    
+    .listing img {
+        width: 200px;
+        height: 200px;
+        top: 50px;
+    }
+    
+    #address {
+        font-size: 17px;
+        width: 300px;
+    }
+}
+
+/* small devices */
+@media (max-width: 768px) {
+    header h1 {
+    top: 90px;
+    font-size: 100px;
+    }
+    
+        .col-sm-3 {
+        padding:0;
+    }
+    
+    .dropdown-toggle {
+        height: 100%;
+       
+    }
+    
+    #map {
+        margin: 0;
+        width: 100%;
+        height: 200px !important;
+    }
+    
+    #dropdowns {
+        z-index: 999;
+    }
+    
+    .dropdown-menu {
+        z-index: 1;
+    }
+    
+    .listing {
+        width: 100vw;
+        margin: 0;
+    }
+    
+    .listing img {
+        width: 200px;
+        height: 200px;
+        top: 50px;
+
+    }
+    
+    #doctorContainer > div:not(.SaDloading) {
+        margin-left: 0;
+    }
+    
+     #address {
+        font-size: 17px;
+        width: 300px;
+    }
+
+    .SaDloading {
+        top: 900px;
+    }
+    
+        /* Listing page */
+        #single {
+        margin: 0;
+        width: 100vw;
+    }
+    
+        #single img {
+        width: 200px;
+        height: 200px;
+        top: 50px;
+
+    }
+    
+    #revDesContainer {
+        top: 941px;
+        margin: 0;
+        width: 100vw;
+    }
+    
+    #reviewCommentBox {
+        width: 100%;
+    }
+    
+    .mapListing {
+        float: left;
+        margin:0px !important;
+        height:200px !important;
+        left:0% !important;
+        top: 700px !important;
+      }
+    
+    
+}
+
+/* Extra Small */
+@media (max-width: 544px) {
+    #content {
+        height:1500px;
+    }
+    
+    header h1 {
+    top: 70px;
+    font-size: 60px;
+    }
+    
+    header p {
+        font-size: 22px;
+    }
+    
+    
+    #map {
+        margin: 0;
+        width: 100%;
+        height: 200px !important;
+    }
+    
+    
+    .input-group {
+        min-width: 100%;
+    }
+    
+    .col-sm-3 {
+        padding:0;
+    }
+    
+    .dropdown-toggle {
+        height: 100%;
+       
+    }
+    
+    #dropdowns {
+        z-index: 999;
+    }
+    
+    .dropdown-menu {
+        z-index: 1;
+    }
+    
+    .listing #name {
+        font-size: 30px;
+    }
+    
+    .listing #title {
+        font-size: 25px;
+    }
+    
+    .listing {
+        width: 100vw;
+        margin: 0;
+    }
+    
+    .listing img {
+        width: 100px;
+        height: 100px;
+        top: 150px;
+    }
+    
+        #doctorContainer > div:not(.SaDloading) {
+        margin-left: 0;
+    }
+    
+    .SaDloading {
+        top: 900px;
+    }
+    
+    /* Listing page */
+    #single {
+        margin: 0;
+        width: 100vw;
+    }
+    
+    #single img {
+        width: 100px;
+        height: 100px;
+        top: 150px;
+    }
+    
+    #revDesContainer {
+        top: 941px;
+        margin: 0;
+        width: 100%
+    }
+    
+    #reviewCommentBox {
+        width: 100%;
+    }
+    
+}
