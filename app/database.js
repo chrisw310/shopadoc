@@ -257,7 +257,7 @@ function addSavedDocs(data, callback){
                 for( var j=0; j<myNewDoc.savedDocs.length;j++){
                     if(myNewDoc.savedDocs[j] === data.docName){
                         docAlreadSaved = 1;
-                        console.log('Doctor already part of client\'s saved list');
+                        console.log("Doctor already part of client's saved list");
                         callback('Doctor already in your list of saved doctors');
                     }
                 }
@@ -282,6 +282,45 @@ function addSavedDocs(data, callback){
         });
     });
 }
+
+function removeSavedDocs(data, callback){
+    console.log(data);
+    MongoClient.connect(uri, function (err, db) {
+        assert.equal(null, err);
+
+        //try get the user's
+        db.collection('savedDoctors').find({'email':data.email}).toArray(function(err, docs){
+            assert.equal(null, err);
+            //console.log(docs);
+
+            if(docs.length === 0){
+                console.log('Doctor not in saved doctor list');
+            }else{
+                var myNewDoc = docs[0];
+                //console.log(myNewDoc);
+
+                for( var j=0; j<myNewDoc.savedDocs.length;j++){
+                    if(myNewDoc.savedDocs[j] === data.docName){
+						var myquery = {email:data.email, savedDocs: [data.docName]};
+						db.collection('savedDoctors').remove(myquery, function(err, r) {
+							if (err === null) {
+								console.log('Doctor removed');
+								callback('Doctor removed');
+								db.close();
+							} else {
+								console.log(err.message);
+								callback('Removing Doctor from saved list failed');
+							}
+						});
+                    }
+                }
+
+            }
+            db.close();
+        });
+    });
+}
+
 
 /*function getContacts(callback){
     MongoClient.connect(uri, function (err, db) {
@@ -366,5 +405,6 @@ module.exports.getAvailability = getAvailability;
 module.exports.makeBooking = makeBooking;
 module.exports.getSavedDocs = getSavedDocs;
 module.exports.addSavedDocs = addSavedDocs;
+module.exports.removeSavedDocs = removeSavedDocs;
 //module.exports.connectDb = connectDb;
 //module.exports.dbResponse = dbResponse;
