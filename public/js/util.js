@@ -41,7 +41,7 @@ loggedIn = function() {
 		return false;
 	}*/
 	return JSON.parse(sessionStorage.getItem("loggedIn"));
-}
+};
 
 
 /**
