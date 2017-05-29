@@ -268,7 +268,7 @@ header p {
 /* for confirm page only */
 #time {
     margin-top: 300px;
-    font-size: 30px;
+    font-size: 20px;
     color: black;
 }
 
@@ -531,6 +531,11 @@ a, a:link, a:visited, a:hover, a:active {
     top: 55x;
 }
 
+#bookingFeedback {
+    top: 450px;
+    color: red;
+}
+
 /* large devices */
 @media (max-width: 1200px) {
     
@@ -560,6 +565,10 @@ a, a:link, a:visited, a:hover, a:active {
     header h1 {
     top: 90px;
     font-size: 100px;
+    }
+    
+    #content {
+        padding-top: 0 !important;
     }
     
         .col-sm-3 {
@@ -648,6 +657,7 @@ a, a:link, a:visited, a:hover, a:active {
 @media (max-width: 544px) {
     #content {
         height:1500px;
+        padding-top: 0 !important;
     }
     
     header h1 {
