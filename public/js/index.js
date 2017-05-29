@@ -75,7 +75,7 @@ function listDoctors(docs) {
         var starsString = fullStar.repeat(starCount) + emptyStar.repeat(5 - starCount);
         var reviewStr = docs[i].reviewCount + " Reviews";
         var imgurl = "../images/" + docs[i].photo;
-        var imgurl = "../images/me.jpg";
+        //var imgurl = "../images/me.jpg";
         htmlStr += '<div class="listing" onclick="redirect(&#39' + name.toString() + '&#39)">' +
             '<p id="name">' + name + '</p>' +
             '<p id="title">' + title + '</p>' +

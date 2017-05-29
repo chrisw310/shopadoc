@@ -121,6 +121,7 @@ function updateDoctorReviews(docs){
             var starCount = Math.floor(docs[i].rating);
             var comment = docs[i].comment;
             var starsString = "&#9733".repeat(starCount) + "&#9734".repeat(5-starCount);
+            reviewStr += '<img src="' + docs[i].reviewerPhotoURL + '" />';
             reviewStr += '<div class="review"><p>' + username + '</p><p>' + starsString + '</p><p>' + comment + '</p></div>';
 
         }
@@ -135,14 +136,14 @@ function updateDoctorReviews(docs){
 function addReview(){
     //var docName = decodeURI(window.location.pathname.split('/')[2]);
     if(profile === null){
-        document.getElementById('ratingFeedback').innerHTML = "Please Sign in to submit a review";
+        document.getElementById('ratingFeedback').innerHTML = "Please Sign in to submit a review <br>";
         return;
     }
     var rName = profile.name;
     var photoURL = profile.pictureUrl;
     var r = document.getElementById("reviewForm").rating.value;
     if (r === ''){
-        document.getElementById('ratingFeedback').innerHTML = "Please Selected A Rating";
+        document.getElementById('ratingFeedback').innerHTML = "Please Select A Rating <br>";
     }else {
         document.getElementById('ratingFeedback').innerHTML = '';
         var c = document.getElementById('reviewCommentBox').value;
