@@ -92,7 +92,7 @@ function updateDoctorInfo(docs) {
         document.getElementById("reviewStars").innerHTML = starsString;
         document.getElementById("reviewCount").innerHTML = docs[i].reviewCount + " Reviews";
         var imgurl = "../images/" + docs[i].photo;
-        document.getElementById("doctorImage").style.backgroundImage = 'url(' + imgurl + ')';
+        document.getElementById("doctorImage").setAttribute('src', imgurl);
 
         document.getElementById('time').innerHTML = times[bookingData.time] + ', ' +
             days[bookingData.day.getDay()] +' ' + bookingData.day.getDate() + ' ' +

@@ -24,5 +24,4 @@ $.when(
 		$("#welcomeMsg, #signout").css("display","flex");
 		$("#login").css("display","none");
 	}
-	$('.parallax-window').parallax({imageSrc: '/images/background.jpg'});
 });

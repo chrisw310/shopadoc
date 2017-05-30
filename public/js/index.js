@@ -11,7 +11,6 @@ $.when(
         $( deferred.resolve );
     })
 ).done(function(){
-    $('.parallax-window').parallax({imageSrc: '/images/background.png'});
 	
 	//~~Search database function~~//
     console.log("onload");
