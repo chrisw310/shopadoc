@@ -2,43 +2,55 @@
 var socket = io.connect();
 var onSignIn;
 var signOut;
-var profile = {}; // Google Sign-In profile
+var profile = null; // Google Sign-In profile
 var loggedIn = null;
+//var docName = '';
 
 $.when(
-    $.getScript("/js/util.js"),
+    $.getScript("js/util.js"),
     $.Deferred(function( deferred ){
         $( deferred.resolve );
     })
 ).done(function(){
     $('.parallax-window').parallax({imageSrc: '/images/background.png'});
-	
-	//~~Search database function~~//
+
+    //~~Search database function~~//
     console.log("onload");
     $("#searchBar").keydown(function() {
         if (event.keyCode === 13) {
             searchDoctors();
         }
     });
-	
-	$(".col-sm-3").css("z-index","0");
+
+    $(".col-sm-6:contains('Saved')").click(function() {
+        window.location.replace('/saved');
+    });
+
+    $(".col-sm-3").css("z-index","0");
     $(".col-sm-3").click(function () {
-		$(".col-sm-3").not(this).css("z-index","0");
-		$(this).css("z-index","1");
-		alert($(this).parent().contains(".open"));
-	});
-	
-	if (loggedIn()) {
-		profile = JSON.parse(sessionStorage.getItem("profile"));
-		$("#welcomeMsg").text("Welcome, " + profile.name);
-		$("#welcomeMsg, #signout").css("display","flex");
-		$("#login").css("display","none");
-	}
+        $(".col-sm-3").not(this).css("z-index","0");
+        $(this).css("z-index","1");
+        alert($(this).parent().contains(".open"));
+    });
+
+    if (loggedIn()) {
+        profile = JSON.parse(sessionStorage.getItem("profile"));
+        $("#welcomeMsg").text("Welcome, " + profile.name);
+        $("#welcomeMsg, #signout").css("display","flex");
+        $("#login").css("display","none");
+
+        //var data = {token: profile.token, docN};
+        socket.emit('getSavedDoctors',{token: profile.token},function(resp){
+            console.log('recieved saved doctors');
+            listDoctors(resp);
+            //console.log(resp);
+        })
+    }
 });
 
 /*window.onresize = function() {
-      google.maps.event.trigger(map, 'resize');  
-};*/
+ google.maps.event.trigger(map, 'resize');
+ };*/
 
 
 //~~Google Maps API functions~~//
@@ -80,8 +92,7 @@ function addMapMarker(address,i) {
 
 
 //~~Update the list of doctors on the index.html page~~//
-function listDoctors(docs, isSavedList) {
-	initMap();
+function listDoctors(docs) {
     //document.getElementById('mapContainer').style.display = '';
     var htmlStr = "";
     for (var i = 0; i < docs.length; i++) {
@@ -99,18 +110,14 @@ function listDoctors(docs, isSavedList) {
         var reviewStr = docs[i].reviewCount + " Reviews";
         var imgurl = "../images/" + docs[i].photo;
         //var imgurl = "../images/me.jpg";
-        htmlStr += '<div class="listing">' +
+        htmlStr += '<div class="listing" onclick="redirect(&#39' + name.toString() + '&#39)">' +
             '<p id="name">' + name + '</p>' +
             '<p id="title">' + title + '</p>' +
             '<p id="address">' + address + '</p>' +
             '<p id="doctorCost">$' + minCost + '-$' + maxCost + '</p>' +
             '<p id="reviewStars">' + starsString + '</p>' +
-            '<p id="reviewCount">' + reviewStr + '</p> ' +
-			'<img alt="Doctor Image" style="background-image:url(' + imgurl + ')"/> ';
-		if (isSavedList) {
-			htmlStr += '<button class="removeFromSaved btn-lg">X</button>';
-		}
-		htmlStr += '</div>';
+            '<p id="reviewCount">' + reviewStr + '</p>' +
+            '<img style="background-image:url(' + imgurl + ')"/>' + '</div>';
     }
     //update the doctor content
     document.getElementById("doctorContainer").innerHTML = htmlStr;
@@ -122,43 +129,21 @@ function listDoctors(docs, isSavedList) {
     if ((str.substring(0,str.length-2) > 200) && docs.length > 0){
         document.getElementById("map").style.height = h.toString() + 'px';
         //map.fitBounds(bounds);
-		google.maps.event.trigger(map, 'resize'); 
-
-
     }
     //show the map
 
     //for (i = 0; i < docs.length; i++) {
     //    addMapMarker(docs[i].address, i + 1);
     //}
-	
-	//register click events
-	$(".listing").click(function(e) {
-		if (!$(e.target).is("button")) {
-			window.location = window.location.origin + ('/listing/' + $(e.target).closest(".listing").children("#name").text());
-		}
-		e.stopPropagation();
-	});
-
-	$(".removeFromSaved").click(function(e) {
-		var docName = $(e.target).siblings("#name").text();
-		
-		if(typeof(profile.token) === 'undefined'){
-            //document.getElementById('listingResponse').innerHTML = 'Please Sign in to save a doctor';
-		} else {
-			var data = {token: profile.token, docName: docName};
-			socket.emit('removeSavedDoctors',data,function(resp){
-				if (resp == "Doctor removed") {
-					$(".listing #name").filter(function() {return $(this).text() == docName}).parent().remove(); 
-				}
-			});
-		}
-		e.stopPropagation();
-	});
-
 }
 
+function redirect(name){
+    window.location = window.location.origin + ('/listing/'+name);
+}
 
+/*function gotosaved(){
+    window.location = window.location.origin + '/saved';
+}*/
 
 //socket to talk to the server
 //var port = "3456"; //remove later
@@ -169,22 +154,20 @@ socket.on('connectedToServer', function (data) {
     //listDoctors(5);
     console.log(data); //prints the data from the server
     socket.emit('clientConnect', 'Client Connected! - Index.js');
-    console.log('Searching Doctors');
+    //console.log('Searching Doctors');
     //document.getElementById('mapContainer').style.display = 'none';
-    socket.emit('searchDoctors','all');
+    //socket.emit('searchDoctors','all');
 });
 
-socket.on('doctors', function(data){
+/*socket.on('doctors', function(data){
     console.log("Got doctors data.... Updating List");
     console.log(data);
-    listDoctors(data, false);
-});
+    listDoctors(data);
+});*/
 
 
 
-function searchDoctors(){
-	//TODO: set as not popular or saved
-	
+/*function searchDoctors(){
     //show loading gif
     document.getElementById("doctorContainer").innerHTML = '<div class="SaDloading"></div>';
     //document.getElementById('mapContainer').style.display = 'none';
@@ -196,37 +179,4 @@ function searchDoctors(){
     }else{
         socket.emit('searchDoctors', 'all');
     }
-}
-
-/*
-* generate list of popular doctors
-*/
-$("#popularTab").click(function() {
-	$("#savedTab").removeClass("activeTab");
-	$("#popularTab").addClass("activeTab");
-	$("#doctorContainer").html("<div class='SaDloading'></div>");
-	
-	socket.emit('searchDoctors','all');
-	
-});
-
-
-/*
-* generate list of saved doctors
-*/
-$("#savedTab").click(function() {
-	$("#popularTab").removeClass("activeTab");
-	$("#savedTab").addClass("activeTab");
-	$("#doctorContainer").html("<div class='SaDloading'></div>");
-	
-	if(typeof(profile.token) === 'undefined'){
-            //document.getElementById('listingResponse').innerHTML = 'Please Sign in to save a doctor';
-	} else {
-		socket.emit('getSavedDoctors',{token: profile.token},function(resp){
-            console.log('recieved saved doctors');
-            listDoctors(resp, true);
-            //console.log(resp);
-        });
-	}
-});
-
+}*/
