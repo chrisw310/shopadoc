@@ -1,7 +1,9 @@
-/**
- * Created by Cameron on 16/05/2017.
- */
-//Js to control the listings page
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Client side script
+ File to manage listing.html
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 var socket = io.connect();
 var onSignIn;

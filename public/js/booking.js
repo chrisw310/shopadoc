@@ -1,6 +1,9 @@
-/**
- * Created by Cameron on 28/05/2017.
- */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ Client side script
+ File to manage confirm.html
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 var socket = io.connect();
 var onSignIn;

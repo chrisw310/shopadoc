@@ -1,7 +1,9 @@
-/**
- * Created by Cameron on 29/05/2017.
- */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+     Server side script
+    File to manage emailing
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 var nodemailer = require('nodemailer');
 

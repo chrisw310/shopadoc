@@ -1,20 +1,23 @@
-/**
- * Created by Cameron on 22/04/2017.
- */
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Server side script
+    File to manage database communication
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+
 //~~~database variables~~~
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
-//var uri = "mongodb://infs3202dbadmin:wrQn3qmF1x7inzgn@cluster0-shard-00-00-mvxrs.mongodb.net:27017,cluster0-shard-00-01-mvxrs.mongodb.net:27017,cluster0-shard-00-02-mvxrs.mongodb.net:27017/admin?ssl=true&replicaSet=Mycluster0-shard-0&authSource=admin";
-
 var uri = "mongodb://infs3202dbadmin:wrQn3qmF1x7inzgn@cluster0-shard-00-00-mvxrs.mongodb.net:27017,cluster0-shard-00-01-mvxrs.mongodb.net:27017,cluster0-shard-00-02-mvxrs.mongodb.net:27017/shopAdoc?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin";
 
 
-//emails sending
+//import the emailer.js file
 var myEmailer = require('./emailer');
 
 
 //returns a list of doctors based on a query
-//if data = "all" returns all doctors in the databse
+//if data = "all" returns all doctors in the database
 function getDoctors(data,callback){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
@@ -40,6 +43,8 @@ function getDoctors(data,callback){
     });
 }
 
+//check if doctor <name> is in the database
+//if so, return the doctor's information
 function checkDoctor(name,callback){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
@@ -52,6 +57,7 @@ function checkDoctor(name,callback){
     });
 }
 
+//gets the reviews for doctor <name>
 function getReviews(name,callback){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
@@ -64,6 +70,7 @@ function getReviews(name,callback){
     });
 }
 
+//returns the availability of doctor <name>
 function getAvailability(name,callback){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
@@ -76,6 +83,7 @@ function getAvailability(name,callback){
     });
 }
 
+//adds a review to the database
 function addReview(data,cb){
     if(typeof(data.doctorName)!== 'undefined' && typeof(data.rating)!== 'undefined' && typeof(data.reviewerName)!== 'undefined' && typeof(data.reviewerPhotoURL)!== 'undefined' && typeof(data.comment)!== 'undefined'){
         MongoClient.connect(uri, function (err, db) {
@@ -105,6 +113,7 @@ function addReview(data,cb){
     }
 }
 
+//modify a doctor's availability (used after making a booking)
 function updateAvailibility(availData){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
@@ -116,6 +125,7 @@ function updateAvailibility(availData){
     });
 }
 
+//add a booking to the database
 function addBooking(bookingData){
     if(typeof(bookingData.doctorName)!== 'undefined' && typeof(bookingData.day)!== 'undefined' && typeof(bookingData.time)!== 'undefined' && typeof(bookingData.clientEmail)!== 'undefined') {
         MongoClient.connect(uri, function (err, db) {
@@ -143,6 +153,10 @@ function addBooking(bookingData){
     }
 }
 
+//called when a client confirms a booking
+//adds booking to database
+//modifies the dector's availability (above two functions)
+//emails the client
 function makeBooking(bookingData,cb){
     //check time isnt already booked
     getAvailability(bookingData.doctorName,function(availData){
@@ -182,6 +196,7 @@ function makeBooking(bookingData,cb){
     });
 }
 
+//gets the user's saved doctors
 function getSavedDocs(email,callback){
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
@@ -215,22 +230,18 @@ function getSavedDocs(email,callback){
                     //callback(returnData);
                 }
             }
-            //var returnData = [];
-           //for(var j=0,j<docs[0].savedDocs.length, j++){
-            //
-            //};
-            //callback(docs);
             db.close();
         });
     });
 }
 
+//add a given doctor to the user's saved doctor list
 function addSavedDocs(data, callback){
     console.log(data);
     MongoClient.connect(uri, function (err, db) {
         assert.equal(null, err);
 
-        //try get the user's
+        //try find the user's existing  list of saved doctors
         db.collection('savedDoctors').find({'email':data.email}).toArray(function(err, docs){
             assert.equal(null, err);
             //console.log(docs);
@@ -269,14 +280,6 @@ function addSavedDocs(data, callback){
                     var res = db.collection('savedDoctors').updateOne({email: data.email},myNewDoc,{ upsert: false });
                     console.log('Doctor Saved');
                     callback('Doctor saved');
-                    /*if(res.nModified >= 1){
-                        console.log('Doctor Saved');
-                        callback('Doctor saved');
-                    }else{
-                        console.log('Error saving doctor?');
-                        callback('Adding Doctor Failed');
-                    }*/
-
                 }
 
             }
@@ -285,6 +288,7 @@ function addSavedDocs(data, callback){
     });
 }
 
+//remove a doctor form the user's saved doctors list
 function removeSavedDocs(data, callback){
     console.log(data);
     MongoClient.connect(uri, function (err, db) {
@@ -303,19 +307,6 @@ function removeSavedDocs(data, callback){
 
                 for( var j=0; j<myNewDoc.savedDocs.length;j++){
                     if(myNewDoc.savedDocs[j] === data.docName){
-						/*var myquery = {email: data.email, savedDocs: [data.docName]};
-						db.collection('savedDoctors').remove(myquery, function(err, r) {
-							if (err === null) {
-								console.log('Doctor removed');
-								//console.log(r);
-								callback('Doctor removed');
-								db.close();
-								
-							} else {
-								console.log(err.message);
-								callback('Removing Doctor from saved list failed');
-							}
-						});*/
 						db.collection('savedDoctors').update({email: data.email, savedDocs : data.docName}, {$pull: {"savedDocs" : data.docName}}, function(err, r) {
 							if (err === null) {
 								console.log('Doctor removed');
@@ -338,81 +329,7 @@ function removeSavedDocs(data, callback){
     });
 }
 
-/*function getContacts(callback){
-    MongoClient.connect(uri, function (err, db) {
-        assert.equal(null, err);
-        db.collection('contacts').find().toArray(function(err, docs){
-            assert.equal(null, err);
-            callback(docs);
-            db.close();
-        });
-
-    });
-}
-
-function addContact(data,callback){
-
-    if(data.name && data.email && data.phone){
-        MongoClient.connect(uri, function (err, db) {
-            assert.equal(null, err);
-
-            var doc = {_id: data.email, phone: data.phone, name:data.name};
-            db.collection('contacts').insertOne(doc,function(err,r){
-                if(err === null) {
-                    assert.equal(1, r.insertedCount);
-                    callback('ContactAdded');
-                    db.close();
-                }else{
-                    switch(err.code){
-                        case 11000:
-                            callback('Email Already in use');
-                            break;
-                        default: callback('Invalid Contact Data');
-                    }
-                }
-            });
-
-        });
-    }else{
-        callback('Invalid Contact Data')
-    }
-}*/
-
-/*var findCollections = function(db, callback) {
-    var cursor =db.collection('contacts').find( );
-    //var cursor =db.listCollections();
-    cursor.each(function(err, doc) {
-        assert.equal(err, null);
-        if (doc != null) {
-            console.log(doc);
-            //console.dir(doc);
-        } else {
-            callback();
-        }
-    });
-};
-
-var insertData = function(db, callback){
-    db.collection("contacts").insertOne({
-        "phone" : "123456789",
-        "email" : "cameron@mongo.com",
-        "status": "Unknown"
-        }, function(err, result){
-        assert.equal(err,null);
-        console.log('insterted test data into contacts');
-        callback();
-        });
-};
-
-function dbResponse(req,res){
-    connectDb();
-    res.send("string test");
-    //return connectDb();
-}*/
-
 //export the functions in this script to be used by routes.js
-//module.exports.getContacts = getContacts;
-//module.exports.addContact = addContact;
 module.exports.getDoctors = getDoctors;
 module.exports.checkDoctor = checkDoctor;
 module.exports.getReviews = getReviews;
@@ -422,5 +339,3 @@ module.exports.makeBooking = makeBooking;
 module.exports.getSavedDocs = getSavedDocs;
 module.exports.addSavedDocs = addSavedDocs;
 module.exports.removeSavedDocs = removeSavedDocs;
-//module.exports.connectDb = connectDb;
-//module.exports.dbResponse = dbResponse;

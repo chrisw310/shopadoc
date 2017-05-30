@@ -1,12 +1,14 @@
-/**
- * Created by Cameron on 29/03/2017.
- */
-//~~~SPECIFY ROUTES FOR HTTP REQUESTS~~~~
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Server side script
+    File to redirect http requests
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 //required modules
 var express = require('express');
 var path = require('path');
-//import the databas.js script
+//import the databas.js script (talks to the database)
 var mydb = require('./database');
 
 //create the router
@@ -26,20 +28,6 @@ router.get('/',function(req,res){
 
 // parameter middleware that will run before the next routes
 router.param('name', function(req, res, next, name) {
-    //console.log('Does doctor exist? ' + name);
-    // check if the user with that name exists
-    //query db to find name, if the name doesnt exist, go to a page not found page
-    //console.log(name);
-    /*mydb.checkDoctor(name,function(result){
-        console.log(result);
-        if (result.length === 0) {
-            next('no doctor found by that name (opportunity to add a new page)');
-        }else{
-            //continue to desired page
-            //next();
-            res.sendFile(path.join(__dirname,'../html/listing.html'));
-        }
-    });*/
     next();
 });
 
@@ -120,11 +108,3 @@ router.get('/login',function(req,res){
     console.log('Providing the signup.html page');
     res.sendFile(path.join(__dirname,'../html/signup.html'));
 });
-
-//client request to the server
-//learn how to make this secure (do I use POST method along with a key?)
-//probably change this to socket.io code??
-//router.get('/server',function(req,res){
-    //call "dbResponse" from the databse.js script
-//    mydb.dbResponse(req,res);
-//});

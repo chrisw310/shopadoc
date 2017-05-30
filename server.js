@@ -1,7 +1,9 @@
-/**
- * Created by Cameron on 28/03/2017.
- */
-//~~~MAIN SERVER FILE~~~
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    Server side script
+    ~~~MAIN SERVER FILE~~~
+
+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
 //use express
 var express = require('express');
