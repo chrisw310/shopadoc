@@ -106,7 +106,7 @@ function listDoctors(docs, isSavedList) {
             '<p id="doctorCost">$' + minCost + '-$' + maxCost + '</p>' +
             '<p id="reviewStars">' + starsString + '</p>' +
             '<p id="reviewCount">' + reviewStr + '</p> ' +
-			'<img alt="Doctor Image" style="background-image:url(' + imgurl + ')"/> ';
+			'<img alt="Doctor Image" src="' + imgurl + '"/> ';
 		if (isSavedList) {
 			htmlStr += '<button class="removeFromSaved btn-lg">X</button>';
 		}

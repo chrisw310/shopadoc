@@ -72,7 +72,7 @@ function updateDoctorInfo(docs) {
         document.getElementById("reviewStars").innerHTML = starsString;
         document.getElementById("reviewCount").innerHTML = docs[i].reviewCount + " Reviews";
         var imgurl = "../images/" + docs[i].photo;
-        document.getElementById("doctorImage").style.backgroundImage = 'url(' + imgurl + ')';
+        document.getElementById("doctorImage").setAttribute('src', imgurl);
         document.getElementById("doctorDescription").innerHTML = docs[i].description;
         addMapMarker(docs[i].address);
 	}else{
